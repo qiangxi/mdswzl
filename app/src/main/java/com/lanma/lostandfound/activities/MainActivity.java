@@ -21,7 +21,7 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.lanma.lostandfound.R;
 import com.lanma.lostandfound.beans.StudentInfo;
-import com.lanma.lostandfound.beans.YouMiAdUtils;
+import com.lanma.lostandfound.utils.YouMiAdUtils;
 import com.lanma.lostandfound.constants.AppConstants;
 import com.lanma.lostandfound.fragment.FoundFragment;
 import com.lanma.lostandfound.fragment.LostFragment;

@@ -9,7 +9,7 @@ import android.widget.LinearLayout;
 
 import com.lanma.lostandfound.R;
 import com.lanma.lostandfound.beans.StudentInfo;
-import com.lanma.lostandfound.beans.YouMiAdUtils;
+import com.lanma.lostandfound.utils.YouMiAdUtils;
 import com.lanma.lostandfound.dialog.LoadingDialog;
 import com.lanma.lostandfound.net.ServerConnection;
 import com.lanma.lostandfound.presenter.SuggestionPresenter;

@@ -1,4 +1,4 @@
-package com.lanma.lostandfound.beans;
+package com.lanma.lostandfound.utils;
 
 import android.app.Activity;
 import android.content.Context;

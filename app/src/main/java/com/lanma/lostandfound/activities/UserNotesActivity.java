@@ -5,7 +5,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import com.lanma.lostandfound.R;
-import com.lanma.lostandfound.beans.YouMiAdUtils;
+import com.lanma.lostandfound.utils.YouMiAdUtils;
 import com.lanma.lostandfound.utils.ImageViewTintUtil;
 
 import butterknife.ButterKnife;

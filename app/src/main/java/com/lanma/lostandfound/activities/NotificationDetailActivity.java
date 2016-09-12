@@ -6,7 +6,7 @@ import android.view.KeyEvent;
 import android.widget.TextView;
 
 import com.lanma.lostandfound.R;
-import com.lanma.lostandfound.beans.YouMiAdUtils;
+import com.lanma.lostandfound.utils.YouMiAdUtils;
 
 import java.text.SimpleDateFormat;
 
