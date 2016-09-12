@@ -1,0 +1,30 @@
+<resources>
+    <string name="app_name">民大失物招领</string>
+    <!--物品类型-->
+    <string-array name="thing_type_array">
+        <item>学生证</item>
+        <item>身份证</item>
+        <item>食堂卡</item>
+        <item>VIP卡</item>
+        <item>钱包</item>
+        <item>行李箱</item>
+        <item>手机</item>
+        <item>课本</item>
+        <item>充电器</item>
+        <item>平板电脑</item>
+        <item>笔记本电脑</item>
+        <item>鼠标</item>
+        <item>耳机</item>
+        <item>键盘</item>
+        <item>电池</item>
+        <item>衣服</item>
+        <item>裤子</item>
+        <item>鞋子</item>
+        <item>袜子</item>
+        <item>被子</item>
+        <item>枕头</item>
+        <item>眼镜</item>
+        <item>玩具</item>
+        <item>其他</item>
+    </string-array>
+</resources>

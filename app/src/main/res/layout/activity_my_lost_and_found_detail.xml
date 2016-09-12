@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/actionBarColor"
+    android:clipToPadding="true"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/myLostAndFoundDetailBack"
+            android:layout_width="60dp"
+            android:layout_height="50dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:padding="10dp"
+            android:src="@drawable/icon_back"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:layout_centerInParent="true"
+            android:background="@android:color/transparent"
+            android:gravity="center"
+            android:text="信息详情"
+            android:textColor="@android:color/white"
+            android:textSize="18sp"/>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/mainBackgroundColor"
+        android:padding="10dp">
+
+        <com.lanma.lostandfound.view.ReboundScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_above="@+id/myLostAndFoundDetailDelete"
+            android:layout_marginBottom="5dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                >
+
+                <TextView
+                    android:id="@+id/myLostAndFoundDetailDesc"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@android:color/white"
+                    android:gravity="center"
+                    android:minHeight="45dp"
+                    android:paddingLeft="5dp"
+                    android:paddingRight="5dp"
+                    android:text="发生法是否还地方和撒旦卡哈斯的发生的刮风时打发士大夫撒旦法"
+                    android:textColor="@android:color/black"
+                    android:textSize="18sp"
+                    android:textStyle="bold"/>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="0.5dp"
+                    android:background="@android:color/white">
+
+                    <TextView
+                        android:id="@+id/myLostAndFoundDetailType"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@android:color/white"
+                        android:drawableLeft="@drawable/icon_thing_type"
+                        android:drawablePadding="5dp"
+                        android:gravity="center"
+                        android:minHeight="45dp"
+                        android:paddingLeft="5dp"
+                        android:text="物品类型:笔记本电脑"
+                        android:textColor="@android:color/black"
+                        android:textSize="14sp"
+                        />
+
+                    <TextView
+                        android:id="@+id/myLostAndFoundDetailTime"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:background="@android:color/white"
+                        android:gravity="center"
+                        android:minHeight="45dp"
+                        android:paddingRight="10dp"
+                        android:text="2016-05-05  21:55:11"
+                        android:textColor="@android:color/black"
+                        android:textSize="14sp"
+                        />
+                </RelativeLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:background="@android:color/white"
+                    android:gravity="center">
+
+                    <GridView
+                        android:id="@+id/myLostAndFoundDetailGridImages"
+                        android:layout_width="340dp"
+                        android:layout_height="120dp"
+                        android:columnWidth="80dp"
+                        android:gravity="center"
+                        android:horizontalSpacing="10dp"
+                        android:numColumns="3"
+                        android:orientation="horizontal"
+                        android:padding="10dp"
+                        android:scrollbars="none"
+                        android:stretchMode="columnWidth"
+                        android:verticalSpacing="10dp"
+                        />
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/myLostAndFoundDetailWhere"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:background="@android:color/white"
+                    android:gravity="center_vertical"
+                    android:minHeight="45dp"
+                    android:paddingLeft="5dp"
+                    android:textColor="@android:color/black"
+                    android:textSize="14sp"
+                    />
+
+                <TextView
+                    android:id="@+id/myLostAndFoundDetailThanksWay"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="0.5dp"
+                    android:background="@android:color/white"
+                    android:gravity="center_vertical"
+                    android:maxLength="50"
+                    android:minHeight="45dp"
+                    android:paddingLeft="5dp"
+                    android:textColor="@android:color/black"
+                    android:textSize="14sp"
+                    />
+
+                <TextView
+                    android:id="@+id/myLostAndFoundDetailDescDetail"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:background="@android:color/white"
+                    android:gravity="center_vertical"
+                    android:minHeight="130dp"
+                    android:padding="5dp"
+                    android:textColor="@android:color/black"
+                    android:textSize="14sp"
+                    />
+            </LinearLayout>
+        </com.lanma.lostandfound.view.ReboundScrollView>
+
+        <Button
+            android:id="@+id/myLostAndFoundDetailDelete"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_alignParentBottom="true"
+            android:background="@drawable/button_selector_blue_dark_drawable"
+            android:padding="5dp"
+            android:text="已找到失主，删除该信息"
+            android:textColor="@android:color/white"
+            android:textSize="14sp"/>
+
+    </RelativeLayout>
+
+</LinearLayout>

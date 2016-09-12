@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#64B5F6</color>
+    <color name="colorPrimaryDark">#64B5F6</color>
+    <color name="colorAccent">#64B5F6</color>
+
+    <!-- 标题栏颜色 -->
+    <color name="titleBarColor">#07B2D9</color>
+    <!-- actionBar颜色 -->
+    <color name="actionBarColor">#64B5F6</color>
+    <!--<color name="actionBarColor">#153659</color>-->
+    <!-- activity/dialog等的背景主色调 -->
+    <color name="mainBackgroundColor">#EBEBEB</color>
+    <!-- view正常时背景颜色 -->
+    <color name="viewNormalColor">#FFFFFF</color>
+    <!-- view按压时背景颜色 -->
+    <color name="viewPressedColor">#DFDFDF</color>
+    <!-- view正常边界颜色 -->
+    <color name="viewStrokeNormalColor">#778899</color>
+    <!-- view获取焦点时边界颜色 -->
+    <color name="viewStrokeFocusedColor">#4169E1</color>
+    <!-- 正常文本颜色 -->
+    <color name="textNormalColor">#949494</color>
+    <!-- 被选中时文本颜色 -->
+    <color name="textCheckedColor">#3DBD9A</color>
+    <color name="buttonPressedDarkBlueColor">#47a9f8</color>
+
+    <!-- 灰色半透明 -->
+    <color name="loading_dialog_bg">#77000000</color>
+    <!-- 暗灰色 -->
+    <color name="dimgrey">#696969</color>
+    <!-- 灰色 -->
+    <color name="gray">#D9D9D9</color>
+    <!-- 花白色 -->
+    <color name="floralwhite">#FFFAF0</color>
+    <!--switchButton-->
+    <color name="ksw_md_ripple_normal">#1E000000</color>
+    <color name="ksw_md_ripple_checked">#33019285</color>
+    <color name="ksw_md_solid_shadow">#33000000</color>
+    <color name="ksw_md_solid_normal">#ECECEC</color>
+    <color name="ksw_md_solid_checked">#019285</color>
+    <color name="ksw_md_solid_disable">#FFFFFF</color>
+    <color name="ksw_md_solid_checked_disable">#aaaaaa</color>
+    <!--indicator指示器滑动时的背景颜色-->
+    <color name="bg_indicator_slide">#7764B5F6</color>
+</resources>

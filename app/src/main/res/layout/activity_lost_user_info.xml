@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/actionBarColor"
+    android:clipToPadding="true"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+
+        <ImageView
+            android:id="@+id/lostUserInfoBack"
+            android:layout_width="60dp"
+            android:layout_height="50dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:padding="10dp"
+            android:src="@drawable/icon_back"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:layout_centerInParent="true"
+            android:background="@android:color/transparent"
+            android:gravity="center"
+            android:text="失主信息"
+            android:textColor="@android:color/white"
+            android:textSize="18sp"/>
+    </RelativeLayout>
+
+    <com.lanma.lostandfound.view.ReboundScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/mainBackgroundColor"
+        >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:gravity="center">
+
+                <com.lanma.lostandfound.view.RoundImageView
+                    android:id="@+id/lostUserInfoHeaderImage"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_margin="10dp"
+                    android:src="@drawable/icon_passenger_man"
+                    app:border_inside_color="#FF6634"
+                    app:border_outside_color="#FF6634"
+                    app:border_thickness="1dp"/>
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/lostUserInfoName"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:layout_marginTop="0.5dp"
+                android:background="@android:color/white"
+                android:drawableLeft="@drawable/icon_student_info_name"
+                android:drawablePadding="10dp"
+                android:gravity="center_vertical"
+                android:paddingLeft="20dp"
+                android:textColor="@android:color/black"
+                android:textSize="12sp"/>
+
+            <TextView
+                android:id="@+id/lostUserInfoSex"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:layout_marginTop="0.5dp"
+                android:background="@android:color/white"
+                android:drawableLeft="@drawable/icon_student_info_sex"
+                android:drawablePadding="10dp"
+                android:gravity="center_vertical"
+                android:paddingLeft="20dp"
+                android:textColor="@android:color/black"
+                android:textSize="12sp"
+                />
+
+            <TextView
+                android:id="@+id/lostUserInfoAge"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:layout_marginTop="0.5dp"
+                android:background="@android:color/white"
+                android:drawableLeft="@drawable/icon_student_info_age"
+                android:drawablePadding="10dp"
+                android:gravity="center_vertical"
+                android:paddingLeft="20dp"
+                android:textColor="@android:color/black"
+                android:textSize="12sp"
+                />
+
+            <TextView
+                android:id="@+id/lostUserInfoEmailAddress"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:layout_marginTop="0.5dp"
+                android:background="@android:color/white"
+                android:drawableLeft="@drawable/icon_student_info_email"
+                android:drawablePadding="10dp"
+                android:gravity="center_vertical"
+                android:paddingLeft="20dp"
+                android:textColor="@android:color/black"
+                android:textSize="12sp"/>
+
+            <TextView
+                android:id="@+id/lostUserInfoPhoneNumber"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:layout_marginTop="0.5dp"
+                android:background="@android:color/white"
+                android:drawableLeft="@drawable/icon_student_info_phone"
+                android:drawablePadding="10dp"
+                android:gravity="center_vertical"
+                android:paddingLeft="20dp"
+                android:textColor="@android:color/black"
+                android:textSize="12sp"/>
+
+            <TextView
+                android:id="@+id/lostUserInfoYear"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:layout_marginTop="0.5dp"
+                android:background="@android:color/white"
+                android:drawableLeft="@drawable/icon_student_info_year"
+                android:drawablePadding="10dp"
+                android:gravity="center_vertical"
+                android:paddingLeft="20dp"
+                android:textColor="@android:color/black"
+                android:textSize="12sp"/>
+
+            <TextView
+                android:id="@+id/lostUserInfoCollege"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:layout_marginTop="0.5dp"
+                android:background="@android:color/white"
+                android:drawableLeft="@drawable/icon_student_info_college"
+                android:drawablePadding="8dp"
+                android:gravity="center_vertical"
+                android:paddingLeft="17dp"
+                android:textColor="@android:color/black"
+                android:textSize="12sp"/>
+
+            <TextView
+                android:id="@+id/lostUserInfoSpecialities"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:layout_marginTop="0.5dp"
+                android:background="@android:color/white"
+                android:drawableLeft="@drawable/icon_student_info_specialities"
+                android:drawablePadding="10dp"
+                android:gravity="center_vertical"
+                android:paddingLeft="17dp"
+                android:textColor="@android:color/black"
+                android:textSize="12sp"/>
+
+            <TextView
+                android:id="@+id/lostUserInfoApartNumber"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:layout_marginTop="0.5dp"
+                android:background="@android:color/white"
+                android:drawableLeft="@drawable/icon_student_info_apartment"
+                android:drawablePadding="10dp"
+                android:gravity="center_vertical"
+                android:paddingLeft="20dp"
+                android:textColor="@android:color/black"
+                android:textSize="12sp"/>
+        </LinearLayout>
+    </com.lanma.lostandfound.view.ReboundScrollView>
+</LinearLayout>

@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/actionBarColor"
+    android:clipToPadding="true"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/lostInfoBack"
+            android:layout_width="60dp"
+            android:layout_height="50dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:padding="10dp"
+            android:src="@drawable/icon_back"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:layout_centerInParent="true"
+            android:background="@android:color/transparent"
+            android:gravity="center"
+            android:text="失物信息"
+            android:textColor="@android:color/white"
+            android:textSize="18sp"/>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/mainBackgroundColor"
+        android:padding="10dp">
+
+        <com.lanma.lostandfound.view.ReboundScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_above="@+id/releaseLostInfo"
+            android:layout_marginBottom="5dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                >
+
+                <EditText
+                    android:id="@+id/lostInfoDesc"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@android:color/white"
+                    android:gravity="center"
+                    android:hint="物品描述...(必填)"
+                    android:inputType="text"
+                    android:maxLength="30"
+                    android:minHeight="45dp"
+                    android:paddingLeft="5dp"
+                    android:paddingRight="5dp"
+                    android:textColor="@android:color/black"
+                    android:textSize="18sp"
+                    android:textStyle="bold"/>
+
+                <TextView
+                    android:id="@+id/lostInfoType"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="0.5dp"
+                    android:background="@android:color/white"
+                    android:gravity="center"
+                    android:hint="点击选择丢失的物品类型(必选)"
+                    android:minHeight="45dp"
+                    android:paddingLeft="15dp"
+                    android:paddingRight="5dp"
+                    android:textColor="@android:color/black"
+                    android:textSize="14sp"
+                    android:drawableLeft="@drawable/icon_thing_type"
+                    />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingBottom="5dp"
+                    android:paddingLeft="5dp"
+                    android:text="添加物品图片(可选):"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@android:color/white"
+                    android:gravity="center">
+
+                    <GridView
+                        android:id="@+id/lostInfoGridImages"
+                        android:layout_width="340dp"
+                        android:layout_height="120dp"
+                        android:columnWidth="80dp"
+                        android:gravity="center"
+                        android:horizontalSpacing="10dp"
+                        android:numColumns="3"
+                        android:orientation="horizontal"
+                        android:padding="10dp"
+                        android:scrollbars="none"
+                        android:stretchMode="columnWidth"
+                        android:verticalSpacing="10dp"/>
+                </LinearLayout>
+
+                <EditText
+                    android:id="@+id/lostInfoWhere"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:background="@android:color/white"
+                    android:gravity="center"
+                    android:hint="大概在哪里丢失(可选)"
+                    android:inputType="text"
+                    android:maxLength="50"
+                    android:minHeight="45dp"
+                    android:textColor="@android:color/black"
+                    android:textSize="14sp"
+                    />
+
+                <EditText
+                    android:id="@+id/lostInfoThanksWay"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="0.5dp"
+                    android:background="@android:color/white"
+                    android:gravity="center"
+                    android:hint="酬谢方式(可选)"
+                    android:inputType="text"
+                    android:maxLength="50"
+                    android:minHeight="45dp"
+                    android:textColor="@android:color/black"
+                    android:textSize="14sp"
+                    />
+
+                <EditText
+                    android:id="@+id/lostInfoPhoneNumber"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="0.5dp"
+                    android:background="@android:color/white"
+                    android:gravity="center"
+                    android:hint="联系方式(手机号,必填)"
+                    android:inputType="phone"
+                    android:maxLength="11"
+                    android:minHeight="45dp"
+                    android:textColor="@android:color/black"
+                    android:textSize="14sp"
+                    />
+
+                <EditText
+                    android:id="@+id/lostInfoDescDetail"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:background="@android:color/white"
+                    android:gravity="left"
+                    android:hint="详细描述...(不少于15个字的描述,必填)"
+                    android:inputType="text"
+                    android:maxLength="500"
+                    android:minHeight="150dp"
+                    android:padding="5dp"
+                    android:textColor="@android:color/black"
+                    android:textSize="14sp"
+                    />
+            </LinearLayout>
+        </com.lanma.lostandfound.view.ReboundScrollView>
+
+        <Button
+            android:id="@+id/releaseLostInfo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:background="@drawable/button_selector_blue_dark_drawable"
+            android:text="发布"
+            android:textColor="@android:color/white"
+            android:layout_marginBottom="5dp"
+            />
+    </RelativeLayout>
+
+</LinearLayout>

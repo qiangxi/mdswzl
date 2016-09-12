@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest package="com.lanma.lostandfound"
+          xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- 允许联网 -->
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <!-- 获取GSM（2g）、WCDMA（联通3g）等网络状态的信息 -->
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <!-- 获取wifi网络状态的信息 -->
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
+    <!-- 保持CPU 运转，屏幕和键盘灯有可能是关闭的,用于文件上传和下载 -->
+    <uses-permission android:name="android.permission.WAKE_LOCK"/>
+    <!-- 获取sd卡写的权限，用于文件上传和下载 -->
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <!-- 允许读取手机状态 用于创建BmobInstallation -->
+    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
+
+    <application
+        android:name=".application.MyApplication"
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity
+            android:name=".activities.MainActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait">
+        </activity>
+        <activity
+            android:name=".activities.BaseActivity"
+            android:screenOrientation="portrait">
+        </activity>
+        <activity
+            android:name=".activities.StartActivity"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".activities.LoginActivity"
+            android:screenOrientation="portrait">
+        </activity>
+        <activity
+            android:name=".activities.StudentInfoActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden">
+        </activity>
+
+        <receiver android:name=".receiver.NetConnectedReceiver">
+            <intent-filter>
+                <action android:name="android.net.conn.CONNECTIVITY_CHANGE"/>
+            </intent-filter>
+        </receiver>
+
+        <activity
+            android:name=".activities.AddLostInfoActivity"
+            android:screenOrientation="portrait">
+        </activity>
+        <activity
+            android:name=".activities.AddFoundInfoActivity"
+            android:screenOrientation="portrait">
+        </activity>
+        <activity
+            android:name=".activities.SelectPictureActivity"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".swipeback.SwipeBackActivity"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".activities.ThingTypeActivity"
+            android:screenOrientation="portrait">
+        </activity>
+        <activity
+            android:name=".activities.InfoDetailActivity"
+            android:screenOrientation="portrait">
+        </activity>
+        <activity
+            android:name=".activities.LostUserInfoActivity"
+            android:screenOrientation="portrait">
+        </activity>
+        <!-- 下面是有米广告配置 -->
+        <activity
+            android:name="net.youmi.android.AdBrowser"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenSize"
+            android:theme="@android:style/Theme.Light.NoTitleBar">
+        </activity>
+
+        <service
+            android:name="net.youmi.android.AdService"
+            android:exported="false">
+        </service>
+
+        <receiver android:name="net.youmi.android.AdReceiver">
+            <intent-filter>
+                <action android:name="android.intent.action.PACKAGE_ADDED"/>
+
+                <data android:scheme="package"/>
+            </intent-filter>
+        </receiver>
+        <!-- 上面是有米广告配置 -->
+
+        <activity
+            android:name=".activities.NotificationDetailActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait">
+        </activity>
+
+        <receiver
+            android:name=".receiver.ServerMessageReceiver"
+            android:enabled="true"
+            android:exported="false">
+            <intent-filter>
+
+                <!-- Required  用户注册SDK的intent -->
+                <action android:name="cn.jpush.android.intent.REGISTRATION"/>
+                <!-- Required  用户接收SDK消息的intent -->
+                <action android:name="cn.jpush.android.intent.MESSAGE_RECEIVED"/>
+                <!-- Required  用户接收SDK通知栏信息的intent -->
+                <action android:name="cn.jpush.android.intent.NOTIFICATION_RECEIVED"/>
+                <!-- Required  用户打开自定义通知栏的intent -->
+                <action android:name="cn.jpush.android.intent.NOTIFICATION_OPENED"/>
+                <!-- Optional 用户接受Rich Push Javascript 回调函数的intent -->
+                <action android:name="cn.jpush.android.intent.ACTION_RICHPUSH_CALLBACK"/>
+                <!-- 接收网络变化 连接/断开 since 1.6.3 -->
+                <action android:name="cn.jpush.android.intent.CONNECTION"/>
+
+                <category android:name="com.lanma.lostandfound"/>
+            </intent-filter>
+        </receiver>
+
+        <activity android:name=".activities.UserNotesActivity">
+        </activity>
+        <activity android:name=".activities.SuggestActivity">
+        </activity>
+        <activity android:name=".activities.MessageCenterActivity">
+        </activity>
+        <activity android:name=".activities.MyLostAndFoundActivity">
+        </activity>
+        <activity android:name=".activities.MyInfoDetailActivity">
+        </activity>
+        <activity android:name=".activities.MyLostAndFoundDetailActivity">
+        </activity>
+        <activity android:name=".activities.LookImageActivity">
+        </activity>
+    </application>
+
+</manifest>

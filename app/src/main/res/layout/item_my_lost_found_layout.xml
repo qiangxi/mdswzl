@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/itemMyLostAndFoundDesc"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:background="@android:color/white"
+        android:gravity="center"
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp"
+        android:text="发生法是否还地方和撒旦卡哈斯的发生的刮风时打发士大夫撒旦法"
+        android:textColor="@android:color/black"
+        android:textSize="16sp"
+        android:textStyle="bold"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/white">
+
+        <TextView
+            android:id="@+id/itemMyLostAndFoundType"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:background="@android:color/white"
+            android:drawableLeft="@drawable/icon_thing_type"
+            android:drawablePadding="5dp"
+            android:gravity="center"
+            android:paddingLeft="5dp"
+            android:text="物品类型:笔记本电脑"
+            android:textColor="@android:color/black"
+            android:textSize="14sp"
+            />
+
+        <TextView
+            android:id="@+id/itemMyLostAndFoundTime"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_alignParentRight="true"
+            android:background="@android:color/white"
+            android:gravity="center"
+            android:paddingRight="10dp"
+            android:text="2016-05-05  21:55:11"
+            android:textColor="@android:color/black"
+            android:textSize="14sp"
+            />
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/itemMyLostAndFoundDescDetail"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:background="@android:color/white"
+        android:gravity="center_vertical"
+        android:singleLine="true"
+        android:paddingLeft="5dp"
+        android:text="adsadfasfasdgasdgfdafsdafsdfasd"
+        android:textColor="@android:color/black"
+        android:textSize="14sp"
+        />
+</LinearLayout>
