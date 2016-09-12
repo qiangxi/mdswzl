@@ -33,36 +33,53 @@
             android:textSize="18sp"/>
     </RelativeLayout>
 
-    <com.lanma.lostandfound.view.ReboundScrollView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/mainBackgroundColor">
+        android:background="@color/mainBackgroundColor"
+        android:orientation="vertical">
 
         <LinearLayout
+            android:id="@+id/ll_banner"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:minHeight="45dp"
+            android:orientation="vertical">
+        </LinearLayout>
+
+        <com.lanma.lostandfound.view.ReboundScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:padding="10dp">
+            android:background="@color/mainBackgroundColor">
 
-            <EditText
-                android:id="@+id/suggestContent"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@android:color/white"
-                android:gravity="left"
-                android:hint="对软件的各种不满、不爽都发泄出来吧,别把自己憋坏了\n反正我又不一定会改...ㄟ( ▔, ▔ )ㄏ"
-                android:minHeight="250dp"
-                android:padding="5dp"
-                android:textSize="12sp"/>
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:padding="10dp">
 
-            <Button
-                android:id="@+id/suggestSubmit"
-                android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:layout_marginTop="20dp"
-                android:background="@drawable/button_selector_blue_dark_drawable"
-                android:text="向我吐槽"
-                android:textColor="@android:color/white"/>
-        </LinearLayout>
-    </com.lanma.lostandfound.view.ReboundScrollView>
+
+                <EditText
+                    android:id="@+id/suggestContent"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@android:color/white"
+                    android:gravity="left"
+                    android:hint="对软件的各种不满、不爽都发泄出来吧,别把自己憋坏了\n反正我又不一定会改...ㄟ( ▔, ▔ )ㄏ"
+                    android:minHeight="250dp"
+                    android:padding="5dp"
+                    android:textSize="12sp"/>
+
+                <Button
+                    android:id="@+id/suggestSubmit"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_marginTop="20dp"
+                    android:background="@drawable/button_selector_blue_dark_drawable"
+                    android:text="向我吐槽"
+                    android:textColor="@android:color/white"/>
+            </LinearLayout>
+        </com.lanma.lostandfound.view.ReboundScrollView>
+    </LinearLayout>
 </LinearLayout>

@@ -7,6 +7,7 @@ import android.widget.ListView;
 import com.lanma.lostandfound.R;
 import com.lanma.lostandfound.adapter.MessageInfoAdapter;
 import com.lanma.lostandfound.beans.MessageInfo;
+import com.lanma.lostandfound.beans.YouMiAdUtils;
 import com.lanma.lostandfound.dialog.LoadingDialog;
 import com.lanma.lostandfound.net.ServerConnection;
 import com.lanma.lostandfound.presenter.MessageInfoPresenter;
@@ -37,6 +38,7 @@ public class MessageCenterActivity extends BaseActivity implements MessageInfoPr
         ImageViewTintUtil.setImageViewTint((ImageView) findViewById(R.id.messageBack));
         getSwipeBackLayout().setEnableGesture(true);
         initData();
+        YouMiAdUtils.showSuspendBannerAdInBottom(this);
     }
 
     private void initData() {

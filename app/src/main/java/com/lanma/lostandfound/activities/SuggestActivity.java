@@ -5,9 +5,11 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 
 import com.lanma.lostandfound.R;
 import com.lanma.lostandfound.beans.StudentInfo;
+import com.lanma.lostandfound.beans.YouMiAdUtils;
 import com.lanma.lostandfound.dialog.LoadingDialog;
 import com.lanma.lostandfound.net.ServerConnection;
 import com.lanma.lostandfound.presenter.SuggestionPresenter;
@@ -33,6 +35,7 @@ public class SuggestActivity extends BaseActivity implements SuggestionPresenter
         ImageViewTintUtil.setImageViewTint((ImageView) findViewById(R.id.suggestBack));
         getSwipeBackLayout().setEnableGesture(true);
         mDialog = new LoadingDialog(this);
+        YouMiAdUtils.showBannerAd(this, (LinearLayout) findViewById(R.id.ll_banner));
     }
 
     @OnClick({R.id.suggestBack, R.id.suggestSubmit})

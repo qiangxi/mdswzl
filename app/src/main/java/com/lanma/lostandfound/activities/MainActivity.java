@@ -21,6 +21,7 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.lanma.lostandfound.R;
 import com.lanma.lostandfound.beans.StudentInfo;
+import com.lanma.lostandfound.beans.YouMiAdUtils;
 import com.lanma.lostandfound.constants.AppConstants;
 import com.lanma.lostandfound.fragment.FoundFragment;
 import com.lanma.lostandfound.fragment.LostFragment;
@@ -71,7 +72,26 @@ public class MainActivity extends BaseActivity implements ViewPager.OnPageChange
     @Override
     protected void onStart() {
         super.onStart();
+        YouMiAdUtils.showVerticalAd(this);
         checkIsLogin();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        YouMiAdUtils.onAdPause(this);
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        YouMiAdUtils.onAdStop(this);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        YouMiAdUtils.onAdDestroy(this);
     }
 
     /**

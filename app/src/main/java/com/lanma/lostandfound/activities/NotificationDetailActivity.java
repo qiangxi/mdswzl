@@ -6,6 +6,7 @@ import android.view.KeyEvent;
 import android.widget.TextView;
 
 import com.lanma.lostandfound.R;
+import com.lanma.lostandfound.beans.YouMiAdUtils;
 
 import java.text.SimpleDateFormat;
 
@@ -28,6 +29,7 @@ public class NotificationDetailActivity extends BaseActivity {
         setContentView(R.layout.activity_notification_detail);
         ButterKnife.bind(this);
         initData();
+        YouMiAdUtils.showSuspendBannerAdInBottom(this);
     }
 
     private void initData() {
