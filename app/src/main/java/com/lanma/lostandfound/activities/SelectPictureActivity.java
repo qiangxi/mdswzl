@@ -3,7 +3,6 @@ package com.lanma.lostandfound.activities;
 import android.content.ContentResolver;
 import android.content.Intent;
 import android.database.Cursor;
-import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -29,6 +28,7 @@ import com.bumptech.glide.Glide;
 import com.lanma.lostandfound.R;
 import com.lanma.lostandfound.dialog.LoadingDialog;
 import com.lanma.lostandfound.utils.ImageViewTintUtil;
+import com.orhanobut.logger.Logger;
 
 import java.io.File;
 import java.text.SimpleDateFormat;
@@ -368,10 +368,16 @@ public class SelectPictureActivity extends BaseActivity {
                 if (null == path) {
                     continue;
                 }
-                //无效的路径不要(不能转换成bitmap的路径不要)
-                if (null == BitmapFactory.decodeFile(path)) {
-                    continue;
+                File file = new File(path);
+                if(file.isFile()){
+                    Logger.e(path+"->是文件，文件大小为："+file.length()+" 字节");
+                }else{
+                    Logger.e(path+"->不是文件：");
                 }
+                //无效的路径不要(不能转换成bitmap的路径不要)
+//                if (null == BitmapFactory.decodeFile(path)) {
+//                    continue;
+//                }
                 //添加图片路径到集合
                 allImageFolder.images.add(new ImageItem(path));
                 // 获取该图片的父路径名

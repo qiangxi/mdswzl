@@ -91,6 +91,7 @@
                     android:minHeight="45dp"
                     android:textColor="@android:color/black"
                     android:textSize="16sp"
+                    android:text="页面广告须知"
                     android:textStyle="bold"/>
 
                 <TextView
@@ -101,7 +102,19 @@
                     android:gravity="left"
                     android:minHeight="80dp"
                     android:padding="5dp"
-                    android:text="发布时间ffjasdfho代码大师的那是覅去外地纳斯达克撒尿了三年飞发撒rjh[qwqeqwe阿达大厦的嘎多发达"
+                    android:text="1，本软件内含广告信息，是本软件唯一的盈利手段\n2，用户可以关闭广告或者不点击广告信息\n3，用户一旦点击广告信息，后台会自动下载应用，使用流量的用户请尽量别点击\n4，如果不小心点击了广告，可以直接退出应用并杀死进程，后台便不会下载，再次进入应用也不会继续下载\n5，如果用户使用的是WIFI，本宝宝希望你们能多点几个广告，下载几个应用，当然你们也可以当做没看见这一条温馨提示\n6，如果您通过广告下载了应用，特别是游戏，在使用或试玩的过程中请一定要注意：拒绝任何权限请求！！！特别是发送短信的请求，读取短信内容的请求一定要拒绝，否则因此产生的其他费用由您自己承担\n7，以上关于广告的注意事项，都是本宝宝在测试广告功能的时候发现的，本宝宝只是单纯的软件开发者，能不让你们掉坑里就尽量提醒你们，特别是游戏，这些游戏在玩的过程中，动不动就提示你要不要钻石、金币神马的，但是底部有一行小字：点击确定会扣除您xx元钱，这些扣费都是通过游戏内部发送短信扣除您的话费的，所以强烈建议您一定要拒绝发送短信等敏感权限\n8，肯定有人疑问本宝宝具体怎么通过广告赚钱的，在这里向你们大致说一下，对于游戏，你们只需要随便玩个1分钟左右（注意拒绝各种权限），然后卸载掉即可，对于应用，你们只需要注册一个账号，然后玩个1分钟左右，卸载掉即可，是不是很简单，中间不用花任何钱，但是前提都是需要玩一会，不然系统会认为这不是有效点击，不计入收益"
+                    android:textColor="@android:color/black"
+                    android:textSize="14sp"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="0.5dp"
+                    android:background="@android:color/white"
+                    android:gravity="left"
+                    android:minHeight="80dp"
+                    android:padding="5dp"
+                    android:text="最后给自己打个广告：再过个把月就要进行一年一度的毕业设计了，如果有同学想搞个Android系统的app作为毕业设计，请直接通过意见反馈系统反馈给我，我看到之后会联系你，当然前提你得留下联系方式"
                     android:textColor="@android:color/black"
                     android:textSize="14sp"/>
             </LinearLayout>
