@@ -28,7 +28,6 @@ import com.bumptech.glide.Glide;
 import com.lanma.lostandfound.R;
 import com.lanma.lostandfound.dialog.LoadingDialog;
 import com.lanma.lostandfound.utils.ImageViewTintUtil;
-import com.orhanobut.logger.Logger;
 
 import java.io.File;
 import java.text.SimpleDateFormat;
@@ -368,16 +367,15 @@ public class SelectPictureActivity extends BaseActivity {
                 if (null == path) {
                     continue;
                 }
+                //过滤掉不是File的文件和字节大小为0的无效图片,
                 File file = new File(path);
-                if(file.isFile()){
-                    Logger.e(path+"->是文件，文件大小为："+file.length()+" 字节");
-                }else{
-                    Logger.e(path+"->不是文件：");
+                if (file.isFile()) {
+                    if (file.length() == 0) {
+                        continue;
+                    }
+                } else {
+                    continue;
                 }
-                //无效的路径不要(不能转换成bitmap的路径不要)
-//                if (null == BitmapFactory.decodeFile(path)) {
-//                    continue;
-//                }
                 //添加图片路径到集合
                 allImageFolder.images.add(new ImageItem(path));
                 // 获取该图片的父路径名

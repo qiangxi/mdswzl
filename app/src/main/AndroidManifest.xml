@@ -141,8 +141,6 @@
         </activity>
         <activity android:name=".activities.MyLostAndFoundActivity">
         </activity>
-        <activity android:name=".activities.MyInfoDetailActivity">
-        </activity>
         <activity android:name=".activities.MyLostAndFoundDetailActivity">
         </activity>
         <activity android:name=".activities.LookImageActivity">
