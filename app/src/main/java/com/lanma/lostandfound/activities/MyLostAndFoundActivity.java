@@ -23,6 +23,7 @@ import com.lanma.lostandfound.presenter.MyLostAndFoundPresenter;
 import com.lanma.lostandfound.utils.AnimationAdapterUtil;
 import com.lanma.lostandfound.utils.ImageViewTintUtil;
 import com.lanma.lostandfound.utils.ScreenUtils;
+import com.lanma.lostandfound.utils.YouMiAdUtils;
 import com.lanma.lostandfound.view.swipemenulistview.SwipeMenu;
 import com.lanma.lostandfound.view.swipemenulistview.SwipeMenuCreator;
 import com.lanma.lostandfound.view.swipemenulistview.SwipeMenuItem;
@@ -61,6 +62,7 @@ public class MyLostAndFoundActivity extends BaseActivity implements ViewTreeObse
         getSwipeBackLayout().setEnableGesture(true);
         initSwipeMenuListView();
         initData();
+        YouMiAdUtils.showSuspendBannerAdInBottom(this);
     }
 
     private void initSwipeMenuListView() {
