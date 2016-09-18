@@ -8,7 +8,7 @@
     </style>
 
     <style name="childAppTheme" parent="AppTheme">
-        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowIsTranslucent">false</item>
     </style>
 
     <style name="SwipeBackLayout">

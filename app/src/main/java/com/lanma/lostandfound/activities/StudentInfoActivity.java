@@ -20,14 +20,12 @@ import com.flyco.dialog.listener.OnOperItemClickL;
 import com.flyco.dialog.widget.ActionSheetDialog;
 import com.lanma.lostandfound.R;
 import com.lanma.lostandfound.beans.StudentInfo;
-import com.lanma.lostandfound.utils.YouMiAdUtils;
 import com.lanma.lostandfound.dialog.LoadingDialog;
 import com.lanma.lostandfound.net.ServerConnection;
 import com.lanma.lostandfound.presenter.GetStudentInfoPresenter;
 import com.lanma.lostandfound.presenter.UpdateStudentInfoPresenter;
 import com.lanma.lostandfound.presenter.UploadHeadImagePresenter;
 import com.lanma.lostandfound.utils.FileUtils;
-import com.lanma.lostandfound.utils.ImageUtils;
 import com.lanma.lostandfound.utils.ImageViewTintUtil;
 import com.lanma.lostandfound.utils.StringUtils;
 import com.lanma.lostandfound.view.RoundImageView;
@@ -116,7 +114,7 @@ public class StudentInfoActivity extends BaseActivity implements GetStudentInfoP
                 break;
             //修改头像
             case R.id.studentHeaderImage:
-                //chooseUserHeaderImage();
+                chooseUserHeaderImage();
                 break;
             //学生性别(男)
             case R.id.studentSexMan:
@@ -261,54 +259,39 @@ public class StudentInfoActivity extends BaseActivity implements GetStudentInfoP
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (null != data) {
-            switch (requestCode) {
-                case FLAG_PHOTO_REQUEST_TAKEPHOTO: // 拍照
-                    File file = FileUtils.getFileByUri(this, photoUri);
-                    if (null != file) {
-                        Bitmap bitmap = BitmapFactory.decodeFile(file.getPath());
-                        if (null == bitmap) {
-                            Bitmap bp = ImageUtils.drawableToBitmap(getResources().getDrawable(R.drawable.icon_passenger_man));
-                            mStudentHeaderImage.setImageBitmap(ImageUtils.toReflectionBitmap(bp));
-                        } else {
-                            mStudentHeaderImage.setImageBitmap(ImageUtils.toReflectionBitmap(bitmap));
-                        }
+        switch (requestCode) {
+            case FLAG_PHOTO_REQUEST_TAKEPHOTO: // 拍照
+                File file = FileUtils.getFileByUri(this, photoUri);
+                if (null != file) {
+                    Bitmap bitmap = BitmapFactory.decodeFile(file.getPath());
+                    if (null != bitmap) {
+                        mStudentHeaderImage.setImageBitmap(bitmap);
+                        //上传头像
+                        ServerConnection.uploadHeadImage(file, this);
+                    } else {
+                        showSnackBar("获取图片异常");
                     }
-                    //上传头像
-                    ServerConnection.uploadHeadImage(file, this);
-//                    startPhotoZoom(photoUri, 500);
-                    break;
-                case FLAG_PHOTO_REQUEST_GALLERY:// 相册获取
+                }
+                break;
+            case FLAG_PHOTO_REQUEST_GALLERY:// 相册获取
+                if (null != data) {
                     File file1 = FileUtils.getFileByUri(this, data.getData());
                     if (null != file1) {
                         Bitmap bitmap = BitmapFactory.decodeFile(file1.getPath());
-                        if (null == bitmap) {
-                            Bitmap bp = ImageUtils.drawableToBitmap(getResources().getDrawable(R.drawable.icon_passenger_man));
-                            mStudentHeaderImage.setImageBitmap(ImageUtils.toReflectionBitmap(bp));
+                        if (null != bitmap) {
+                            mStudentHeaderImage.setImageBitmap(bitmap);
+                            //上传头像
+                            ServerConnection.uploadHeadImage(file1, this);
                         } else {
-                            mStudentHeaderImage.setImageBitmap(ImageUtils.toReflectionBitmap(bitmap));
+                            showSnackBar("获取图片异常");
                         }
                     }
-                    //上传头像
-                    ServerConnection.uploadHeadImage(file1, this);
-//                    data.getData();
-//                    startPhotoZoom(data.getData(), 500);
-                    break;
-                case FLAG_PHOTO_REQUEST_CUT: // 接收处理返回的图片结果
-                    Uri data1 = data.getData();
-                    Bitmap bitmap = data.getParcelableExtra("data");
-//
-//
-//
-//
-//
-//                    }
-//                    File file = FileUtils.getFileByUri(this, photoUri);
-//                    //上传头像
-//                    ServerConnection.uploadHeadImage(file, this);
-                    break;
-            }
+                }
+                break;
+            case FLAG_PHOTO_REQUEST_CUT: // 接收处理返回的图片结果
+                break;
         }
+
     }
 
     @Override

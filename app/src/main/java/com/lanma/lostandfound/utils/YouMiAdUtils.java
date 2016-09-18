@@ -136,7 +136,7 @@ public class YouMiAdUtils {
         FrameLayout.LayoutParams layoutParams = new FrameLayout.LayoutParams
                 (FrameLayout.LayoutParams.MATCH_PARENT, FrameLayout.LayoutParams.WRAP_CONTENT);
         // 设置广告条的悬浮位置
-        layoutParams.gravity = Gravity.BOTTOM | Gravity.LEFT;
+        layoutParams.gravity = Gravity.BOTTOM | Gravity.START;
         // 获取广告条
         View bannerView = BannerManager.getInstance(context)
                 .getBannerView(new BannerViewListener() {

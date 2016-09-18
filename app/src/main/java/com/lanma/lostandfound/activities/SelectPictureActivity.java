@@ -154,7 +154,6 @@ public class SelectPictureActivity extends BaseActivity {
         });
     }
 
-
     @OnItemClick({R.id.selectPictureGridView, R.id.selectPictureListView})
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         switch (parent.getId()) {
