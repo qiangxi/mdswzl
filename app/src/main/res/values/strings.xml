@@ -8,9 +8,9 @@
         <item>VIP卡</item>
         <item>钱包</item>
         <item>行李箱</item>
-        <item>手机</item>
         <item>课本</item>
         <item>充电器</item>
+        <item>手机</item>
         <item>平板电脑</item>
         <item>笔记本电脑</item>
         <item>鼠标</item>
@@ -25,6 +25,11 @@
         <item>枕头</item>
         <item>眼镜</item>
         <item>玩具</item>
+        <item>水杯</item>
+        <item>雨伞</item>
+        <item>太阳伞</item>
+        <item>钥匙</item>
+        <item>包</item>
         <item>其他</item>
     </string-array>
 </resources>
