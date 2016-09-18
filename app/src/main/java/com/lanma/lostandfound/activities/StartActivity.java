@@ -13,7 +13,6 @@ import android.view.KeyEvent;
 import android.widget.RelativeLayout;
 
 import com.lanma.lostandfound.R;
-import com.orhanobut.logger.Logger;
 
 import net.youmi.android.AdManager;
 import net.youmi.android.normal.spot.SplashViewSettings;
@@ -44,10 +43,9 @@ public class StartActivity extends BaseActivity implements SpotListener {
         //Bmob初始化
         Bmob.initialize(this, "0fd42f33574319cf39864c7ee043482d");
         //有米广告初始化
-        AdManager.getInstance(this).init("16125092afdec464", "29a780a031bc7bd9", false, true);
+        AdManager.getInstance(this).init("16125092afdec464", "29a780a031bc7bd9", false, false);
         setIsFirstReceiveToTrue();
         showStartAd();
-        Logger.e("s设备信息：" + getDeviceInfo(this));
     }
 
     public static boolean checkPermission(Context context, String permission) {
@@ -205,6 +203,7 @@ public class StartActivity extends BaseActivity implements SpotListener {
     @Override
     public void onShowFailed(int errorCode) {
         // 展示失败
+        //mAdContainer.setBackgroundResource(R.drawable.pic01);
     }
 
     @Override
