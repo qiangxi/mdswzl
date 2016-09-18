@@ -355,9 +355,12 @@ public class SelectPictureActivity extends BaseActivity {
      * 得到缩略图
      */
     private void getThumbnail() {
-        Cursor mCursor = mContentResolver.query(MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
-                new String[]{MediaStore.Images.ImageColumns.DATA}, "", null,
-                MediaStore.MediaColumns.DATE_ADDED + " DESC");
+        //只查询jpeg和png格式的图片
+        Cursor mCursor = mContentResolver.query(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, null,
+                MediaStore.Images.Media.MIME_TYPE + "=? or " + MediaStore.Images.Media.MIME_TYPE + "=?",
+                new String[] { "image/jpeg", "image/png" },
+                MediaStore.Images.Media.DATE_MODIFIED);
+
         if (null != mCursor && mCursor.moveToFirst()) {
             int _date = mCursor.getColumnIndex(MediaStore.Images.Media.DATA);
             do {
