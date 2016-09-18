@@ -84,7 +84,6 @@ public class StudentInfoActivity extends BaseActivity implements GetStudentInfoP
         getSwipeBackLayout().setEnableGesture(true);
         initData();
         initPhotoUri();
-        YouMiAdUtils.showSuspendBannerAdInBottom(this);
     }
 
     private void initData() {
@@ -117,7 +116,7 @@ public class StudentInfoActivity extends BaseActivity implements GetStudentInfoP
                 break;
             //修改头像
             case R.id.studentHeaderImage:
-                chooseUserHeaderImage();
+                //chooseUserHeaderImage();
                 break;
             //学生性别(男)
             case R.id.studentSexMan:

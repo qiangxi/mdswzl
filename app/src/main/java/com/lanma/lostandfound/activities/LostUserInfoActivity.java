@@ -12,6 +12,7 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.lanma.lostandfound.R;
 import com.lanma.lostandfound.beans.StudentInfo;
 import com.lanma.lostandfound.utils.ImageViewTintUtil;
+import com.lanma.lostandfound.utils.YouMiAdUtils;
 import com.lanma.lostandfound.view.RoundImageView;
 
 import butterknife.Bind;
@@ -48,6 +49,7 @@ public class LostUserInfoActivity extends BaseActivity {
         ImageViewTintUtil.setImageViewTint((ImageView) findViewById(R.id.lostUserInfoBack));
         getSwipeBackLayout().setEnableGesture(true);
         initData();
+        YouMiAdUtils.showSuspendBannerAdInBottom(this);
     }
 
     private void initData() {

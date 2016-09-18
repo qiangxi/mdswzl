@@ -11,6 +11,7 @@ import com.lanma.lostandfound.R;
 import com.lanma.lostandfound.adapter.ThingTypeAdapter;
 import com.lanma.lostandfound.constants.AppConstants;
 import com.lanma.lostandfound.utils.ImageViewTintUtil;
+import com.lanma.lostandfound.utils.YouMiAdUtils;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -33,6 +34,7 @@ public class ThingTypeActivity extends BaseActivity {
         ImageViewTintUtil.setImageViewTint((ImageView) findViewById(R.id.thingTypeBack));
         getSwipeBackLayout().setEnableGesture(true);
         initData();
+        YouMiAdUtils.showSuspendBannerAdInBottom(this);
     }
 
     private void initData() {

@@ -25,6 +25,7 @@ import com.lanma.lostandfound.dialog.LoadingDialog;
 import com.lanma.lostandfound.net.ServerConnection;
 import com.lanma.lostandfound.presenter.DeleteCurrentInfoPresenter;
 import com.lanma.lostandfound.utils.ImageViewTintUtil;
+import com.lanma.lostandfound.utils.YouMiAdUtils;
 
 import java.util.ArrayList;
 
@@ -66,6 +67,7 @@ public class MyLostAndFoundDetailActivity extends BaseActivity  {
         ImageViewTintUtil.setImageViewTint((ImageView) findViewById(R.id.myLostAndFoundDetailBack));
         getSwipeBackLayout().setEnableGesture(true);
         initData();
+        YouMiAdUtils.showSuspendBannerAdInBottom(this);
     }
 
     private void initData() {

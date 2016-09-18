@@ -67,12 +67,12 @@ public class MainActivity extends BaseActivity implements ViewPager.OnPageChange
         ImageViewTintUtil.setImageViewTint((ImageView) findViewById(R.id.mainToggle));
         initViewPagerAndIndicator();
         initEvent();
+        YouMiAdUtils.showVerticalAd(this);
     }
 
     @Override
     protected void onStart() {
         super.onStart();
-        YouMiAdUtils.showVerticalAd(this);
         checkIsLogin();
     }
 
@@ -128,14 +128,19 @@ public class MainActivity extends BaseActivity implements ViewPager.OnPageChange
     private void checkIsLogin() {
         if (null != BmobUser.getCurrentUser(StudentInfo.class)) {
             mDrawer.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED);
+            //设置头像
             if (TextUtils.isEmpty(BmobUser.getCurrentUser(StudentInfo.class).getStudentHeadImage())) {
-                //设置头像
                 mUserHeader.setImageResource(R.drawable.icon_passenger_man);
             } else {
-                //设置头像
                 Glide.with(this).load(BmobUser.getCurrentUser(StudentInfo.class).getStudentHeadImage()).diskCacheStrategy(DiskCacheStrategy.ALL).
                         centerCrop().placeholder(R.drawable.icon_passenger_man).error(R.drawable.icon_passenger_man).
                         into(mUserHeader);
+            }
+            //设置性别
+            if ("女".equals(BmobUser.getCurrentUser(StudentInfo.class).getStudentSex())) {
+                mUserSex.setText("漂亮的小姑娘");
+            } else {
+                mUserSex.setText("帅气的小伙子");
             }
         } else {
             mDrawer.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
