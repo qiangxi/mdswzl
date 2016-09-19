@@ -21,6 +21,7 @@ import com.lanma.lostandfound.constants.AppConstants;
 import com.lanma.lostandfound.net.ServerConnection;
 import com.lanma.lostandfound.presenter.LostInfoListPresenter;
 import com.lanma.lostandfound.utils.AnimationAdapterUtil;
+import com.lanma.lostandfound.utils.EmptyViewUtil;
 import com.lanma.lostandfound.view.DirectionListView;
 import com.umeng.analytics.MobclickAgent;
 
@@ -139,6 +140,12 @@ public class LostFragment extends BaseFragment implements SwipeRefreshLayout.OnR
 
     @Override
     public void onRefreshLostInfoListSuccess(List<LostFoundInfo> list) {
+        if (null != list && list.size() > 0) {
+            isDataLoaded = true;
+        } else {
+            isDataLoaded = false;
+            mListView.setEmptyView(EmptyViewUtil.getEmptyView(getActivity(), mListView));
+        }
         mSwipeRefreshLayout.setRefreshing(false);
         isDataLoaded = true;
         mList = list;
@@ -148,6 +155,7 @@ public class LostFragment extends BaseFragment implements SwipeRefreshLayout.OnR
 
     @Override
     public void onRefreshLostInfoListFailure(String failureMessage) {
+        mListView.setEmptyView(EmptyViewUtil.getEmptyView(getActivity(), mListView));
         mSwipeRefreshLayout.setRefreshing(false);
         showToast(failureMessage);
     }

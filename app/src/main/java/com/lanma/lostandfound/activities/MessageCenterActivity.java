@@ -7,11 +7,12 @@ import android.widget.ListView;
 import com.lanma.lostandfound.R;
 import com.lanma.lostandfound.adapter.MessageInfoAdapter;
 import com.lanma.lostandfound.beans.MessageInfo;
-import com.lanma.lostandfound.utils.YouMiAdUtils;
 import com.lanma.lostandfound.dialog.LoadingDialog;
 import com.lanma.lostandfound.net.ServerConnection;
 import com.lanma.lostandfound.presenter.MessageInfoPresenter;
+import com.lanma.lostandfound.utils.EmptyViewUtil;
 import com.lanma.lostandfound.utils.ImageViewTintUtil;
+import com.lanma.lostandfound.utils.YouMiAdUtils;
 
 import java.util.List;
 
@@ -59,6 +60,7 @@ public class MessageCenterActivity extends BaseActivity implements MessageInfoPr
             mMessageListView.setAdapter(mAdapter);
         } else {
             showSnackBar("还没有任何消息呦~~");
+            mMessageListView.setEmptyView(EmptyViewUtil.getEmptyView(this, mMessageListView, "宝宝没用\n没能查到您的消息记录"));
         }
     }
 
@@ -66,6 +68,7 @@ public class MessageCenterActivity extends BaseActivity implements MessageInfoPr
     public void getMessageInfoFailure(String failureMessage) {
         mDialog.dismiss();
         showSnackBar(failureMessage);
+        mMessageListView.setEmptyView(EmptyViewUtil.getEmptyView(this, mMessageListView, "宝宝没用\n没能查到您的消息记录"));
     }
 
     @Override

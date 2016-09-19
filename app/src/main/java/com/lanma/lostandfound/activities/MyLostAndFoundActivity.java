@@ -21,6 +21,7 @@ import com.lanma.lostandfound.net.ServerConnection;
 import com.lanma.lostandfound.presenter.DeleteCurrentInfoPresenter;
 import com.lanma.lostandfound.presenter.MyLostAndFoundPresenter;
 import com.lanma.lostandfound.utils.AnimationAdapterUtil;
+import com.lanma.lostandfound.utils.EmptyViewUtil;
 import com.lanma.lostandfound.utils.ImageViewTintUtil;
 import com.lanma.lostandfound.utils.ScreenUtils;
 import com.lanma.lostandfound.utils.YouMiAdUtils;
@@ -122,6 +123,9 @@ public class MyLostAndFoundActivity extends BaseActivity implements ViewTreeObse
     public void onRefreshMyLostAndFoundListSuccess(List<LostFoundInfo> list) {
         mDialog.dismiss();
         mList = list;
+        if (null == list || list.size() == 0) {
+            mMyLostAndFoundListView.setEmptyView(EmptyViewUtil.getEmptyView(this, mMyLostAndFoundListView));
+        }
         mAdapter = new MyLostAndFoundAdapter(this, mList);
         mMyLostAndFoundListView.setAdapter(AnimationAdapterUtil.getAnimationInAdapter(mAdapter, mMyLostAndFoundListView));
     }
@@ -130,6 +134,7 @@ public class MyLostAndFoundActivity extends BaseActivity implements ViewTreeObse
     public void onRefreshMyLostAndFoundListFailure(String failureMessage) {
         mDialog.dismiss();
         showSnackBar(failureMessage);
+        mMyLostAndFoundListView.setEmptyView(EmptyViewUtil.getEmptyView(this, mMyLostAndFoundListView));
     }
 
     @Override
