@@ -165,7 +165,6 @@
                     android:background="@android:color/white"
                     android:gravity="left"
                     android:hint="详细描述...(不少于15个字的描述,必填)"
-                    android:inputType="text"
                     android:maxLength="500"
                     android:minHeight="150dp"
                     android:padding="5dp"
