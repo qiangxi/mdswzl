@@ -1,8 +1,6 @@
 package com.lanma.lostandfound.net;
 
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.text.TextUtils;
 
 import com.lanma.lostandfound.beans.LostFoundInfo;
@@ -20,7 +18,6 @@ import com.lanma.lostandfound.presenter.ReleaseInfoPresenter;
 import com.lanma.lostandfound.presenter.SuggestionPresenter;
 import com.lanma.lostandfound.presenter.UpdateStudentInfoPresenter;
 import com.lanma.lostandfound.presenter.UploadHeadImagePresenter;
-import com.lanma.lostandfound.utils.ImageUtils;
 import com.orhanobut.logger.Logger;
 
 import java.io.File;
@@ -107,7 +104,7 @@ public class ServerConnection {
                 if (e == null) {
                     presenter.getStudentInfoSuccess(list.get(0));
                 } else {
-                    presenter.getStudentInfoFailure(e.toString());
+                    presenter.getStudentInfoFailure("查询失败,请稍后重试");
                 }
             }
         });
@@ -125,8 +122,10 @@ public class ServerConnection {
         newUser.setStudentAge(studentAge);
         newUser.setStudentSex(studentSex);
         newUser.setEmail(studentEmailAddress);
-        if (!BmobUser.getCurrentUser().getMobilePhoneNumber().equals(studentPhoneNumber)) {
-            newUser.setMobilePhoneNumber(studentPhoneNumber + " ");
+        if (!TextUtils.isEmpty(studentPhoneNumber)) {
+            if (!studentPhoneNumber.equals(BmobUser.getCurrentUser().getMobilePhoneNumber())) {
+                newUser.setMobilePhoneNumber(studentPhoneNumber);
+            }
         }
         newUser.setStudentYear(studentYear);
         newUser.setStudentOfCollege(studentCollege);
@@ -139,7 +138,7 @@ public class ServerConnection {
                 if (e == null) {
                     presenter.updateStudentInfoSuccess();
                 } else {
-                    presenter.updateStudentInfoFailure(e.getErrorCode(), e.toString());
+                    presenter.updateStudentInfoFailure(e.getErrorCode(), "更新个人信息失败");
                 }
             }
         });
@@ -157,7 +156,7 @@ public class ServerConnection {
                 if (e == null) {
                     setHeadImageUrlToStudentInfo(bmobFile.getFileUrl(), presenter);
                 } else {
-                    presenter.uploadHeadImageFailure(e.toString());
+                    presenter.uploadHeadImageFailure("头像上传失败");
                 }
             }
         });
@@ -176,7 +175,7 @@ public class ServerConnection {
                 if (e == null) {
                     presenter.uploadHeadImageSuccess();
                 } else {
-                    presenter.uploadHeadImageFailure(e.toString());
+                    presenter.uploadHeadImageFailure("头像上传失败");
                 }
             }
         });
@@ -205,9 +204,9 @@ public class ServerConnection {
                     }
                 } else {
                     if (CurrentListSize == 0) {
-                        presenter.onRefreshLostInfoListFailure(e.toString());
+                        presenter.onRefreshLostInfoListFailure("数据刷新失败");
                     } else {
-                        presenter.onLoadMoreLostInfoListFailure(e.toString());
+                        presenter.onLoadMoreLostInfoListFailure("数据加载失败");
                     }
                 }
             }
@@ -238,42 +237,51 @@ public class ServerConnection {
     private static void uploadThingImage(Context context, final String lostInfoType, final String lostInfoDesc, final String lostThingType, final ArrayList<String> mList,
                                          final String lostInfoWhere, final String lostInfoThanksWay, final String lostInfoPhoneNumber,
                                          final String lostInfoDescDetail, final StudentInfo studentInfo, final ReleaseInfoPresenter presenter) {
-        List<String> newImageList = new ArrayList<>();
-        BitmapFactory.Options option = new BitmapFactory.Options();
-        option.inSampleSize = 4;
-        /*不进行图片抖动处理*/
-        option.inDither = false;
-        /*设置让解码器以最佳方式解码*/
-        option.inPreferredConfig = null;
-        /* 下面两个字段需要组合使用 */
-        option.inPurgeable = true;
-        option.inInputShareable = true;
-        //生成的bitmap可变
-        option.inMutable = true;
-        for (String path : mList) {
-            Bitmap bitmap = BitmapFactory.decodeFile(path, option);
-            File fileFromBitmap = ImageUtils.getFileFromBitmap(context, bitmap);
-            if (null != fileFromBitmap) {
-                newImageList.add(fileFromBitmap.getPath());
+//        List<String> newImageList = new ArrayList<>();
+//        BitmapFactory.Options option = new BitmapFactory.Options();
+//        option.inSampleSize = 4;
+//        /*不进行图片抖动处理*/
+//        option.inDither = false;
+//        /*设置让解码器以最佳方式解码*/
+//        option.inPreferredConfig = null;
+//        /* 下面两个字段需要组合使用 */
+//        option.inPurgeable = true;
+//        option.inInputShareable = true;
+//        //生成的bitmap可变
+//        option.inMutable = true;
+//        for (String path : mList) {
+//            Bitmap bitmap = BitmapFactory.decodeFile(path, option);
+//            File fileFromBitmap = ImageUtils.getFileFromBitmap(context, bitmap);
+//            if (null != fileFromBitmap) {
+//                newImageList.add(fileFromBitmap.getPath());
+//            }
+//        }
+        //过滤无效数据,保留有效数据
+        List<String> list = new ArrayList<>();
+        for (String imagePath : mList) {
+            if (!TextUtils.isEmpty(imagePath)) {
+                list.add(imagePath);
             }
         }
-        final String[] imageLocalPath = mList.toArray(new String[newImageList.size()]);
+        final String[] imageLocalPath = list.toArray(new String[list.size()]);
         presenter.requestStart();
         BmobFile.uploadBatch(imageLocalPath, new UploadBatchListener() {
                     @Override
                     public void onSuccess(List<BmobFile> list, List<String> urlList) {
                         //图片全部上传成功之后把图片url地址保存到UpLoadImageInfo表中
-                        if (urlList.size() == imageLocalPath.length) {
-                            StringBuilder sb = new StringBuilder();
-                            for (int i = 0; i < urlList.size(); i++) {
-                                if (i != urlList.size() - 1) {
-                                    sb.append(urlList.get(i)).append(",");
-                                } else {
-                                    sb.append(urlList.get(i));
+                        if (null != urlList) {
+                            if (urlList.size() == imageLocalPath.length) {
+                                StringBuilder sb = new StringBuilder();
+                                for (int i = 0; i < urlList.size(); i++) {
+                                    if (i != urlList.size() - 1) {
+                                        sb.append(urlList.get(i)).append(",");
+                                    } else {
+                                        sb.append(urlList.get(i));
+                                    }
                                 }
+                                releaseLostInfo(lostInfoType, lostInfoDesc, lostThingType, sb.toString(), lostInfoWhere, lostInfoThanksWay,
+                                        lostInfoPhoneNumber, lostInfoDescDetail, studentInfo, presenter);
                             }
-                            releaseLostInfo(lostInfoType, lostInfoDesc, lostThingType, sb.toString(), lostInfoWhere, lostInfoThanksWay,
-                                    lostInfoPhoneNumber, lostInfoDescDetail, studentInfo, presenter);
                         }
                     }
 
@@ -284,7 +292,7 @@ public class ServerConnection {
 
                     @Override
                     public void onError(int i, String s) {
-                        presenter.releaseFailure(s);
+                        presenter.releaseFailure("物品图片上传失败");
                     }
                 }
 
@@ -317,7 +325,7 @@ public class ServerConnection {
                 if (e == null) {
                     presenter.releaseSuccessful();
                 } else {
-                    presenter.releaseFailure(e.toString());
+                    presenter.releaseFailure("信息发布失败");
                 }
             }
         });
@@ -338,7 +346,7 @@ public class ServerConnection {
                 if (null == e) {
                     presenter.SuggestSuccessful();
                 } else {
-                    presenter.SuggestFailure(e.toString());
+                    presenter.SuggestFailure("提交失败,再试试?");
                 }
             }
         });
@@ -357,7 +365,7 @@ public class ServerConnection {
                 if (e == null) {
                     presenter.getMessageInfoSuccess(list);
                 } else {
-                    presenter.getMessageInfoFailure(e.toString());
+                    presenter.getMessageInfoFailure("消息获取失败");
                 }
             }
         });
@@ -385,9 +393,9 @@ public class ServerConnection {
                     }
                 } else {
                     if (currentListSize == 0) {
-                        presenter.onRefreshMyLostAndFoundListFailure(e.toString());
+                        presenter.onRefreshMyLostAndFoundListFailure("刷新数据失败");
                     } else {
-                        presenter.onLoadMoreMyLostAndFoundListFailure(e.toString());
+                        presenter.onLoadMoreMyLostAndFoundListFailure("加载数据失败");
                     }
                 }
             }
@@ -406,7 +414,7 @@ public class ServerConnection {
                 if (null == e) {
                     presenter.onDeleteSuccess(position);
                 } else {
-                    presenter.onDeleteFailure(e.toString());
+                    presenter.onDeleteFailure("删除失败,请稍后重试");
                 }
             }
         });

@@ -10,7 +10,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="5dp"
-        android:text="dgafasfhsdas放好地方哈啥事都爱上大沙发撒"
         android:textColor="@android:color/black"
         android:textSize="16sp"/>
 

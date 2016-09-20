@@ -107,23 +107,23 @@ public class AddLostInfoActivity extends BaseActivity implements ReleaseInfoPres
         //详细描述
         String lostInfoDescDetail = mLostInfoDescDetail.getText().toString().trim();
         if (TextUtils.isEmpty(lostInfoDesc)) {
-            showSnackBar("物品描述不可为空");
+            showToast("物品描述不可为空");
             return;
         }
         if (TextUtils.isEmpty(lostThingType)) {
-            showSnackBar("物品类型不可为空");
+            showToast("物品类型不可为空");
             return;
         }
         if (TextUtils.isEmpty(lostInfoPhoneNumber)) {
-            showSnackBar("手机号码不可为空");
+            showToast("手机号码不可为空");
             return;
         }
         if (!StringUtils.isMobileNo(lostInfoPhoneNumber)) {
-            showSnackBar("手机号码不合法");
+            showToast("手机号码不合法");
             return;
         }
         if (TextUtils.isEmpty(lostInfoDescDetail) || lostInfoDescDetail.length() < 15) {
-            showSnackBar("详细描述不可少于15个字");
+            showToast("详细描述不可少于15个字");
             return;
         }
         MobclickAgent.onEvent(this, "releaseLostInfo");
@@ -189,7 +189,7 @@ public class AddLostInfoActivity extends BaseActivity implements ReleaseInfoPres
     @Override
     public void releaseFailure(String failureMessage) {
         mDialog.dismiss();
-        showSnackBar(failureMessage);
+        showToast(failureMessage);
     }
 
     @Override

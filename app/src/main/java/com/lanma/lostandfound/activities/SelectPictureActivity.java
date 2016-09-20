@@ -3,6 +3,7 @@ package com.lanma.lostandfound.activities;
 import android.content.ContentResolver;
 import android.content.Intent;
 import android.database.Cursor;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -87,6 +88,7 @@ public class SelectPictureActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_select_picture);
         ButterKnife.bind(this);
+        setStatusBarColor(Color.parseColor("#303030"));
         ImageViewTintUtil.setImageViewTint((ImageView) findViewById(R.id.selectPictureBack));
         getSwipeBackLayout().setEnableGesture(true);
         initData();
@@ -176,7 +178,7 @@ public class SelectPictureActivity extends BaseActivity {
      */
     protected void goCamera() {
         if (selectedPicture.size() + 1 > MAX_NUM) {
-            showSnackBar("最多选择" + MAX_NUM + "张");
+            showToast("最多选择" + MAX_NUM + "张");
             return;
         }
         Intent openCameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
@@ -279,7 +281,7 @@ public class SelectPictureActivity extends BaseActivity {
                     @Override
                     public void onClick(View v) {
                         if (!v.isSelected() && selectedPicture.size() + 1 > MAX_NUM) {
-                            showSnackBar("最多选择" + MAX_NUM + "张");
+                            showToast("最多选择" + MAX_NUM + "张");
                             return;
                         }
                         if (selectedPicture.contains(item.path)) {
@@ -357,7 +359,7 @@ public class SelectPictureActivity extends BaseActivity {
         //只查询jpeg和png格式的图片
         Cursor mCursor = mContentResolver.query(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, null,
                 MediaStore.Images.Media.MIME_TYPE + "=? or " + MediaStore.Images.Media.MIME_TYPE + "=?",
-                new String[] { "image/jpeg", "image/png" },
+                new String[]{"image/jpeg", "image/png"},
                 MediaStore.Images.Media.DATE_MODIFIED);
 
         if (null != mCursor && mCursor.moveToFirst()) {

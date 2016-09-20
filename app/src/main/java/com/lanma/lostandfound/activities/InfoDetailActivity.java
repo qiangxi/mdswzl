@@ -160,7 +160,7 @@ public class InfoDetailActivity extends BaseActivity {
                     intent.setData(data);
                     startActivity(intent);
                 } catch (Exception e) {
-                    showSnackBar("获取电话异常");
+                    showToast("获取电话异常");
                     e.printStackTrace();
                 }
                 break;

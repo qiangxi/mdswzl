@@ -181,7 +181,7 @@ public class MyLostAndFoundDetailActivity extends BaseActivity  {
         @Override
         public void onDeleteFailure(String failureMessage) {
             mDialog.dismiss();
-            showSnackBar(failureMessage);
+            showToast(failureMessage);
         }
     }
 }

@@ -17,8 +17,8 @@ public class MyApplication extends Application {
         JPushInterface.init(this);
         //友盟统计初始化
         MobclickAgent.UMAnalyticsConfig config = new MobclickAgent.UMAnalyticsConfig(this,
-                "57d4d66be0f55a77c6001624", "Xiaomi", MobclickAgent.EScenarioType.E_UM_NORMAL, true);
-        MobclickAgent.setDebugMode(true);
+                "57d4d66be0f55a77c6001624", "Xiaomi", MobclickAgent.EScenarioType.E_UM_NORMAL, false);
+        MobclickAgent.setDebugMode(false);
         MobclickAgent.startWithConfigure(config);
     }
 }

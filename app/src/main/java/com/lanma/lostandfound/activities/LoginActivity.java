@@ -8,12 +8,10 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.view.View;
-import android.widget.ImageView;
 
 import com.lanma.lostandfound.R;
 import com.lanma.lostandfound.fragment.LoginFragment;
 import com.lanma.lostandfound.fragment.RegisterFragment;
-import com.lanma.lostandfound.utils.ImageViewTintUtil;
 
 import net.lucode.hackware.magicindicator.MagicIndicator;
 import net.lucode.hackware.magicindicator.buildins.commonnavigator.CommonNavigator;
@@ -25,7 +23,6 @@ import net.lucode.hackware.magicindicator.buildins.commonnavigator.titles.Simple
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
-import butterknife.OnClick;
 
 public class LoginActivity extends BaseActivity implements ViewPager.OnPageChangeListener {
 
@@ -42,7 +39,7 @@ public class LoginActivity extends BaseActivity implements ViewPager.OnPageChang
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         ButterKnife.bind(this);
-        ImageViewTintUtil.setImageViewTint((ImageView) findViewById(R.id.loginRegisterBack));
+        setStatusBarColor(Color.parseColor("#0076A3"));
         initViewPagerAndIndicator();
     }
 
@@ -81,11 +78,6 @@ public class LoginActivity extends BaseActivity implements ViewPager.OnPageChang
             }
         });
         mLoginRegisterIndicator.setNavigator(loginRegisterNavigator);
-    }
-
-    @OnClick(R.id.loginRegisterBack)
-    public void onClick() {
-        finish();
     }
 
     @Override

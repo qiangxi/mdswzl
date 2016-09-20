@@ -59,7 +59,7 @@ public class MessageCenterActivity extends BaseActivity implements MessageInfoPr
             mAdapter = new MessageInfoAdapter(this, list);
             mMessageListView.setAdapter(mAdapter);
         } else {
-            showSnackBar("还没有任何消息呦~~");
+            showToast("还没有任何消息呦~~");
             mMessageListView.setEmptyView(EmptyViewUtil.getEmptyView(this, mMessageListView, "宝宝没用\n没能查到您的消息记录"));
         }
     }
@@ -67,7 +67,7 @@ public class MessageCenterActivity extends BaseActivity implements MessageInfoPr
     @Override
     public void getMessageInfoFailure(String failureMessage) {
         mDialog.dismiss();
-        showSnackBar(failureMessage);
+        showToast(failureMessage);
         mMessageListView.setEmptyView(EmptyViewUtil.getEmptyView(this, mMessageListView, "宝宝没用\n没能查到您的消息记录"));
     }
 

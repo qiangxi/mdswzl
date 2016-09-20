@@ -122,7 +122,7 @@ public class LostUserInfoActivity extends BaseActivity {
                 mLostUserInfoApartNumber.setText(studentInfo.getStudentApartNumber());
             }
         } else {
-            showSnackBar("获取信息失败");
+            showToast("获取信息失败");
         }
     }
 

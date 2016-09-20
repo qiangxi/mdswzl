@@ -49,7 +49,7 @@ public class SuggestActivity extends BaseActivity implements SuggestionPresenter
                 //提交建议
                 String suggest = mSuggestContent.getText().toString().trim();
                 if (TextUtils.isEmpty(suggest)) {
-                    showSnackBar("再多说点吧!", "好吧");
+                    showToast("再多说点吧!");
                     return;
                 }
                 ServerConnection.submitSuggestion(suggest, BmobUser.getCurrentUser(StudentInfo.class), this);
@@ -61,13 +61,13 @@ public class SuggestActivity extends BaseActivity implements SuggestionPresenter
     public void SuggestSuccessful() {
         mSuggestContent.setText("");
         mDialog.dismiss();
-        showSnackBar("吐槽成功");
+        showToast("吐槽成功");
     }
 
     @Override
     public void SuggestFailure(String failureMessage) {
         mDialog.dismiss();
-        showSnackBar(failureMessage);
+        showToast(failureMessage);
     }
 
     @Override

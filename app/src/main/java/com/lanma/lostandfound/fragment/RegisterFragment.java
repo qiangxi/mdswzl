@@ -95,9 +95,8 @@ public class RegisterFragment extends BaseFragment implements RegisterPresenter 
 
     @Override
     public void registerSuccess() {
-        showToast("注册成功");
+        showToast("注册成功,快去登陆吧");
         mDialog.dismiss();
-        getActivity().finish();
     }
 
     @Override

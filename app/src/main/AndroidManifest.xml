@@ -59,11 +59,13 @@
 
         <activity
             android:name=".activities.AddLostInfoActivity"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden">
         </activity>
         <activity
             android:name=".activities.AddFoundInfoActivity"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden">
         </activity>
         <activity
             android:name=".activities.SelectPictureActivity"
@@ -133,17 +135,24 @@
             </intent-filter>
         </receiver>
 
-        <activity android:name=".activities.UserNotesActivity">
+        <activity android:name=".activities.UserNotesActivity"
+                  android:screenOrientation="portrait">
         </activity>
-        <activity android:name=".activities.SuggestActivity">
+        <activity android:name=".activities.SuggestActivity"
+                  android:screenOrientation="portrait"
+                  android:windowSoftInputMode="stateHidden">
         </activity>
-        <activity android:name=".activities.MessageCenterActivity">
+        <activity android:name=".activities.MessageCenterActivity"
+                  android:screenOrientation="portrait">
         </activity>
-        <activity android:name=".activities.MyLostAndFoundActivity">
+        <activity android:name=".activities.MyLostAndFoundActivity"
+                  android:screenOrientation="portrait">
         </activity>
-        <activity android:name=".activities.MyLostAndFoundDetailActivity">
+        <activity android:name=".activities.MyLostAndFoundDetailActivity"
+                  android:screenOrientation="portrait">
         </activity>
-        <activity android:name=".activities.LookImageActivity">
+        <activity android:name=".activities.LookImageActivity"
+                  android:screenOrientation="portrait">
         </activity>
     </application>
 

@@ -146,17 +146,17 @@ public class StudentInfoActivity extends BaseActivity implements GetStudentInfoP
         String studentSpecialities = mStudentSpecialities.getText().toString();
         String studentApartmentNumber = mStudentApartmentNumber.getText().toString();
         if (!TextUtils.isEmpty(studentEmailAddress) && !StringUtils.isEmail(studentEmailAddress)) {
-            showSnackBar("邮箱格式不正确");
+            showToast("邮箱格式不正确");
             return;
         }
         if (!TextUtils.isEmpty(studentPhoneNumber)) {
             if (!StringUtils.isMobileNo(studentPhoneNumber) || studentPhoneNumber.length() < 11) {
-                showSnackBar("手机号格式不正确");
+                showToast("手机号格式不正确");
                 return;
             }
         }
         ServerConnection.UpdateStudentInfo(BmobUser.getCurrentUser(StudentInfo.class).getObjectId(), studentName,
-                studentAge, studentSex, studentEmailAddress, studentPhoneNumber, studentYear, studentCollege,
+                studentAge, studentSex, studentEmailAddress, studentPhoneNumber+"", studentYear, studentCollege,
                 studentSpecialities, studentApartmentNumber, this);
     }
 
@@ -213,7 +213,7 @@ public class StudentInfoActivity extends BaseActivity implements GetStudentInfoP
      */
     private void openCameraActivity() {
         if (!FileUtils.hasSdcard()) {
-            showSnackBar("没有找到SD卡，请检查SD卡是否接触良好");
+            showToast("没有找到SD卡，请检查SD卡是否接触良好");
             return;
         }
         // 调用系统的拍照功能
@@ -269,7 +269,7 @@ public class StudentInfoActivity extends BaseActivity implements GetStudentInfoP
                         //上传头像
                         ServerConnection.uploadHeadImage(file, this);
                     } else {
-                        showSnackBar("获取图片异常");
+                        showToast("获取图片异常");
                     }
                 }
                 break;
@@ -283,7 +283,7 @@ public class StudentInfoActivity extends BaseActivity implements GetStudentInfoP
                             //上传头像
                             ServerConnection.uploadHeadImage(file1, this);
                         } else {
-                            showSnackBar("获取图片异常");
+                            showToast("获取图片异常");
                         }
                     }
                 }
@@ -370,36 +370,36 @@ public class StudentInfoActivity extends BaseActivity implements GetStudentInfoP
     @Override
     public void getStudentInfoFailure(String failureMessage) {
         mDialog.dismiss();
-        showSnackBar(failureMessage);
+        showToast(failureMessage);
         Logger.e("getStudentInfoFailure" + failureMessage);
     }
 
     @Override
     public void updateStudentInfoSuccess() {
         mDialog.dismiss();
-        showSnackBar("信息更新成功");
+        showToast("信息更新成功");
     }
 
     @Override
     public void updateStudentInfoFailure(int errorCode, String failureMessage) {
         mDialog.dismiss();
         if (errorCode == 206) {
-            showSnackBar("登陆信息已过期,不能修改个人信息,请重新登陆重试");
+            showToast("登陆信息已过期,不能修改个人信息,请重新登陆重试");
         } else {
-            showSnackBar(failureMessage);
+            showToast(failureMessage);
         }
     }
 
     @Override
     public void uploadHeadImageSuccess() {
         mDialog.dismiss();
-        showSnackBar("头像更新成功");
+        showToast("头像更新成功");
     }
 
     @Override
     public void uploadHeadImageFailure(String failureMessage) {
         mDialog.dismiss();
-        showSnackBar(failureMessage);
+        showToast(failureMessage);
         Logger.e("uploadHeadImageFailure" + failureMessage);
     }
 

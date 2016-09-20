@@ -107,31 +107,31 @@ public class AddFoundInfoActivity extends BaseActivity implements ReleaseInfoPre
         //详细描述
         String lostInfoDescDetail = mFoundInfoDescDetail.getText().toString().trim();
         if (TextUtils.isEmpty(lostInfoDesc)) {
-            showSnackBar("物品描述不可为空");
+            showToast("物品描述不可为空");
             return;
         }
         if (TextUtils.isEmpty(lostThingType)) {
-            showSnackBar("物品类型不可为空");
+            showToast("物品类型不可为空");
             return;
         }
         if (null == mList || mList.size() == 0) {
-            showSnackBar("请至少选择一张图片");
+            showToast("请至少选择一张图片");
             return;
         }
         if (TextUtils.isEmpty(lostInfoWhere)) {
-            showSnackBar("在哪捡到不可为空");
+            showToast("在哪捡到不可为空");
             return;
         }
         if (TextUtils.isEmpty(lostInfoPhoneNumber)) {
-            showSnackBar("手机号码不可为空");
+            showToast("手机号码不可为空");
             return;
         }
         if (!StringUtils.isMobileNo(lostInfoPhoneNumber)) {
-            showSnackBar("手机号码不合法");
+            showToast("手机号码不合法");
             return;
         }
         if (TextUtils.isEmpty(lostInfoDescDetail) || lostInfoDescDetail.length() < 15) {
-            showSnackBar("详细描述不可少于15个字");
+            showToast("详细描述不可少于15个字");
             return;
         }
         MobclickAgent.onEvent(this,"releaseFoundInfo");
@@ -191,7 +191,7 @@ public class AddFoundInfoActivity extends BaseActivity implements ReleaseInfoPre
     @Override
     public void releaseFailure(String failureMessage) {
         mDialog.dismiss();
-        showSnackBar(failureMessage);
+        showToast(failureMessage);
     }
 
     @Override

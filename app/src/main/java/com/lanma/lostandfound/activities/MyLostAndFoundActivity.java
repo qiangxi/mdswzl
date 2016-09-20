@@ -133,14 +133,14 @@ public class MyLostAndFoundActivity extends BaseActivity implements ViewTreeObse
     @Override
     public void onRefreshMyLostAndFoundListFailure(String failureMessage) {
         mDialog.dismiss();
-        showSnackBar(failureMessage);
+        showToast(failureMessage);
         mMyLostAndFoundListView.setEmptyView(EmptyViewUtil.getEmptyView(this, mMyLostAndFoundListView));
     }
 
     @Override
     public void onLoadMoreMyLostAndFoundListSuccess(List<LostFoundInfo> list) {
         if (null == list || list.size() == 0) {
-            showSnackBar("没有更多数据了");
+            showToast("没有更多数据了");
             return;
         }
         mList.addAll(list);
@@ -149,7 +149,7 @@ public class MyLostAndFoundActivity extends BaseActivity implements ViewTreeObse
 
     @Override
     public void onLoadMoreMyLostAndFoundListFailure(String failureMessage) {
-        showSnackBar(failureMessage);
+        showToast(failureMessage);
     }
 
     @Override
@@ -195,7 +195,7 @@ public class MyLostAndFoundActivity extends BaseActivity implements ViewTreeObse
     @Override
     public void onDeleteFailure(String failureMessage) {
         mDialog.dismiss();
-        showSnackBar(failureMessage);
+        showToast(failureMessage);
     }
 
     @Override

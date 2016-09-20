@@ -17,6 +17,7 @@ import com.lanma.lostandfound.activities.InfoDetailActivity;
 import com.lanma.lostandfound.activities.LoginActivity;
 import com.lanma.lostandfound.adapter.LostInfoAdapter;
 import com.lanma.lostandfound.beans.LostFoundInfo;
+import com.lanma.lostandfound.beans.StudentInfo;
 import com.lanma.lostandfound.constants.AppConstants;
 import com.lanma.lostandfound.net.ServerConnection;
 import com.lanma.lostandfound.presenter.LostInfoListPresenter;
@@ -116,7 +117,7 @@ public class LostFragment extends BaseFragment implements SwipeRefreshLayout.OnR
 
     @OnClick(R.id.addLostInfo)
     public void onClick() {
-        if (null != BmobUser.getCurrentUser()) {
+        if (null != BmobUser.getCurrentUser(StudentInfo.class)) {
             MobclickAgent.onEvent(getActivity(),"addLostInfo");
             Intent intent = new Intent(getActivity(), AddLostInfoActivity.class);
             startActivityForResult(intent, AppConstants.LostInfoRequestCode);
@@ -217,7 +218,6 @@ public class LostFragment extends BaseFragment implements SwipeRefreshLayout.OnR
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
         if (null != data) {
             if (AppConstants.LostInfoRequestCode == requestCode) {
                 //必须加上这句代码,mSwipeRefreshLayout才会在一开始的时候就显示圆圈loading
