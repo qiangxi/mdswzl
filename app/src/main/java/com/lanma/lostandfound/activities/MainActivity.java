@@ -127,20 +127,24 @@ public class MainActivity extends BaseActivity implements ViewPager.OnPageChange
      */
     private void checkIsLogin() {
         if (null != BmobUser.getCurrentUser(StudentInfo.class)) {
-            mDrawer.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED);
-            //设置头像
-            if (TextUtils.isEmpty(BmobUser.getCurrentUser(StudentInfo.class).getStudentHeadImage())) {
-                mUserHeader.setImageResource(R.drawable.icon_passenger_man);
+            if (!TextUtils.isEmpty(BmobUser.getCurrentUser(StudentInfo.class).getObjectId())) {
+                mDrawer.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED);
+                //设置头像
+                if (TextUtils.isEmpty(BmobUser.getCurrentUser(StudentInfo.class).getStudentHeadImage())) {
+                    mUserHeader.setImageResource(R.drawable.icon_passenger_man);
+                } else {
+                    Glide.with(this).load(BmobUser.getCurrentUser(StudentInfo.class).getStudentHeadImage()).diskCacheStrategy(DiskCacheStrategy.ALL).
+                            centerCrop().placeholder(R.drawable.icon_passenger_man).error(R.drawable.icon_passenger_man).
+                            into(mUserHeader);
+                }
+                //设置性别
+                if ("女".equals(BmobUser.getCurrentUser(StudentInfo.class).getStudentSex())) {
+                    mUserSex.setText("漂亮的小姑娘");
+                } else {
+                    mUserSex.setText("帅气的小伙子");
+                }
             } else {
-                Glide.with(this).load(BmobUser.getCurrentUser(StudentInfo.class).getStudentHeadImage()).diskCacheStrategy(DiskCacheStrategy.ALL).
-                        centerCrop().placeholder(R.drawable.icon_passenger_man).error(R.drawable.icon_passenger_man).
-                        into(mUserHeader);
-            }
-            //设置性别
-            if ("女".equals(BmobUser.getCurrentUser(StudentInfo.class).getStudentSex())) {
-                mUserSex.setText("漂亮的小姑娘");
-            } else {
-                mUserSex.setText("帅气的小伙子");
+                mDrawer.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
             }
         } else {
             mDrawer.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
@@ -191,10 +195,15 @@ public class MainActivity extends BaseActivity implements ViewPager.OnPageChange
         switch (view.getId()) {
             case R.id.mainToggle:
                 if (null != BmobUser.getCurrentUser(StudentInfo.class)) {
-                    if (mDrawer.isDrawerOpen(GravityCompat.START)) {
-                        mDrawer.closeDrawer(GravityCompat.START);
+                    if (!TextUtils.isEmpty(BmobUser.getCurrentUser(StudentInfo.class).getObjectId())) {
+                        if (mDrawer.isDrawerOpen(GravityCompat.START)) {
+                            mDrawer.closeDrawer(GravityCompat.START);
+                        } else {
+                            mDrawer.openDrawer(GravityCompat.START);
+                        }
                     } else {
-                        mDrawer.openDrawer(GravityCompat.START);
+                        intent = new Intent(MainActivity.this, LoginActivity.class);
+                        startActivity(intent);
                     }
                 } else {
                     intent = new Intent(MainActivity.this, LoginActivity.class);

@@ -1,10 +1,12 @@
 package com.lanma.lostandfound.dialog;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.flyco.dialog.utils.CornerUtils;
 import com.flyco.dialog.widget.base.BaseDialog;
 import com.lanma.lostandfound.R;
 
@@ -30,6 +32,7 @@ public class DeleteInfoDialog extends BaseDialog {
         dialogMessage = (TextView) view.findViewById(R.id.dialogMessage);
         dialogLeftButton = (Button) view.findViewById(R.id.dialogDismiss);
         dialogRightButton = (Button) view.findViewById(R.id.dialogDelete);
+        view.setBackgroundDrawable(CornerUtils.cornerDrawable(Color.parseColor("#ffffff"), dp2px(5)));
         view.setScaleX(0.8f);
         view.setScaleY(0.8f);
         return view;

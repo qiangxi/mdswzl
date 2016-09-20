@@ -156,7 +156,7 @@ public class StudentInfoActivity extends BaseActivity implements GetStudentInfoP
             }
         }
         ServerConnection.UpdateStudentInfo(BmobUser.getCurrentUser(StudentInfo.class).getObjectId(), studentName,
-                studentAge, studentSex, studentEmailAddress, studentPhoneNumber+"", studentYear, studentCollege,
+                studentAge, studentSex, studentEmailAddress, studentPhoneNumber + "", studentYear, studentCollege,
                 studentSpecialities, studentApartmentNumber, this);
     }
 
@@ -263,29 +263,31 @@ public class StudentInfoActivity extends BaseActivity implements GetStudentInfoP
             case FLAG_PHOTO_REQUEST_TAKEPHOTO: // 拍照
                 File file = FileUtils.getFileByUri(this, photoUri);
                 if (null != file) {
-                    Bitmap bitmap = BitmapFactory.decodeFile(file.getPath());
-                    if (null != bitmap) {
-                        mStudentHeaderImage.setImageBitmap(bitmap);
-                        //上传头像
-                        ServerConnection.uploadHeadImage(file, this);
-                    } else {
-                        showToast("获取图片异常");
-                    }
+                    //设置头像
+                    Glide.with(this).load(file).diskCacheStrategy(DiskCacheStrategy.ALL).
+                            centerCrop().placeholder(R.drawable.icon_passenger_man).error(R.drawable.icon_passenger_man).
+                            into(mStudentHeaderImage);
+                    //上传头像
+                    ServerConnection.uploadHeadImage(file, this);
+                } else {
+                    showToast("获取图片异常");
                 }
                 break;
             case FLAG_PHOTO_REQUEST_GALLERY:// 相册获取
                 if (null != data) {
                     File file1 = FileUtils.getFileByUri(this, data.getData());
                     if (null != file1) {
-                        Bitmap bitmap = BitmapFactory.decodeFile(file1.getPath());
-                        if (null != bitmap) {
-                            mStudentHeaderImage.setImageBitmap(bitmap);
-                            //上传头像
-                            ServerConnection.uploadHeadImage(file1, this);
-                        } else {
-                            showToast("获取图片异常");
-                        }
+                        //设置头像
+                        Glide.with(this).load(file1).diskCacheStrategy(DiskCacheStrategy.ALL).
+                                centerCrop().placeholder(R.drawable.icon_passenger_man).error(R.drawable.icon_passenger_man).
+                                into(mStudentHeaderImage);
+                        //上传头像
+                        ServerConnection.uploadHeadImage(file1, this);
+                    } else {
+                        showToast("获取图片异常");
                     }
+                } else {
+                    showToast("获取图片异常");
                 }
                 break;
             case FLAG_PHOTO_REQUEST_CUT: // 接收处理返回的图片结果
