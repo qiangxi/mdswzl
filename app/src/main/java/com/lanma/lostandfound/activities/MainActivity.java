@@ -67,7 +67,6 @@ public class MainActivity extends BaseActivity implements ViewPager.OnPageChange
         ImageViewTintUtil.setImageViewTint((ImageView) findViewById(R.id.mainToggle));
         initViewPagerAndIndicator();
         initEvent();
-        YouMiAdUtils.showVerticalAd(this);
     }
 
     @Override

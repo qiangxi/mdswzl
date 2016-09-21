@@ -9,7 +9,6 @@ import android.widget.LinearLayout;
 
 import net.youmi.android.normal.banner.BannerManager;
 import net.youmi.android.normal.banner.BannerViewListener;
-import net.youmi.android.normal.spot.SpotListener;
 import net.youmi.android.normal.spot.SpotManager;
 
 /**
@@ -20,41 +19,10 @@ public class YouMiAdUtils {
     }
 
     /**
-     * 显示一个竖屏广告
-     */
-    public static void showVerticalAd(Context context) {
-        SpotManager.getInstance(context).setImageType(SpotManager.IMAGE_TYPE_VERTICAL);
-        SpotManager.getInstance(context).setAnimationType(SpotManager.ANIMATION_TYPE_ADVANCED);
-        SpotManager.getInstance(context).showSpot(context,
-                new SpotListener() {
-                    @Override
-                    public void onShowSuccess() {
-
-                    }
-
-                    @Override
-                    public void onShowFailed(int i) {
-
-                    }
-
-                    @Override
-                    public void onSpotClosed() {
-
-                    }
-
-                    @Override
-                    public void onSpotClicked(boolean b) {
-
-                    }
-                });
-    }
-
-    /**
      * 广告生命周期方法onPause
      */
     public static void onAdPause(Context context) {
         SpotManager.getInstance(context).onPause();
-
     }
 
     /**
@@ -70,36 +38,6 @@ public class YouMiAdUtils {
      */
     public static void onAdDestroy(Context context) {
         SpotManager.getInstance(context).onDestroy();
-    }
-
-    /**
-     * 展示一个竖屏轮播广告
-     */
-    public void showSlideableAd(Context context) {
-        SpotManager.getInstance(context).setImageType(SpotManager.IMAGE_TYPE_VERTICAL);
-        SpotManager.getInstance(context).setAnimationType(SpotManager.ANIMATION_TYPE_ADVANCED);
-        SpotManager.getInstance(context).showSlideableSpot(context,
-                new SpotListener() {
-                    @Override
-                    public void onShowSuccess() {
-
-                    }
-
-                    @Override
-                    public void onShowFailed(int i) {
-
-                    }
-
-                    @Override
-                    public void onSpotClosed() {
-
-                    }
-
-                    @Override
-                    public void onSpotClicked(boolean b) {
-
-                    }
-                });
     }
 
     /**
