@@ -6,6 +6,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -132,9 +133,14 @@ public class FoundFragment extends BaseFragment implements SwipeRefreshLayout.On
     @OnClick(R.id.addfoundInfo)
     public void onClick() {
         if (null != BmobUser.getCurrentUser(StudentInfo.class)) {
-            MobclickAgent.onEvent(getActivity(),"addFoundInfo");
-            Intent intent = new Intent(getActivity(), AddFoundInfoActivity.class);
-            startActivityForResult(intent, AppConstants.foundInfoRequestCode);
+            if (!TextUtils.isEmpty(BmobUser.getCurrentUser(StudentInfo.class).getObjectId())) {
+                MobclickAgent.onEvent(getActivity(), "addFoundInfo");
+                Intent intent = new Intent(getActivity(), AddFoundInfoActivity.class);
+                startActivityForResult(intent, AppConstants.foundInfoRequestCode);
+            } else {
+                Intent intent = new Intent(getActivity(), LoginActivity.class);
+                startActivity(intent);
+            }
         } else {
             Intent intent = new Intent(getActivity(), LoginActivity.class);
             startActivity(intent);
@@ -199,7 +205,7 @@ public class FoundFragment extends BaseFragment implements SwipeRefreshLayout.On
         // 如果满足允许上拉加载、非加载状态中、最后一个显示的 item 与数据源的大小一样，则表示滑动入底部
         if (scrollState == SCROLL_STATE_IDLE && !mSwipeRefreshLayout.isRefreshing()) {
             if (view.getLastVisiblePosition() == (mFoundListView.getCount() - 1)) {
-                View childView = mFoundListView.getChildAt(mFoundListView.getChildCount()-1);
+                View childView = mFoundListView.getChildAt(mFoundListView.getChildCount() - 1);
                 if (null != childView && childView.getBottom() == mListViewHeight) {
                     ServerConnection.getLostFoundInfoList(AppConstants.FoundInfoType, mList.size(), this);
                 }
@@ -243,10 +249,12 @@ public class FoundFragment extends BaseFragment implements SwipeRefreshLayout.On
             }
         }
     }
+
     public void onResume() {
         super.onResume();
         MobclickAgent.onPageStart(getActivity().getClass().getSimpleName()); //统计页面，"MainScreen"为页面名称，可自定义
     }
+
     public void onPause() {
         super.onPause();
         MobclickAgent.onPageEnd(getActivity().getClass().getSimpleName());

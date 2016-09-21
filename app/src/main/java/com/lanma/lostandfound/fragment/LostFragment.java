@@ -5,6 +5,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -118,9 +119,14 @@ public class LostFragment extends BaseFragment implements SwipeRefreshLayout.OnR
     @OnClick(R.id.addLostInfo)
     public void onClick() {
         if (null != BmobUser.getCurrentUser(StudentInfo.class)) {
-            MobclickAgent.onEvent(getActivity(),"addLostInfo");
-            Intent intent = new Intent(getActivity(), AddLostInfoActivity.class);
-            startActivityForResult(intent, AppConstants.LostInfoRequestCode);
+            if (!TextUtils.isEmpty(BmobUser.getCurrentUser(StudentInfo.class).getObjectId())) {
+                MobclickAgent.onEvent(getActivity(), "addLostInfo");
+                Intent intent = new Intent(getActivity(), AddLostInfoActivity.class);
+                startActivityForResult(intent, AppConstants.LostInfoRequestCode);
+            } else {
+                Intent intent = new Intent(getActivity(), LoginActivity.class);
+                startActivity(intent);
+            }
         } else {
             Intent intent = new Intent(getActivity(), LoginActivity.class);
             startActivity(intent);
@@ -232,6 +238,7 @@ public class LostFragment extends BaseFragment implements SwipeRefreshLayout.OnR
         super.onResume();
         MobclickAgent.onPageStart(getActivity().getClass().getSimpleName()); //统计页面，"MainScreen"为页面名称，可自定义
     }
+
     public void onPause() {
         super.onPause();
         MobclickAgent.onPageEnd(getActivity().getClass().getSimpleName());
