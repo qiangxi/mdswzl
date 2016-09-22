@@ -44,7 +44,9 @@ public class StartActivity extends BaseActivity implements SpotListener {
         Bmob.initialize(this, "0fd42f33574319cf39864c7ee043482d");
         //有米广告初始化
         AdManager.getInstance(this).init("16125092afdec464", "29a780a031bc7bd9", false, false);
+        //监听网络状态相关
         setIsFirstReceiveToTrue();
+        //展示广告
         showStartAd();
     }
 

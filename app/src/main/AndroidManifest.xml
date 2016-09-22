@@ -154,6 +154,7 @@
         <activity android:name=".activities.LookImageActivity"
                   android:screenOrientation="portrait">
         </activity>
+
     </application>
 
 </manifest>
