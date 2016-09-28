@@ -1,13 +1,14 @@
 package com.lanma.lostandfound.activities;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.GridView;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.lanma.lostandfound.R;
@@ -17,7 +18,6 @@ import com.lanma.lostandfound.constants.AppConstants;
 import com.lanma.lostandfound.dialog.LoadingDialog;
 import com.lanma.lostandfound.net.ServerConnection;
 import com.lanma.lostandfound.presenter.ReleaseInfoPresenter;
-import com.lanma.lostandfound.utils.ImageViewTintUtil;
 import com.lanma.lostandfound.utils.StringUtils;
 import com.umeng.analytics.MobclickAgent;
 
@@ -46,6 +46,8 @@ public class AddLostInfoActivity extends BaseActivity implements ReleaseInfoPres
     EditText mLostInfoPhoneNumber;//联系方式(必填)
     @Bind(R.id.lostInfoDescDetail)
     EditText mLostInfoDescDetail;//详细描述(必填)
+    @Bind(R.id.toolBar)
+    Toolbar mToolBar;
 
     private GridImageAdapter mAdapter;
     private ArrayList<String> mList = new ArrayList<>();//用来装载图片路径的
@@ -57,9 +59,19 @@ public class AddLostInfoActivity extends BaseActivity implements ReleaseInfoPres
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_lost_info);
         ButterKnife.bind(this);
-        ImageViewTintUtil.setImageViewTint((ImageView) findViewById(R.id.lostInfoBack));
-        getSwipeBackLayout().setEnableGesture(true);
+        initToolBar();
         initData();
+    }
+
+    private void initToolBar() {
+        mToolBar.setTitle("失物信息");
+        mToolBar.setTitleTextColor(Color.WHITE);
+        mToolBar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
     }
 
     private void initData() {
@@ -71,13 +83,9 @@ public class AddLostInfoActivity extends BaseActivity implements ReleaseInfoPres
         mLostInfoGridImages.setAdapter(mAdapter);
     }
 
-    @OnClick({R.id.lostInfoBack, R.id.lostInfoType, R.id.releaseLostInfo})
+    @OnClick({ R.id.lostInfoType, R.id.releaseLostInfo})
     public void onClick(View view) {
         switch (view.getId()) {
-            //返回上一层
-            case R.id.lostInfoBack:
-                finish();
-                break;
             //选择丢失的物品类型
             case R.id.lostInfoType:
                 Intent intent = new Intent(this, ThingTypeActivity.class);
@@ -127,7 +135,7 @@ public class AddLostInfoActivity extends BaseActivity implements ReleaseInfoPres
             return;
         }
         MobclickAgent.onEvent(this, "releaseLostInfo");
-        ServerConnection.ReleaseLostInfo(this,AppConstants.LostInfoType, lostInfoDesc, lostThingType, mList, lostInfoWhere, lostInfoThanksWay,
+        ServerConnection.ReleaseLostInfo(this, AppConstants.LostInfoType, lostInfoDesc, lostThingType, mList, lostInfoWhere, lostInfoThanksWay,
                 lostInfoPhoneNumber, lostInfoDescDetail, BmobUser.getCurrentUser(StudentInfo.class), this);
     }
 

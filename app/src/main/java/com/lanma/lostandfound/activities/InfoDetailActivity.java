@@ -5,6 +5,7 @@ import android.graphics.Color;
 import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.text.SpannableStringBuilder;
 import android.text.Spanned;
 import android.text.TextUtils;
@@ -15,14 +16,12 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.GridView;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.lanma.lostandfound.R;
 import com.lanma.lostandfound.adapter.GridImageAdapter;
 import com.lanma.lostandfound.beans.LostFoundInfo;
 import com.lanma.lostandfound.constants.AppConstants;
-import com.lanma.lostandfound.utils.ImageViewTintUtil;
 
 import java.util.ArrayList;
 
@@ -54,6 +53,8 @@ public class InfoDetailActivity extends BaseActivity {
     Button mInfoDetailLookUserInfo;
     @Bind(R.id.InfoDetailCallPhone)
     Button mInfoDetailCallPhone;
+    @Bind(R.id.toolBar)
+    Toolbar mToolBar;
 
     private LostFoundInfo info;
     private GridImageAdapter mAdapter;
@@ -65,9 +66,19 @@ public class InfoDetailActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_info_detail);
         ButterKnife.bind(this);
-        ImageViewTintUtil.setImageViewTint((ImageView) findViewById(R.id.InfoDetailBack));
-        getSwipeBackLayout().setEnableGesture(true);
+        initToolBar();
         initData();
+    }
+
+    private void initToolBar() {
+        mToolBar.setTitle("信息详情");
+        mToolBar.setTitleTextColor(Color.WHITE);
+        mToolBar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
     }
 
     private void initData() {
@@ -136,14 +147,10 @@ public class InfoDetailActivity extends BaseActivity {
         mInfoDetailDescDetail.setText(builder);
     }
 
-    @OnClick({R.id.InfoDetailBack, R.id.InfoDetailLookUserInfo, R.id.InfoDetailCallPhone})
+    @OnClick({R.id.InfoDetailLookUserInfo, R.id.InfoDetailCallPhone})
     public void onClick(View view) {
         Intent intent;
         switch (view.getId()) {
-            // 返回上一层
-            case R.id.InfoDetailBack:
-                finish();
-                break;
             //查看失主信息
             case R.id.InfoDetailLookUserInfo:
                 intent = new Intent(this, LostUserInfoActivity.class);

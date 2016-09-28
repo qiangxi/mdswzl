@@ -1,5 +1,7 @@
 <resources>
     <string name="app_name">民大失物招领</string>
+    <string name="open">打开</string>
+    <string name="close">关闭</string>
     <!--物品类型-->
     <string-array name="thing_type_array">
         <item>学生证</item>

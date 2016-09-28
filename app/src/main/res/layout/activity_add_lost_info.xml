@@ -3,33 +3,9 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-
     android:orientation="vertical">
 
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/actionBarColor"
-        android:clipToPadding="true"
-        android:fitsSystemWindows="true">
-
-        <ImageView
-            android:id="@+id/lostInfoBack"
-            android:layout_width="60dp"
-            android:layout_height="50dp"
-            android:padding="10dp"
-            android:src="@drawable/icon_back"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="50dp"
-            android:layout_gravity="center"
-            android:background="@android:color/transparent"
-            android:gravity="center"
-            android:text="失物信息"
-            android:textColor="@android:color/white"
-            android:textSize="18sp"/>
-    </FrameLayout>
+    <include layout="@layout/tool_bar_layout"/>
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -72,6 +48,7 @@
                     android:layout_gravity="center"
                     android:layout_marginTop="0.5dp"
                     android:background="@android:color/white"
+                    android:drawableLeft="@drawable/icon_thing_type"
                     android:gravity="center"
                     android:hint="点击选择丢失的物品类型(必选)"
                     android:minHeight="45dp"
@@ -79,7 +56,6 @@
                     android:paddingRight="5dp"
                     android:textColor="@android:color/black"
                     android:textSize="14sp"
-                    android:drawableLeft="@drawable/icon_thing_type"
                     />
 
                 <TextView
@@ -177,10 +153,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
+            android:layout_marginBottom="5dp"
             android:background="@drawable/button_selector_blue_dark_drawable"
             android:text="发布"
             android:textColor="@android:color/white"
-            android:layout_marginBottom="5dp"
             />
     </RelativeLayout>
 

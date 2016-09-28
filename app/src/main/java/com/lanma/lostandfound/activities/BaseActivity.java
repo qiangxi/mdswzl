@@ -21,7 +21,7 @@ public class BaseActivity extends SwipeBackActivity implements NetConnectedRecei
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_base);
-        setStatusBarColor(getResources().getColor(R.color.actionBarColor));
+        setStatusBarColor(getResources().getColor(R.color.colorPrimary));
         AppManager.newInstance().addActivity(this);
         configSwipeBackLayout();
     }
@@ -37,7 +37,7 @@ public class BaseActivity extends SwipeBackActivity implements NetConnectedRecei
      */
     private void configSwipeBackLayout() {
         SwipeBackLayout swipeBackLayout = getSwipeBackLayout();
-        swipeBackLayout.setEnableGesture(false);//禁止各种方向的侧滑返回
+        swipeBackLayout.setEnableGesture(true);//禁止各种方向的侧滑返回
         swipeBackLayout.setEdgeTrackingEnabled(SwipeBackLayout.EDGE_LEFT);//边缘检测方向为左边
         swipeBackLayout.setScrollThresHold(0.5f);//滑动距离大于屏幕的一半时进行finish操作
     }
@@ -47,41 +47,7 @@ public class BaseActivity extends SwipeBackActivity implements NetConnectedRecei
      */
     public void showToast(String message) {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
-//        //去掉虚拟按键
-//        getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
-//                | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION //隐藏虚拟按键栏
-//                | View.SYSTEM_UI_FLAG_IMMERSIVE //防止点击屏幕时,隐藏虚拟按键栏又弹了出来
-//        );
-//        final Snackbar snackbar = Snackbar.make(getWindow().getDecorView(), message, Snackbar.LENGTH_INDEFINITE);
-//        snackbar.setAction("知道了", new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                snackbar.dismiss();
-//                //隐藏SnackBar时记得恢复隐藏虚拟按键栏,不然屏幕底部会多出一块空白布局出来,和难看
-//                getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_VISIBLE);
-//            }
-//        }).show();
     }
-
-    /**
-     * 展示一个SnackBar
-     */
-//    public void showToast(String message, @NonNull String actionName) {
-//        //去掉虚拟按键
-//        getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
-//                | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION //隐藏虚拟按键栏
-//                | View.SYSTEM_UI_FLAG_IMMERSIVE //防止点击屏幕时,隐藏虚拟按键栏又弹了出来
-//        );
-//        final Snackbar snackbar = Snackbar.make(getWindow().getDecorView(), message, Snackbar.LENGTH_INDEFINITE);
-//        snackbar.setAction(actionName, new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                snackbar.dismiss();
-//                //隐藏SnackBar时记得恢复隐藏虚拟按键栏,不然屏幕底部会多出一块空白布局出来,和难看
-//                getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_VISIBLE);
-//            }
-//        }).show();
-//    }
 
     /**
      * 错误码转String

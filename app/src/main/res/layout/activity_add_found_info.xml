@@ -3,185 +3,156 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-
     android:orientation="vertical">
 
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/actionBarColor"
-        android:clipToPadding="true"
-        android:fitsSystemWindows="true">
+    <include layout="@layout/tool_bar_layout"/>
 
-        <ImageView
-            android:id="@+id/foundInfoBack"
-            android:layout_width="60dp"
-            android:layout_height="50dp"
-            android:padding="10dp"
-            android:src="@drawable/icon_back"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="50dp"
-            android:layout_gravity="center"
-            android:background="@android:color/transparent"
-            android:gravity="center"
-            android:text="招领信息"
-            android:textColor="@android:color/white"
-            android:textSize="18sp"/>
-    </FrameLayout>
-
-    <RelativeLayout
+    <com.lanma.lostandfound.view.ReboundScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_above="@+id/releaseFoundInfo"
+        android:layout_marginBottom="5dp"
         android:background="@color/mainBackgroundColor"
         android:padding="10dp">
 
-        <com.lanma.lostandfound.view.ReboundScrollView
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_above="@+id/releaseFoundInfo"
-            android:layout_marginBottom="5dp">
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            >
+
+            <EditText
+                android:id="@+id/foundInfoDesc"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@android:color/white"
+                android:gravity="center"
+                android:hint="物品描述...(必填)"
+                android:inputType="text"
+                android:maxLength="30"
+                android:minHeight="45dp"
+                android:paddingLeft="5dp"
+                android:paddingRight="5dp"
+                android:textColor="@android:color/black"
+                android:textSize="18sp"
+                android:textStyle="bold"/>
+
+            <TextView
+                android:id="@+id/foundInfoType"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="0.5dp"
+                android:background="@android:color/white"
+                android:drawableLeft="@drawable/icon_thing_type"
+                android:gravity="center"
+                android:hint="点击选择丢失的物品类型(必选)"
+                android:minHeight="45dp"
+                android:paddingLeft="15dp"
+                android:paddingRight="5dp"
+                android:textColor="@android:color/black"
+                android:textSize="14sp"
+                />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="5dp"
+                android:paddingLeft="5dp"
+                android:text="添加物品图片(至少1张图片):"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                >
+                android:background="@android:color/white"
+                android:gravity="center">
 
-                <EditText
-                    android:id="@+id/foundInfoDesc"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@android:color/white"
+                <GridView
+                    android:id="@+id/foundInfoGridImages"
+                    android:layout_width="340dp"
+                    android:layout_height="120dp"
+                    android:columnWidth="80dp"
                     android:gravity="center"
-                    android:hint="物品描述...(必填)"
-                    android:inputType="text"
-                    android:maxLength="30"
-                    android:minHeight="45dp"
-                    android:paddingLeft="5dp"
-                    android:paddingRight="5dp"
-                    android:textColor="@android:color/black"
-                    android:textSize="18sp"
-                    android:textStyle="bold"/>
-
-                <TextView
-                    android:id="@+id/foundInfoType"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginTop="0.5dp"
-                    android:background="@android:color/white"
-                    android:drawableLeft="@drawable/icon_thing_type"
-                    android:gravity="center"
-                    android:hint="点击选择丢失的物品类型(必选)"
-                    android:minHeight="45dp"
-                    android:paddingLeft="15dp"
-                    android:paddingRight="5dp"
-                    android:textColor="@android:color/black"
-                    android:textSize="14sp"
-                    />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:paddingBottom="5dp"
-                    android:paddingLeft="5dp"
-                    android:text="添加物品图片(至少1张图片):"/>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@android:color/white"
-                    android:gravity="center">
-
-                    <GridView
-                        android:id="@+id/foundInfoGridImages"
-                        android:layout_width="340dp"
-                        android:layout_height="120dp"
-                        android:columnWidth="80dp"
-                        android:gravity="center"
-                        android:horizontalSpacing="10dp"
-                        android:numColumns="3"
-                        android:orientation="horizontal"
-                        android:padding="10dp"
-                        android:scrollbars="none"
-                        android:stretchMode="columnWidth"
-                        android:verticalSpacing="10dp"/>
-                </LinearLayout>
-
-                <EditText
-                    android:id="@+id/foundInfoWhere"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    android:background="@android:color/white"
-                    android:gravity="center"
-                    android:hint="在哪里捡到(必填)"
-                    android:inputType="text"
-                    android:maxLength="50"
-                    android:minHeight="45dp"
-                    android:textColor="@android:color/black"
-                    android:textSize="14sp"
-                    />
-
-                <EditText
-                    android:id="@+id/foundInfoThanksWay"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="0.5dp"
-                    android:background="@android:color/white"
-                    android:gravity="center"
-                    android:hint="希望失主酬谢的方式(可选)"
-                    android:inputType="text"
-                    android:maxLength="50"
-                    android:minHeight="45dp"
-                    android:textColor="@android:color/black"
-                    android:textSize="14sp"
-                    />
-
-                <EditText
-                    android:id="@+id/foundInfoPhoneNumber"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="0.5dp"
-                    android:background="@android:color/white"
-                    android:gravity="center"
-                    android:hint="联系方式(手机号,必填)"
-                    android:inputType="phone"
-                    android:maxLength="11"
-                    android:minHeight="45dp"
-                    android:textColor="@android:color/black"
-                    android:textSize="14sp"
-                    />
-
-                <EditText
-                    android:id="@+id/foundInfoDescDetail"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    android:background="@android:color/white"
-                    android:gravity="left"
-                    android:hint="详细描述...(不少于15个字的描述,必填)"
-                    android:maxLength="500"
-                    android:minHeight="150dp"
-                    android:padding="5dp"
-                    android:textColor="@android:color/black"
-                    android:textSize="14sp"
-                    />
+                    android:horizontalSpacing="10dp"
+                    android:numColumns="3"
+                    android:orientation="horizontal"
+                    android:padding="10dp"
+                    android:scrollbars="none"
+                    android:stretchMode="columnWidth"
+                    android:verticalSpacing="10dp"/>
             </LinearLayout>
-        </com.lanma.lostandfound.view.ReboundScrollView>
 
-        <Button
-            android:id="@+id/releaseFoundInfo"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_marginBottom="5dp"
-            android:background="@drawable/button_selector_blue_dark_drawable"
-            android:text="发布"
-            android:textColor="@android:color/white"
-            />
-    </RelativeLayout>
+            <EditText
+                android:id="@+id/foundInfoWhere"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:background="@android:color/white"
+                android:gravity="center"
+                android:hint="在哪里捡到(必填)"
+                android:inputType="text"
+                android:maxLength="50"
+                android:minHeight="45dp"
+                android:textColor="@android:color/black"
+                android:textSize="14sp"
+                />
+
+            <EditText
+                android:id="@+id/foundInfoThanksWay"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="0.5dp"
+                android:background="@android:color/white"
+                android:gravity="center"
+                android:hint="希望失主酬谢的方式(可选)"
+                android:inputType="text"
+                android:maxLength="50"
+                android:minHeight="45dp"
+                android:textColor="@android:color/black"
+                android:textSize="14sp"
+                />
+
+            <EditText
+                android:id="@+id/foundInfoPhoneNumber"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="0.5dp"
+                android:background="@android:color/white"
+                android:gravity="center"
+                android:hint="联系方式(手机号,必填)"
+                android:inputType="phone"
+                android:maxLength="11"
+                android:minHeight="45dp"
+                android:textColor="@android:color/black"
+                android:textSize="14sp"
+                />
+
+            <EditText
+                android:id="@+id/foundInfoDescDetail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:background="@android:color/white"
+                android:gravity="left"
+                android:hint="详细描述...(不少于15个字的描述,必填)"
+                android:maxLength="500"
+                android:minHeight="150dp"
+                android:padding="5dp"
+                android:textColor="@android:color/black"
+                android:textSize="14sp"
+                />
+        </LinearLayout>
+    </com.lanma.lostandfound.view.ReboundScrollView>
+
+    <Button
+        android:id="@+id/releaseFoundInfo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="5dp"
+        android:background="@drawable/button_selector_blue_dark_drawable"
+        android:text="发布"
+        android:textColor="@android:color/white"
+        />
 
 </LinearLayout>

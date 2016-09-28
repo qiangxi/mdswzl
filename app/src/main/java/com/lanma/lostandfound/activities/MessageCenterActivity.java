@@ -1,7 +1,9 @@
 package com.lanma.lostandfound.activities;
 
+import android.graphics.Color;
 import android.os.Bundle;
-import android.widget.ImageView;
+import android.support.v7.widget.Toolbar;
+import android.view.View;
 import android.widget.ListView;
 
 import com.lanma.lostandfound.R;
@@ -11,14 +13,12 @@ import com.lanma.lostandfound.dialog.LoadingDialog;
 import com.lanma.lostandfound.net.ServerConnection;
 import com.lanma.lostandfound.presenter.MessageInfoPresenter;
 import com.lanma.lostandfound.utils.EmptyViewUtil;
-import com.lanma.lostandfound.utils.ImageViewTintUtil;
 import com.lanma.lostandfound.utils.YouMiAdUtils;
 
 import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
-import butterknife.OnClick;
 
 /**
  * 消息中心
@@ -27,6 +27,8 @@ public class MessageCenterActivity extends BaseActivity implements MessageInfoPr
 
     @Bind(R.id.messageListView)
     ListView mMessageListView;
+    @Bind(R.id.toolBar)
+    Toolbar mToolBar;
 
     private LoadingDialog mDialog;
     private MessageInfoAdapter mAdapter;
@@ -36,20 +38,25 @@ public class MessageCenterActivity extends BaseActivity implements MessageInfoPr
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_message_center);
         ButterKnife.bind(this);
-        ImageViewTintUtil.setImageViewTint((ImageView) findViewById(R.id.messageBack));
-        getSwipeBackLayout().setEnableGesture(true);
+        initToolBar();
         initData();
         YouMiAdUtils.showSuspendBannerAdInBottom(this);
+    }
+
+    private void initToolBar() {
+        mToolBar.setTitle("消息中心");
+        mToolBar.setTitleTextColor(Color.WHITE);
+        mToolBar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
     }
 
     private void initData() {
         mDialog = new LoadingDialog(this);
         ServerConnection.getMessageInfo(this);
-    }
-
-    @OnClick(R.id.messageBack)
-    public void onClick() {
-        finish();
     }
 
     @Override

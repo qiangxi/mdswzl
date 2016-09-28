@@ -1,17 +1,16 @@
 package com.lanma.lostandfound.activities;
 
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -26,7 +25,6 @@ import com.lanma.lostandfound.presenter.GetStudentInfoPresenter;
 import com.lanma.lostandfound.presenter.UpdateStudentInfoPresenter;
 import com.lanma.lostandfound.presenter.UploadHeadImagePresenter;
 import com.lanma.lostandfound.utils.FileUtils;
-import com.lanma.lostandfound.utils.ImageViewTintUtil;
 import com.lanma.lostandfound.utils.StringUtils;
 import com.lanma.lostandfound.view.RoundImageView;
 import com.orhanobut.logger.Logger;
@@ -63,6 +61,8 @@ public class StudentInfoActivity extends BaseActivity implements GetStudentInfoP
     EditText mStudentSpecialities;//所学专业
     @Bind(R.id.studentApartNumber)
     EditText mStudentApartmentNumber;//所在公寓
+    @Bind(R.id.toolBar)
+    Toolbar mToolBar;
 
     private static final String SAVE_DIRECTORY = "/mdswzl"; // 头像存储路径
     private static final String SAVE_PIC_NAME = "header.jpeg";// 头像存储名称
@@ -78,10 +78,31 @@ public class StudentInfoActivity extends BaseActivity implements GetStudentInfoP
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_info);
         ButterKnife.bind(this);
-        ImageViewTintUtil.setImageViewTint((ImageView) findViewById(R.id.studentInfoBack));
-        getSwipeBackLayout().setEnableGesture(true);
+        initToolBar();
         initData();
         initPhotoUri();
+    }
+
+    private void initToolBar() {
+        mToolBar.setTitle("个人信息");
+        mToolBar.setTitleTextColor(Color.WHITE);
+        mToolBar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+        mToolBar.inflateMenu(R.menu.menu_student_info);
+        mToolBar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                StudentInfo.logOut();
+                Intent intent = new Intent(StudentInfoActivity.this, LoginActivity.class);
+                startActivity(intent);
+                finish();
+                return true;
+            }
+        });
     }
 
     private void initData() {
@@ -100,14 +121,10 @@ public class StudentInfoActivity extends BaseActivity implements GetStudentInfoP
         }
     }
 
-    @OnClick({R.id.studentInfoBack, R.id.saveUserInfo, R.id.studentHeaderImage,
-            R.id.studentSexMan, R.id.studentSexWoman, R.id.exitLogin})
+    @OnClick({R.id.saveUserInfo, R.id.studentHeaderImage,
+            R.id.studentSexMan, R.id.studentSexWoman})
     public void onClick(View view) {
         switch (view.getId()) {
-            //返回上一层
-            case R.id.studentInfoBack:
-                finish();
-                break;
             //更新学生信息
             case R.id.saveUserInfo:
                 updateStudentInfo();
@@ -125,13 +142,6 @@ public class StudentInfoActivity extends BaseActivity implements GetStudentInfoP
             case R.id.studentSexWoman:
                 studentSex = "女";
                 setWomanSex();
-                break;
-            //退出登陆
-            case R.id.exitLogin:
-                StudentInfo.logOut();
-                Intent intent = new Intent(this, LoginActivity.class);
-                startActivity(intent);
-                finish();
                 break;
         }
     }

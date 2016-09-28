@@ -1,13 +1,14 @@
 package com.lanma.lostandfound.activities;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.GridView;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.lanma.lostandfound.R;
@@ -17,7 +18,6 @@ import com.lanma.lostandfound.constants.AppConstants;
 import com.lanma.lostandfound.dialog.LoadingDialog;
 import com.lanma.lostandfound.net.ServerConnection;
 import com.lanma.lostandfound.presenter.ReleaseInfoPresenter;
-import com.lanma.lostandfound.utils.ImageViewTintUtil;
 import com.lanma.lostandfound.utils.StringUtils;
 import com.umeng.analytics.MobclickAgent;
 
@@ -45,6 +45,8 @@ public class AddFoundInfoActivity extends BaseActivity implements ReleaseInfoPre
     EditText mFoundInfoPhoneNumber;//手机号
     @Bind(R.id.foundInfoDescDetail)
     EditText mFoundInfoDescDetail;//详细描述
+    @Bind(R.id.toolBar)
+    Toolbar mToolBar;
 
 
     private GridImageAdapter mAdapter;
@@ -57,9 +59,19 @@ public class AddFoundInfoActivity extends BaseActivity implements ReleaseInfoPre
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_found_info);
         ButterKnife.bind(this);
-        ImageViewTintUtil.setImageViewTint((ImageView) findViewById(R.id.foundInfoBack));
-        getSwipeBackLayout().setEnableGesture(true);
+        initToolBar();
         initData();
+    }
+
+    private void initToolBar() {
+        mToolBar.setTitle("招领信息");
+        mToolBar.setTitleTextColor(Color.WHITE);
+        mToolBar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
     }
 
     private void initData() {
@@ -71,13 +83,9 @@ public class AddFoundInfoActivity extends BaseActivity implements ReleaseInfoPre
         mFoundInfoGridImages.setAdapter(mAdapter);
     }
 
-    @OnClick({R.id.foundInfoBack, R.id.foundInfoType, R.id.releaseFoundInfo})
+    @OnClick({R.id.foundInfoType, R.id.releaseFoundInfo})
     public void onClick(View view) {
         switch (view.getId()) {
-            //返回上一层
-            case R.id.foundInfoBack:
-                finish();
-                break;
             //类型
             case R.id.foundInfoType:
                 Intent intent = new Intent(this, ThingTypeActivity.class);
@@ -134,7 +142,7 @@ public class AddFoundInfoActivity extends BaseActivity implements ReleaseInfoPre
             showToast("详细描述不可少于15个字");
             return;
         }
-        MobclickAgent.onEvent(this,"releaseFoundInfo");
+        MobclickAgent.onEvent(this, "releaseFoundInfo");
         ServerConnection.ReleaseLostInfo(this, AppConstants.FoundInfoType, lostInfoDesc, lostThingType, mList, lostInfoWhere, lostInfoThanksWay,
                 lostInfoPhoneNumber, lostInfoDescDetail, BmobUser.getCurrentUser(StudentInfo.class), this);
     }

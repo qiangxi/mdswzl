@@ -5,28 +5,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/actionBarColor"
-        >
-        <ImageView
-            android:id="@+id/suggestBack"
-            android:layout_width="60dp"
-            android:layout_height="50dp"
-            android:padding="10dp"
-            android:src="@drawable/icon_back"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="50dp"
-            android:layout_gravity="center"
-            android:background="@android:color/transparent"
-            android:gravity="center"
-            android:text="反馈建议"
-            android:textColor="@android:color/white"
-            android:textSize="18sp"/>
-    </FrameLayout>
+    <include layout="@layout/tool_bar_layout"/>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -73,7 +52,8 @@
                     android:layout_marginTop="20dp"
                     android:background="@drawable/button_selector_blue_dark_drawable"
                     android:text="向我吐槽"
-                    android:textColor="@android:color/white"/>
+                    android:textColor="@android:color/white"
+                    />
             </LinearLayout>
         </com.lanma.lostandfound.view.ReboundScrollView>
     </LinearLayout>

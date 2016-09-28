@@ -4,12 +4,11 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.ViewTreeObserver;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
-import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.lanma.lostandfound.R;
 import com.lanma.lostandfound.adapter.MyLostAndFoundAdapter;
@@ -22,7 +21,6 @@ import com.lanma.lostandfound.presenter.DeleteCurrentInfoPresenter;
 import com.lanma.lostandfound.presenter.MyLostAndFoundPresenter;
 import com.lanma.lostandfound.utils.AnimationAdapterUtil;
 import com.lanma.lostandfound.utils.EmptyViewUtil;
-import com.lanma.lostandfound.utils.ImageViewTintUtil;
 import com.lanma.lostandfound.utils.ScreenUtils;
 import com.lanma.lostandfound.utils.YouMiAdUtils;
 import com.lanma.lostandfound.view.swipemenulistview.SwipeMenu;
@@ -35,7 +33,6 @@ import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
-import butterknife.OnClick;
 import butterknife.OnItemClick;
 import cn.bmob.v3.BmobUser;
 
@@ -43,10 +40,10 @@ public class MyLostAndFoundActivity extends BaseActivity implements ViewTreeObse
         AbsListView.OnScrollListener, MyLostAndFoundPresenter, DeleteCurrentInfoPresenter,
         SwipeMenuListView.OnMenuItemClickListener {
 
-    @Bind(R.id.myLostAndFoundTitle)
-    TextView mMyLostAndFoundTitle;
     @Bind(R.id.myLostAndFoundListView)
     SwipeMenuListView mMyLostAndFoundListView;
+    @Bind(R.id.toolBar)
+    Toolbar mToolBar;
 
     private List<LostFoundInfo> mList = new ArrayList<>();
     private MyLostAndFoundAdapter mAdapter;
@@ -59,11 +56,21 @@ public class MyLostAndFoundActivity extends BaseActivity implements ViewTreeObse
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_lost_and_found);
         ButterKnife.bind(this);
-        ImageViewTintUtil.setImageViewTint((ImageView) findViewById(R.id.myLostAndFoundBack));
-        getSwipeBackLayout().setEnableGesture(true);
+        initToolBar();
         initSwipeMenuListView();
         initData();
         YouMiAdUtils.showSuspendBannerAdInBottom(this);
+    }
+
+    private void initToolBar() {
+        mToolBar.setTitle("我的失物信息");
+        mToolBar.setTitleTextColor(Color.WHITE);
+        mToolBar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
     }
 
     private void initSwipeMenuListView() {
@@ -95,20 +102,17 @@ public class MyLostAndFoundActivity extends BaseActivity implements ViewTreeObse
     }
 
     private void initData() {
+
+
         if (AppConstants.MyLostInfoAction.equals(getIntent().getAction())) {
-            mMyLostAndFoundTitle.setText("我的失物信息");
+            mToolBar.setTitle("我的失物信息");
             InfoType = AppConstants.LostInfoType;
         } else {
-            mMyLostAndFoundTitle.setText("我的招领信息");
+            mToolBar.setTitle("我的招领信息");
             InfoType = AppConstants.FoundInfoType;
         }
         mDialog.show();
         ServerConnection.getMyLostAndFoundInfo(BmobUser.getCurrentUser(StudentInfo.class), 0, InfoType, this);
-    }
-
-    @OnClick(R.id.myLostAndFoundBack)
-    public void onClick() {
-        finish();
     }
 
     @OnItemClick(R.id.myLostAndFoundListView)

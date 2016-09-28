@@ -1,27 +1,28 @@
 package com.lanma.lostandfound.activities;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.GridView;
-import android.widget.ImageView;
 
 import com.lanma.lostandfound.R;
 import com.lanma.lostandfound.adapter.ThingTypeAdapter;
 import com.lanma.lostandfound.constants.AppConstants;
-import com.lanma.lostandfound.utils.ImageViewTintUtil;
 import com.lanma.lostandfound.utils.YouMiAdUtils;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
-import butterknife.OnClick;
 import butterknife.OnItemClick;
 
 public class ThingTypeActivity extends BaseActivity {
 
     @Bind(R.id.thingType)
     GridView mThingType;
+    @Bind(R.id.toolBar)
+    Toolbar mToolBar;
 
     private String[] thingTypeArray;
     private ThingTypeAdapter mAdapter;
@@ -31,21 +32,27 @@ public class ThingTypeActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_thing_type);
         ButterKnife.bind(this);
-        ImageViewTintUtil.setImageViewTint((ImageView) findViewById(R.id.thingTypeBack));
-        getSwipeBackLayout().setEnableGesture(true);
+        initToolBar();
         initData();
         YouMiAdUtils.showSuspendBannerAdInBottom(this);
+    }
+
+    private void initToolBar() {
+        mToolBar.setTitle("物品类型");
+        mToolBar.setTitleTextColor(Color.WHITE);
+        mToolBar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+
     }
 
     private void initData() {
         thingTypeArray = getResources().getStringArray(R.array.thing_type_array);
         mAdapter = new ThingTypeAdapter(this, thingTypeArray);
         mThingType.setAdapter(mAdapter);
-    }
-
-    @OnClick(R.id.thingTypeBack)
-    public void onClick() {
-        finish();
     }
 
     @OnItemClick(R.id.thingType)

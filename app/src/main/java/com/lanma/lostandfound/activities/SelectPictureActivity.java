@@ -10,7 +10,9 @@ import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
 import android.provider.MediaStore;
+import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
@@ -28,7 +30,6 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.lanma.lostandfound.R;
 import com.lanma.lostandfound.dialog.LoadingDialog;
-import com.lanma.lostandfound.utils.ImageViewTintUtil;
 
 import java.io.File;
 import java.text.SimpleDateFormat;
@@ -43,8 +44,6 @@ import butterknife.OnClick;
 import butterknife.OnItemClick;
 
 public class SelectPictureActivity extends BaseActivity {
-    @Bind(R.id.selectPictureOk)
-    Button mSelectPictureOk;//确定
     @Bind(R.id.selectPictureGridView)
     GridView mSelectPictureGridView;//展示图片
     @Bind(R.id.selectPicture)
@@ -56,6 +55,8 @@ public class SelectPictureActivity extends BaseActivity {
     private static final int TAKE_PICTURE = 520;
 
     public static final String INTENT_SELECTED_PICTURE = "intent_selected_picture";
+    @Bind(R.id.toolBar)
+    Toolbar mToolBar;
 
     private PictureAdapter pictureAdapter;//图片Adapter
     /**
@@ -70,7 +71,7 @@ public class SelectPictureActivity extends BaseActivity {
     private ArrayList<String> selectedPicture = new ArrayList<>();// 已选择的图片
     private String cameraPath = null;
     private LoadingDialog mDialog;
-
+    private MenuItem menuItem;
     private Handler mHandler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
@@ -89,9 +90,32 @@ public class SelectPictureActivity extends BaseActivity {
         setContentView(R.layout.activity_select_picture);
         ButterKnife.bind(this);
         setStatusBarColor(Color.parseColor("#303030"));
-        ImageViewTintUtil.setImageViewTint((ImageView) findViewById(R.id.selectPictureBack));
-        getSwipeBackLayout().setEnableGesture(true);
+        initToolBar();
         initData();
+    }
+
+    private void initToolBar() {
+        mToolBar.setBackgroundColor(Color.parseColor("#303030"));
+        mToolBar.setTitle("选择图片");
+        mToolBar.setTitleTextColor(Color.WHITE);
+        mToolBar.setNavigationOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+        mToolBar.inflateMenu(R.menu.menu_select_picture);
+        menuItem = mToolBar.getMenu().findItem(R.id.menu_pic_count);
+        mToolBar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                Intent data = new Intent();
+                data.putExtra(INTENT_SELECTED_PICTURE, selectedPicture);
+                setResult(RESULT_OK, data);
+                finish();
+                return true;
+            }
+        });
     }
 
     private void initData() {
@@ -111,8 +135,11 @@ public class SelectPictureActivity extends BaseActivity {
         allImageFolder.setDir("/所有图片");
         currentImageFolder = allImageFolder;
         mDirPaths.add(allImageFolder);
+        if (selectedPicture.size() == 0) {
+            menuItem.setEnabled(false);
+        }
         //当前已选中了几张图片
-        mSelectPictureOk.setText("完成" + selectedPicture.size() + "/" + MAX_NUM);
+        menuItem.setTitle("完成" + selectedPicture.size() + "/" + MAX_NUM);
         //图片Adapter
         pictureAdapter = new PictureAdapter();
         mSelectPictureGridView.setAdapter(pictureAdapter);
@@ -216,18 +243,9 @@ public class SelectPictureActivity extends BaseActivity {
     }
 
 
-    @OnClick({R.id.selectPictureBack, R.id.selectPictureOk, R.id.selectPicture})
+    @OnClick({R.id.selectPicture})
     public void onClick(View view) {
         switch (view.getId()) {
-            case R.id.selectPictureBack:
-                finish();
-                break;
-            case R.id.selectPictureOk:
-                Intent data = new Intent();
-                data.putExtra(INTENT_SELECTED_PICTURE, selectedPicture);
-                setResult(RESULT_OK, data);
-                this.finish();
-                break;
             case R.id.selectPicture:
                 if (mSelectPictureListView.getVisibility() == View.VISIBLE) {
                     hideListAnimation();
@@ -289,8 +307,8 @@ public class SelectPictureActivity extends BaseActivity {
                         } else {
                             selectedPicture.add(item.path);
                         }
-                        mSelectPictureOk.setEnabled(selectedPicture.size() > 0);
-                        mSelectPictureOk.setText("完成" + selectedPicture.size() + "/" + MAX_NUM);
+                        menuItem.setEnabled(selectedPicture.size() > 0);
+                        menuItem.setTitle("完成" + selectedPicture.size() + "/" + MAX_NUM);
                         v.setSelected(selectedPicture.contains(item.path));
                     }
                 });

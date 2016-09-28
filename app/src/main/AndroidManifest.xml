@@ -135,26 +135,31 @@
             </intent-filter>
         </receiver>
 
-        <activity android:name=".activities.UserNotesActivity"
-                  android:screenOrientation="portrait">
+        <activity
+            android:name=".activities.UserNotesActivity"
+            android:screenOrientation="portrait">
         </activity>
-        <activity android:name=".activities.SuggestActivity"
-                  android:screenOrientation="portrait"
-                  android:windowSoftInputMode="stateHidden">
+        <activity
+            android:name=".activities.SuggestActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden">
         </activity>
-        <activity android:name=".activities.MessageCenterActivity"
-                  android:screenOrientation="portrait">
+        <activity
+            android:name=".activities.MessageCenterActivity"
+            android:screenOrientation="portrait">
         </activity>
-        <activity android:name=".activities.MyLostAndFoundActivity"
-                  android:screenOrientation="portrait">
+        <activity
+            android:name=".activities.MyLostAndFoundActivity"
+            android:screenOrientation="portrait">
         </activity>
-        <activity android:name=".activities.MyLostAndFoundDetailActivity"
-                  android:screenOrientation="portrait">
+        <activity
+            android:name=".activities.MyLostAndFoundDetailActivity"
+            android:screenOrientation="portrait">
         </activity>
-        <activity android:name=".activities.LookImageActivity"
-                  android:screenOrientation="portrait">
+        <activity
+            android:name=".activities.LookImageActivity"
+            android:screenOrientation="portrait">
         </activity>
-
     </application>
 
 </manifest>

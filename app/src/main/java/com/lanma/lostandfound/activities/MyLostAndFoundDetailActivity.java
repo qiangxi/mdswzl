@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.text.SpannableStringBuilder;
 import android.text.Spanned;
 import android.text.TextUtils;
@@ -13,7 +14,6 @@ import android.text.style.StyleSpan;
 import android.view.View;
 import android.widget.Button;
 import android.widget.GridView;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.lanma.lostandfound.R;
@@ -24,7 +24,6 @@ import com.lanma.lostandfound.dialog.DeleteInfoDialog;
 import com.lanma.lostandfound.dialog.LoadingDialog;
 import com.lanma.lostandfound.net.ServerConnection;
 import com.lanma.lostandfound.presenter.DeleteCurrentInfoPresenter;
-import com.lanma.lostandfound.utils.ImageViewTintUtil;
 
 import java.util.ArrayList;
 
@@ -32,7 +31,7 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class MyLostAndFoundDetailActivity extends BaseActivity  {
+public class MyLostAndFoundDetailActivity extends BaseActivity {
 
     @Bind(R.id.myLostAndFoundDetailDesc)
     TextView mMyLostAndFoundDetailDesc;
@@ -50,6 +49,8 @@ public class MyLostAndFoundDetailActivity extends BaseActivity  {
     TextView mMyLostAndFoundDetailDescDetail;
     @Bind(R.id.myLostAndFoundDetailDelete)
     Button mMyLostAndFoundDetailDelete;
+    @Bind(R.id.toolBar)
+    Toolbar mToolBar;
 
     private LoadingDialog mDialog;
     private LostFoundInfo info;
@@ -58,14 +59,25 @@ public class MyLostAndFoundDetailActivity extends BaseActivity  {
     private SpannableStringBuilder builder;
     private int position;
     private String infoType;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_lost_and_found_detail);
         ButterKnife.bind(this);
-        ImageViewTintUtil.setImageViewTint((ImageView) findViewById(R.id.myLostAndFoundDetailBack));
-        getSwipeBackLayout().setEnableGesture(true);
+        initToolBar();
         initData();
+    }
+
+    private void initToolBar() {
+        mToolBar.setTitle("信息详情");
+        mToolBar.setTitleTextColor(Color.WHITE);
+        mToolBar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
     }
 
     private void initData() {
@@ -136,17 +148,14 @@ public class MyLostAndFoundDetailActivity extends BaseActivity  {
     }
 
 
-    @OnClick({R.id.myLostAndFoundDetailBack, R.id.myLostAndFoundDetailDelete})
+    @OnClick({ R.id.myLostAndFoundDetailDelete})
     public void onClick(View view) {
         switch (view.getId()) {
-            case R.id.myLostAndFoundDetailBack:
-                finish();
-                break;
             case R.id.myLostAndFoundDetailDelete:
                 DeleteInfoDialog dialog = new DeleteInfoDialog(this);
                 if (AppConstants.LostInfoType.equals(infoType)) {
                     dialog.setDeleteMessage("您已经找到丢失的物品了吗？");
-                }else{
+                } else {
                     dialog.setDeleteMessage("您已经找到该物品的失主了吗？");
                 }
                 dialog.setOnDeleteClickListener(new View.OnClickListener() {
@@ -160,7 +169,7 @@ public class MyLostAndFoundDetailActivity extends BaseActivity  {
         }
     }
 
-    private class deletePresenter implements DeleteCurrentInfoPresenter{
+    private class deletePresenter implements DeleteCurrentInfoPresenter {
         public deletePresenter() {
         }
 
@@ -173,7 +182,7 @@ public class MyLostAndFoundDetailActivity extends BaseActivity  {
         public void onDeleteSuccess(int position) {
             mDialog.dismiss();
             Intent intent = new Intent();
-            intent.putExtra("position",position);
+            intent.putExtra("position", position);
             setResult(AppConstants.myLostAndFoundInfoDetailRequestCode, intent);
             finish();
         }

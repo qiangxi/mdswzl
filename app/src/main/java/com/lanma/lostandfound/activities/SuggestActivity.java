@@ -1,19 +1,19 @@
 package com.lanma.lostandfound.activities;
 
+import android.graphics.Color;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import com.lanma.lostandfound.R;
 import com.lanma.lostandfound.beans.StudentInfo;
-import com.lanma.lostandfound.utils.YouMiAdUtils;
 import com.lanma.lostandfound.dialog.LoadingDialog;
 import com.lanma.lostandfound.net.ServerConnection;
 import com.lanma.lostandfound.presenter.SuggestionPresenter;
-import com.lanma.lostandfound.utils.ImageViewTintUtil;
+import com.lanma.lostandfound.utils.YouMiAdUtils;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -24,7 +24,8 @@ public class SuggestActivity extends BaseActivity implements SuggestionPresenter
 
     @Bind(R.id.suggestContent)
     EditText mSuggestContent;
-
+    @Bind(R.id.toolBar)
+    Toolbar mToolBar;
     private LoadingDialog mDialog;
 
     @Override
@@ -32,19 +33,25 @@ public class SuggestActivity extends BaseActivity implements SuggestionPresenter
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_suggest);
         ButterKnife.bind(this);
-        ImageViewTintUtil.setImageViewTint((ImageView) findViewById(R.id.suggestBack));
-        getSwipeBackLayout().setEnableGesture(true);
+        initToolBar();
         mDialog = new LoadingDialog(this);
         YouMiAdUtils.showBannerAd(this, (LinearLayout) findViewById(R.id.ll_banner));
     }
 
-    @OnClick({R.id.suggestBack, R.id.suggestSubmit})
+    private void initToolBar() {
+        mToolBar.setTitle("反馈建议");
+        mToolBar.setTitleTextColor(Color.WHITE);
+        mToolBar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+    }
+
+    @OnClick({R.id.suggestSubmit})
     public void onClick(View view) {
         switch (view.getId()) {
-            //返回上一层
-            case R.id.suggestBack:
-                finish();
-                break;
             case R.id.suggestSubmit:
                 //提交建议
                 String suggest = mSuggestContent.getText().toString().trim();

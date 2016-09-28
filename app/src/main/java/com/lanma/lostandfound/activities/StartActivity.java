@@ -40,6 +40,7 @@ public class StartActivity extends BaseActivity implements SpotListener {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_start);
         ButterKnife.bind(this);
+        getSwipeBackLayout().setEnableGesture(false);
         //Bmob初始化
         Bmob.initialize(this, "0fd42f33574319cf39864c7ee043482d");
         //有米广告初始化

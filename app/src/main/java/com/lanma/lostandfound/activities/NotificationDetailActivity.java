@@ -1,8 +1,11 @@
 package com.lanma.lostandfound.activities;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.view.KeyEvent;
+import android.view.View;
 import android.widget.TextView;
 
 import com.lanma.lostandfound.R;
@@ -12,7 +15,6 @@ import java.text.SimpleDateFormat;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
-import butterknife.OnClick;
 
 public class NotificationDetailActivity extends BaseActivity {
 
@@ -22,14 +24,30 @@ public class NotificationDetailActivity extends BaseActivity {
     TextView mNotificationDetailTime;
     @Bind(R.id.notificationDetailContent)
     TextView mNotificationDetailContent;
+    @Bind(R.id.toolBar)
+    Toolbar mToolBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_notification_detail);
         ButterKnife.bind(this);
+        initToolBar();
         initData();
         YouMiAdUtils.showSuspendBannerAdInBottom(this);
+    }
+
+    private void initToolBar() {
+        mToolBar.setTitle("通知详情");
+        mToolBar.setTitleTextColor(Color.WHITE);
+        mToolBar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(NotificationDetailActivity.this, MainActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
     }
 
     private void initData() {
@@ -40,13 +58,6 @@ public class NotificationDetailActivity extends BaseActivity {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         mNotificationDetailTime.setText("发布时间:" + sdf.format(System.currentTimeMillis()));
         mNotificationDetailContent.setText(notificationContent);
-    }
-
-    @OnClick(R.id.notificationDetailBack)
-    public void onClick() {
-        Intent intent = new Intent(this, MainActivity.class);
-        startActivity(intent);
-        finish();
     }
 
     @Override

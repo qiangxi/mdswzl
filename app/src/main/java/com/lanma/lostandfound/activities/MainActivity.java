@@ -10,10 +10,12 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.view.KeyEvent;
+import android.view.MenuItem;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -25,7 +27,6 @@ import com.lanma.lostandfound.constants.AppConstants;
 import com.lanma.lostandfound.fragment.FoundFragment;
 import com.lanma.lostandfound.fragment.LostFragment;
 import com.lanma.lostandfound.utils.AppManager;
-import com.lanma.lostandfound.utils.ImageViewTintUtil;
 import com.lanma.lostandfound.utils.YouMiAdUtils;
 import com.lanma.lostandfound.view.RoundImageView;
 import com.umeng.analytics.MobclickAgent;
@@ -54,7 +55,10 @@ public class MainActivity extends BaseActivity implements ViewPager.OnPageChange
     TextView mUserSex;//用户性别
     @Bind(R.id.drawer)
     DrawerLayout mDrawer;//侧滑菜单
+    @Bind(R.id.toolBar)
+    Toolbar mToolBar;
 
+    private ActionBarDrawerToggle mDrawerToggle;
     private String[] TITLES = {"失物", "招领"};
     private CommonNavigator mainNavigator;//指示器
     private long timeSpace;
@@ -64,9 +68,63 @@ public class MainActivity extends BaseActivity implements ViewPager.OnPageChange
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
-        ImageViewTintUtil.setImageViewTint((ImageView) findViewById(R.id.mainToggle));
+        initToolBar();
+        getSwipeBackLayout().setEnableGesture(false);
         initViewPagerAndIndicator();
-        initEvent();
+    }
+
+    private void initToolBar() {
+        setSupportActionBar(mToolBar);
+        getSupportActionBar().setHomeButtonEnabled(true); //设置返回键可用
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        //创建返回键，并实现打开关/闭监听
+        mDrawerToggle = new ActionBarDrawerToggle(this, mDrawer, mToolBar, R.string.open, R.string.close) {
+            @Override
+            public void onDrawerOpened(View drawerView) {
+                super.onDrawerOpened(drawerView);
+                // 解决当侧滑菜单显示出来时,下层view依然可以点击的问题
+                drawerView.setClickable(true);
+            }
+
+            @Override
+            public void onDrawerClosed(View drawerView) {
+                super.onDrawerClosed(drawerView);
+            }
+        };
+        mDrawerToggle.setDrawerIndicatorEnabled(true);
+        mDrawer.setDrawerListener(mDrawerToggle);
+        mDrawerToggle.syncState();
+        mToolBar.setTitle("失物招领");
+        mToolBar.setTitleTextColor(Color.WHITE);
+        mToolBar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent;
+                if (null != BmobUser.getCurrentUser(StudentInfo.class)) {
+                    if (!TextUtils.isEmpty(BmobUser.getCurrentUser(StudentInfo.class).getObjectId())) {
+                        if (mDrawer.isDrawerOpen(GravityCompat.START)) {
+                            mDrawer.closeDrawer(GravityCompat.START);
+                        } else {
+                            mDrawer.openDrawer(GravityCompat.START);
+                        }
+                    } else {
+                        intent = new Intent(MainActivity.this, LoginActivity.class);
+                        startActivity(intent);
+                    }
+                } else {
+                    intent = new Intent(MainActivity.this, LoginActivity.class);
+                    startActivity(intent);
+                }
+            }
+        });
+        mToolBar.inflateMenu(R.menu.menu_main);
+        mToolBar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+
+                return true;
+            }
+        });
     }
 
     @Override
@@ -91,34 +149,6 @@ public class MainActivity extends BaseActivity implements ViewPager.OnPageChange
     protected void onDestroy() {
         super.onDestroy();
         YouMiAdUtils.onAdDestroy(this);
-    }
-
-    /**
-     * 初始化事件
-     */
-    private void initEvent() {
-        // DrawerLayout监听事件.
-        mDrawer.setDrawerListener(new DrawerLayout.DrawerListener() {
-            @Override
-            public void onDrawerSlide(View drawerView, float slideOffset) {
-            }
-
-            @Override
-            public void onDrawerOpened(View drawerView) {
-                // 解决当侧滑菜单显示出来时,下层view依然可以点击的问题
-                drawerView.setClickable(true);
-            }
-
-            @Override
-            public void onDrawerClosed(View drawerView) {
-
-            }
-
-            @Override
-            public void onDrawerStateChanged(int newState) {
-
-            }
-        });
     }
 
     /**
@@ -292,6 +322,10 @@ public class MainActivity extends BaseActivity implements ViewPager.OnPageChange
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK) {
+            if (mDrawer.isDrawerOpen(GravityCompat.START)) {
+                mDrawer.closeDrawer(GravityCompat.START);
+                return false;
+            }
             if (System.currentTimeMillis() - timeSpace > 2000) {
                 timeSpace = System.currentTimeMillis();
                 Toast.makeText(MainActivity.this, "再按一次退出程序", Toast.LENGTH_SHORT).show();

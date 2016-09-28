@@ -1,23 +1,22 @@
 package com.lanma.lostandfound.activities;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.lanma.lostandfound.R;
 import com.lanma.lostandfound.beans.StudentInfo;
-import com.lanma.lostandfound.utils.ImageViewTintUtil;
 import com.lanma.lostandfound.utils.YouMiAdUtils;
 import com.lanma.lostandfound.view.RoundImageView;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
-import butterknife.OnClick;
 
 public class LostUserInfoActivity extends BaseActivity {
     @Bind(R.id.lostUserInfoHeaderImage)
@@ -40,16 +39,28 @@ public class LostUserInfoActivity extends BaseActivity {
     TextView mLostUserInfoSpecialities;//专业
     @Bind(R.id.lostUserInfoApartNumber)
     TextView mLostUserInfoApartNumber;//公寓号
+    @Bind(R.id.toolBar)
+    Toolbar mToolBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lost_user_info);
         ButterKnife.bind(this);
-        ImageViewTintUtil.setImageViewTint((ImageView) findViewById(R.id.lostUserInfoBack));
-        getSwipeBackLayout().setEnableGesture(true);
+        initToolBar();
         initData();
         YouMiAdUtils.showSuspendBannerAdInBottom(this);
+    }
+
+    private void initToolBar() {
+        mToolBar.setTitle("失主信息");
+        mToolBar.setTitleTextColor(Color.WHITE);
+        mToolBar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
     }
 
     private void initData() {
@@ -124,10 +135,5 @@ public class LostUserInfoActivity extends BaseActivity {
         } else {
             showToast("获取信息失败");
         }
-    }
-
-    @OnClick(R.id.lostUserInfoBack)
-    public void onClick() {
-        finish();
     }
 }
