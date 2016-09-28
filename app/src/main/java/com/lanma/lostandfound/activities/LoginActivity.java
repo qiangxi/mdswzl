@@ -14,6 +14,7 @@ import com.lanma.lostandfound.fragment.LoginFragment;
 import com.lanma.lostandfound.fragment.RegisterFragment;
 
 import net.lucode.hackware.magicindicator.MagicIndicator;
+import net.lucode.hackware.magicindicator.ViewPagerHelper;
 import net.lucode.hackware.magicindicator.buildins.commonnavigator.CommonNavigator;
 import net.lucode.hackware.magicindicator.buildins.commonnavigator.abs.CommonNavigatorAdapter;
 import net.lucode.hackware.magicindicator.buildins.commonnavigator.abs.IPagerIndicator;
@@ -24,7 +25,7 @@ import net.lucode.hackware.magicindicator.buildins.commonnavigator.titles.Simple
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
-public class LoginActivity extends BaseActivity implements ViewPager.OnPageChangeListener {
+public class LoginActivity extends BaseActivity  {
 
     @Bind(R.id.loginRegisterIndicator)
     MagicIndicator mLoginRegisterIndicator; //viewpager指示器
@@ -44,7 +45,6 @@ public class LoginActivity extends BaseActivity implements ViewPager.OnPageChang
     }
 
     public void initViewPagerAndIndicator() {
-        mLoginRegisterViewPager.addOnPageChangeListener(this);
         mLoginRegisterViewPager.setAdapter(new LoginRegisterPagerAdapter(getSupportFragmentManager()));
         loginRegisterNavigator = new CommonNavigator(this);
         loginRegisterNavigator.setScrollPivotX(0.35f);
@@ -78,24 +78,7 @@ public class LoginActivity extends BaseActivity implements ViewPager.OnPageChang
             }
         });
         mLoginRegisterIndicator.setNavigator(loginRegisterNavigator);
-    }
-
-    @Override
-    public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-        mLoginRegisterIndicator.onPageScrolled(position, positionOffset, positionOffsetPixels);
-        loginRegisterNavigator.onPageScrolled(position, positionOffset, positionOffsetPixels);
-    }
-
-    @Override
-    public void onPageSelected(int position) {
-        mLoginRegisterIndicator.onPageSelected(position);
-        loginRegisterNavigator.onPageSelected(position);
-    }
-
-    @Override
-    public void onPageScrollStateChanged(int state) {
-        mLoginRegisterIndicator.onPageScrollStateChanged(state);
-        loginRegisterNavigator.onPageScrollStateChanged(state);
+        ViewPagerHelper.bind(mLoginRegisterIndicator, mLoginRegisterViewPager);
     }
 
     public class LoginRegisterPagerAdapter extends FragmentPagerAdapter {

@@ -29,14 +29,16 @@ import com.lanma.lostandfound.fragment.LostFragment;
 import com.lanma.lostandfound.utils.AppManager;
 import com.lanma.lostandfound.utils.YouMiAdUtils;
 import com.lanma.lostandfound.view.RoundImageView;
+import com.lanma.lostandfound.view.ScaleTransitionPagerTitleView;
 import com.umeng.analytics.MobclickAgent;
 
 import net.lucode.hackware.magicindicator.MagicIndicator;
+import net.lucode.hackware.magicindicator.ViewPagerHelper;
 import net.lucode.hackware.magicindicator.buildins.commonnavigator.CommonNavigator;
 import net.lucode.hackware.magicindicator.buildins.commonnavigator.abs.CommonNavigatorAdapter;
 import net.lucode.hackware.magicindicator.buildins.commonnavigator.abs.IPagerIndicator;
 import net.lucode.hackware.magicindicator.buildins.commonnavigator.abs.IPagerTitleView;
-import net.lucode.hackware.magicindicator.buildins.commonnavigator.indicators.WrapPagerIndicator;
+import net.lucode.hackware.magicindicator.buildins.commonnavigator.indicators.BezierPagerIndicator;
 import net.lucode.hackware.magicindicator.buildins.commonnavigator.titles.SimplePagerTitleView;
 
 import butterknife.Bind;
@@ -44,7 +46,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import cn.bmob.v3.BmobUser;
 
-public class MainActivity extends BaseActivity implements ViewPager.OnPageChangeListener {
+public class MainActivity extends BaseActivity  {
     @Bind(R.id.mainIndicator)
     MagicIndicator mainIndicator; //viewpager指示器
     @Bind(R.id.mainViewPager)
@@ -74,9 +76,6 @@ public class MainActivity extends BaseActivity implements ViewPager.OnPageChange
     }
 
     private void initToolBar() {
-        setSupportActionBar(mToolBar);
-        getSupportActionBar().setHomeButtonEnabled(true); //设置返回键可用
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         //创建返回键，并实现打开关/闭监听
         mDrawerToggle = new ActionBarDrawerToggle(this, mDrawer, mToolBar, R.string.open, R.string.close) {
             @Override
@@ -91,9 +90,8 @@ public class MainActivity extends BaseActivity implements ViewPager.OnPageChange
                 super.onDrawerClosed(drawerView);
             }
         };
-        mDrawerToggle.setDrawerIndicatorEnabled(true);
         mDrawer.setDrawerListener(mDrawerToggle);
-        mDrawerToggle.syncState();
+        mDrawerToggle.syncState();//必不可少,该方法用来同步滑动状态,没有这句会造成Toggle按钮没有动画效果
         mToolBar.setTitle("失物招领");
         mToolBar.setTitleTextColor(Color.WHITE);
         mToolBar.setNavigationOnClickListener(new View.OnClickListener() {
@@ -181,10 +179,10 @@ public class MainActivity extends BaseActivity implements ViewPager.OnPageChange
     }
 
     public void initViewPagerAndIndicator() {
-        mainViewPager.addOnPageChangeListener(this);
+        mainIndicator.setBackgroundColor(getResources().getColor(R.color.actionBarColor));
         mainViewPager.setAdapter(new LostFoundPagerAdapter(getSupportFragmentManager()));
         mainNavigator = new CommonNavigator(this);
-        mainNavigator.setScrollPivotX(0.35f);
+        mainNavigator.setAdjustMode(true);  // 自适应模式
         mainNavigator.setAdapter(new CommonNavigatorAdapter() {
             @Override
             public int getCount() {
@@ -193,10 +191,11 @@ public class MainActivity extends BaseActivity implements ViewPager.OnPageChange
 
             @Override
             public IPagerTitleView getTitleView(Context context, final int index) {
-                SimplePagerTitleView simplePagerTitleView = new SimplePagerTitleView(context);
+                SimplePagerTitleView simplePagerTitleView = new ScaleTransitionPagerTitleView(context);
                 simplePagerTitleView.setText(TITLES[index]);
-                simplePagerTitleView.setNormalColor(Color.BLACK);
-                simplePagerTitleView.setSelectedColor(getResources().getColor(R.color.actionBarColor));
+                simplePagerTitleView.setTextSize(16);
+                simplePagerTitleView.setNormalColor(Color.WHITE);
+                simplePagerTitleView.setSelectedColor(Color.WHITE);
                 simplePagerTitleView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -208,37 +207,20 @@ public class MainActivity extends BaseActivity implements ViewPager.OnPageChange
 
             @Override
             public IPagerIndicator getIndicator(Context context) {
-                WrapPagerIndicator indicator = new WrapPagerIndicator(context);
-                indicator.setFillColor(getResources().getColor(R.color.bg_indicator_slide));
-                indicator.setRoundRadius(10);
+                BezierPagerIndicator indicator = new BezierPagerIndicator(context);
+                indicator.setColors(Color.WHITE);
                 return indicator;
             }
         });
         mainIndicator.setNavigator(mainNavigator);
+        ViewPagerHelper.bind(mainIndicator, mainViewPager);
     }
 
-    @OnClick({R.id.mainToggle, R.id.userHeaderLayout, R.id.mainLost, R.id.mainFound,
+    @OnClick({R.id.userHeaderLayout, R.id.mainLost, R.id.mainFound,
             R.id.mainMessageCenter, R.id.mainUserNote, R.id.mainSuggestion})
     public void onClick(View view) {
         Intent intent;
         switch (view.getId()) {
-            case R.id.mainToggle:
-                if (null != BmobUser.getCurrentUser(StudentInfo.class)) {
-                    if (!TextUtils.isEmpty(BmobUser.getCurrentUser(StudentInfo.class).getObjectId())) {
-                        if (mDrawer.isDrawerOpen(GravityCompat.START)) {
-                            mDrawer.closeDrawer(GravityCompat.START);
-                        } else {
-                            mDrawer.openDrawer(GravityCompat.START);
-                        }
-                    } else {
-                        intent = new Intent(MainActivity.this, LoginActivity.class);
-                        startActivity(intent);
-                    }
-                } else {
-                    intent = new Intent(MainActivity.this, LoginActivity.class);
-                    startActivity(intent);
-                }
-                break;
             //查看个人信息
             case R.id.userHeaderLayout:
                 intent = new Intent(MainActivity.this, StudentInfoActivity.class);
@@ -274,24 +256,6 @@ public class MainActivity extends BaseActivity implements ViewPager.OnPageChange
         }
     }
 
-    @Override
-    public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-        mainIndicator.onPageScrolled(position, positionOffset, positionOffsetPixels);
-        mainNavigator.onPageScrolled(position, positionOffset, positionOffsetPixels);
-    }
-
-    @Override
-    public void onPageSelected(int position) {
-        mainIndicator.onPageSelected(position);
-        mainNavigator.onPageSelected(position);
-    }
-
-    @Override
-    public void onPageScrollStateChanged(int state) {
-        mainIndicator.onPageScrollStateChanged(state);
-        mainNavigator.onPageScrollStateChanged(state);
-    }
-
     public class LostFoundPagerAdapter extends FragmentPagerAdapter {
 
         public LostFoundPagerAdapter(FragmentManager fm) {
@@ -322,7 +286,7 @@ public class MainActivity extends BaseActivity implements ViewPager.OnPageChange
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK) {
-            if (mDrawer.isDrawerOpen(GravityCompat.START)) {
+            if (mDrawer.isDrawerVisible(GravityCompat.START)) {
                 mDrawer.closeDrawer(GravityCompat.START);
                 return false;
             }
