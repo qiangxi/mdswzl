@@ -9,205 +9,41 @@
     <RelativeLayout
         android:id="@+id/userHeaderLayout"
         android:layout_width="match_parent"
-        android:layout_height="180dp"
-        android:layout_marginTop="50dp"
-        android:gravity="center">
+        android:layout_height="100dp"
+        android:background="?attr/selectableItemBackground">
 
         <com.lanma.lostandfound.view.RoundImageView
             android:id="@+id/userHeader"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:layout_centerInParent="true"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="16dp"
             android:src="@drawable/icon_passenger_man"
             app:border_thickness="1dp" />
 
         <TextView
             android:id="@+id/userSex"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/userHeader"
-            android:layout_marginTop="10dp"
-            android:gravity="center"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="20dp"
+            android:layout_toRightOf="@+id/userHeader"
             android:text="先生"
             android:textColor="@android:color/white" />
     </RelativeLayout>
 
-    <View
+    <android.support.v7.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@color/mainBackgroundColor" />
+        android:layout_height="45dp"
+        android:foreground="#0062C4"
+        app:cardCornerRadius="0dp"
+        app:cardElevation="2dp" />
 
-    <LinearLayout
+    <ListView
+        android:id="@+id/drawerListView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
-
-        <LinearLayout
-            android:id="@+id/mainLost"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/selector_text_view_item_drawable"
-            android:orientation="horizontal">
-
-            <ImageView
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:layout_gravity="center"
-                android:layout_marginLeft="10dp"
-                android:src="@drawable/icon_lost" />
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="50dp"
-                android:layout_weight="3"
-                android:gravity="center_vertical"
-                android:paddingLeft="10dp"
-                android:text="我的失物"
-                android:textColor="@android:color/white" />
-        </LinearLayout>
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="0.1dp"
-            android:background="@color/mainBackgroundColor" />
-
-        <LinearLayout
-            android:id="@+id/mainFound"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/selector_text_view_item_drawable"
-            android:orientation="horizontal">
-
-            <ImageView
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:layout_gravity="center"
-                android:layout_marginLeft="10dp"
-                android:src="@drawable/icon_found" />
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="50dp"
-                android:layout_weight="3"
-                android:gravity="center_vertical"
-                android:paddingLeft="10dp"
-                android:text="我的招领"
-                android:textColor="@android:color/white" />
-        </LinearLayout>
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="0.1dp"
-            android:background="@color/mainBackgroundColor" />
-
-        <LinearLayout
-            android:id="@+id/mainMessageCenter"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/selector_text_view_item_drawable"
-            android:orientation="horizontal">
-
-            <ImageView
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:layout_gravity="center"
-                android:layout_marginLeft="10dp"
-                android:src="@drawable/icon_message_center" />
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="50dp"
-                android:layout_weight="3"
-                android:gravity="center_vertical"
-                android:paddingLeft="10dp"
-                android:text="消息中心"
-                android:textColor="@android:color/white" />
-        </LinearLayout>
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="0.1dp"
-            android:background="@color/mainBackgroundColor" />
-
-        <LinearLayout
-            android:id="@+id/mainUserNote"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/selector_text_view_item_drawable"
-            android:orientation="horizontal">
-
-            <ImageView
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:layout_gravity="center"
-                android:layout_marginLeft="10dp"
-                android:src="@drawable/icon_user_note" />
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="50dp"
-                android:layout_weight="3"
-                android:gravity="center_vertical"
-                android:paddingLeft="10dp"
-                android:text="用户须知"
-                android:textColor="@android:color/white" />
-        </LinearLayout>
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="0.1dp"
-            android:background="@color/mainBackgroundColor" />
-
-        <LinearLayout
-            android:id="@+id/mainSuggestion"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/selector_text_view_item_drawable"
-            android:orientation="horizontal">
-
-            <ImageView
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:layout_gravity="center"
-                android:layout_marginLeft="10dp"
-                android:src="@drawable/icon_suggestion" />
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="50dp"
-                android:layout_weight="3"
-                android:gravity="center_vertical"
-                android:paddingLeft="10dp"
-                android:text="反馈建议"
-                android:textColor="@android:color/white" />
-        </LinearLayout>
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="0.1dp"
-            android:background="@color/mainBackgroundColor" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/selector_text_view_item_drawable"
-            android:orientation="horizontal"
-            android:visibility="gone">
-
-            <ImageView
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:layout_gravity="center"
-                android:layout_marginLeft="10dp" />
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="50dp"
-                android:layout_weight="3"
-                android:gravity="center_vertical"
-                android:paddingLeft="10dp"
-                android:text="更多"
-                android:textColor="@android:color/white" />
-        </LinearLayout>
-    </LinearLayout>
+        android:divider="@android:color/transparent"
+        android:dividerHeight="-1dp" />
 </LinearLayout>

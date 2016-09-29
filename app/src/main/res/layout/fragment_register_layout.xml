@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <com.lanma.lostandfound.view.ReboundScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-                                               xmlns:app="http://schemas.android.com/apk/res-auto"
-                                               android:layout_width="match_parent"
-                                               android:layout_height="match_parent">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -28,7 +28,7 @@
                 android:inputType="textEmailAddress"
                 android:paddingLeft="10dp"
                 android:textColor="@android:color/white"
-                android:textSize="14sp"/>
+                android:textSize="14sp" />
         </android.support.design.widget.TextInputLayout>
 
         <android.support.design.widget.TextInputLayout
@@ -51,7 +51,7 @@
                 android:inputType="textPassword"
                 android:paddingLeft="10dp"
                 android:textColor="@android:color/white"
-                android:textSize="14sp"/>
+                android:textSize="14sp" />
         </android.support.design.widget.TextInputLayout>
 
         <android.support.design.widget.TextInputLayout
@@ -75,18 +75,24 @@
                 android:inputType="textPassword"
                 android:paddingLeft="10dp"
                 android:textColor="@android:color/white"
-                android:textSize="14sp"/>
+                android:textSize="14sp" />
         </android.support.design.widget.TextInputLayout>
 
-        <Button
-            android:id="@+id/register"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="30dp"
             android:layout_marginRight="30dp"
             android:layout_marginTop="10dp"
-            android:background="@drawable/shape_button_stroke"
-            android:text="注册"
-            android:textColor="@android:color/white"/>
+            android:background="@drawable/shape_button_stroke">
+
+            <Button
+                android:id="@+id/register"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:background="?attr/selectableItemBackground"
+                android:text="注册"
+                android:textColor="@android:color/white" />
+        </LinearLayout>
     </LinearLayout>
 </com.lanma.lostandfound.view.ReboundScrollView>

@@ -8,7 +8,7 @@ import android.os.Build;
 import java.lang.reflect.Method;
 
 /**
- * Created by Chaojun Wang on 6/9/14.
+ * Created by qiang_xi on 6/9/14 23:25.
  */
 public class Utils {
     private Utils() {
@@ -31,7 +31,7 @@ public class Utils {
             Method method = Activity.class.getDeclaredMethod("convertFromTranslucent");
             method.setAccessible(true);
             method.invoke(activity);
-        } catch (Throwable t) {
+        } catch (Throwable ignored) {
         }
     }
 
@@ -73,7 +73,7 @@ public class Utils {
             method.invoke(activity, new Object[] {
                 null
             });
-        } catch (Throwable t) {
+        } catch (Throwable ignored) {
         }
     }
 
@@ -97,7 +97,7 @@ public class Utils {
                     translucentConversionListenerClazz, ActivityOptions.class);
             convertToTranslucent.setAccessible(true);
             convertToTranslucent.invoke(activity, null, options);
-        } catch (Throwable t) {
+        } catch (Throwable ignored) {
         }
     }
 }

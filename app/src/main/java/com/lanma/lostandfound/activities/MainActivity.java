@@ -16,12 +16,16 @@ import android.text.TextUtils;
 import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.lanma.lostandfound.R;
+import com.lanma.lostandfound.adapter.DrawerLayoutAdapter;
+import com.lanma.lostandfound.beans.DrawerLayoutBean;
 import com.lanma.lostandfound.beans.StudentInfo;
 import com.lanma.lostandfound.constants.AppConstants;
 import com.lanma.lostandfound.fragment.FoundFragment;
@@ -41,12 +45,16 @@ import net.lucode.hackware.magicindicator.buildins.commonnavigator.abs.IPagerTit
 import net.lucode.hackware.magicindicator.buildins.commonnavigator.indicators.BezierPagerIndicator;
 import net.lucode.hackware.magicindicator.buildins.commonnavigator.titles.SimplePagerTitleView;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import butterknife.OnItemClick;
 import cn.bmob.v3.BmobUser;
 
-public class MainActivity extends BaseActivity  {
+public class MainActivity extends BaseActivity {
     @Bind(R.id.mainIndicator)
     MagicIndicator mainIndicator; //viewpager指示器
     @Bind(R.id.mainViewPager)
@@ -59,11 +67,21 @@ public class MainActivity extends BaseActivity  {
     DrawerLayout mDrawer;//侧滑菜单
     @Bind(R.id.toolBar)
     Toolbar mToolBar;
+    @Bind(R.id.drawerListView)
+    ListView drawerListView;
 
+    private DrawerLayoutAdapter adapter;
+    private List<DrawerLayoutBean> list = new ArrayList<>();
     private ActionBarDrawerToggle mDrawerToggle;
     private String[] TITLES = {"失物", "招领"};
     private CommonNavigator mainNavigator;//指示器
     private long timeSpace;
+    private int[] resId = new int[]{R.drawable.icon_lost, R.drawable.icon_found, R.drawable.icon_message_center,
+            R.drawable.icon_user_note, R.drawable.icon_suggestion};
+    private String[] desc = new String[]{"我的失物", "我的招领", "消息中心", "用户须知", "反馈建议",};
+    private Class<?>[] classes = new Class[]{MyLostAndFoundActivity.class, MyLostAndFoundActivity.class,
+            MessageCenterActivity.class, UserNotesActivity.class, SuggestActivity.class};
+    private String[] intentAction = new String[]{AppConstants.MyLostInfoAction, AppConstants.MyFoundInfoAction, "", "", "", "",};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,6 +91,15 @@ public class MainActivity extends BaseActivity  {
         initToolBar();
         getSwipeBackLayout().setEnableGesture(false);
         initViewPagerAndIndicator();
+        initData();
+    }
+
+    private void initData() {
+        for (int i = 0; i < resId.length; i++) {
+            list.add(new DrawerLayoutBean(resId[i], desc[i], classes[i], intentAction[i]));
+        }
+        adapter = new DrawerLayoutAdapter(this, list);
+        drawerListView.setAdapter(adapter);
     }
 
     private void initToolBar() {
@@ -216,8 +243,7 @@ public class MainActivity extends BaseActivity  {
         ViewPagerHelper.bind(mainIndicator, mainViewPager);
     }
 
-    @OnClick({R.id.userHeaderLayout, R.id.mainLost, R.id.mainFound,
-            R.id.mainMessageCenter, R.id.mainUserNote, R.id.mainSuggestion})
+    @OnClick({R.id.userHeaderLayout})
     public void onClick(View view) {
         Intent intent;
         switch (view.getId()) {
@@ -226,34 +252,16 @@ public class MainActivity extends BaseActivity  {
                 intent = new Intent(MainActivity.this, StudentInfoActivity.class);
                 startActivity(intent);
                 break;
-            //发布的失物信息
-            case R.id.mainLost:
-                intent = new Intent(MainActivity.this, MyLostAndFoundActivity.class);
-                intent.setAction(AppConstants.MyLostInfoAction);
-                startActivity(intent);
-                break;
-            //发布的招领信息
-            case R.id.mainFound:
-                intent = new Intent(MainActivity.this, MyLostAndFoundActivity.class);
-                intent.setAction(AppConstants.MyFoundInfoAction);
-                startActivity(intent);
-                break;
-            //消息中心
-            case R.id.mainMessageCenter:
-                intent = new Intent(MainActivity.this, MessageCenterActivity.class);
-                startActivity(intent);
-                break;
-            //用户须知
-            case R.id.mainUserNote:
-                intent = new Intent(MainActivity.this, UserNotesActivity.class);
-                startActivity(intent);
-                break;
-            //反馈建议
-            case R.id.mainSuggestion:
-                intent = new Intent(MainActivity.this, SuggestActivity.class);
-                startActivity(intent);
-                break;
         }
+    }
+
+    @OnItemClick(R.id.drawerListView)
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        Intent intent = new Intent(this, list.get(position).getClazz());
+        if (!TextUtils.isEmpty(list.get(position).getIntentAction())) {
+            intent.setAction(list.get(position).getIntentAction());
+        }
+        startActivity(intent);
     }
 
     public class LostFoundPagerAdapter extends FragmentPagerAdapter {

@@ -160,6 +160,7 @@
             android:name=".activities.LookImageActivity"
             android:screenOrientation="portrait">
         </activity>
+        <service android:name=".service.DownLoadService"/>
     </application>
 
 </manifest>

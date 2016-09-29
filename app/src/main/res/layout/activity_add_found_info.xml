@@ -10,7 +10,6 @@
     <com.lanma.lostandfound.view.ReboundScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@+id/releaseFoundInfo"
         android:layout_marginBottom="5dp"
         android:background="@color/mainBackgroundColor"
         android:padding="10dp">
@@ -148,7 +147,6 @@
         android:id="@+id/releaseFoundInfo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
         android:layout_marginBottom="5dp"
         android:background="@drawable/button_selector_blue_dark_drawable"
         android:text="发布"

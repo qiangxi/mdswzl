@@ -5,7 +5,7 @@ import android.content.Context;
 import net.lucode.hackware.magicindicator.buildins.commonnavigator.titles.ColorTransitionPagerTitleView;
 
 /**
- * Created by qiang_xi on 2016/9/28 22:23.
+ * Created by qiang_xi on 2016/9/28 22:23 23:24.
  */
 
 public class ScaleTransitionPagerTitleView extends ColorTransitionPagerTitleView {

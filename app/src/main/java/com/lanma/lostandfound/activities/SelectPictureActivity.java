@@ -276,7 +276,7 @@ public class SelectPictureActivity extends BaseActivity {
 
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
-            ViewHolder holder = null;
+            ViewHolder holder;
             if (convertView == null) {
                 convertView = View.inflate(SelectPictureActivity.this, R.layout.grid_item_picture, null);
                 holder = new ViewHolder();
@@ -342,7 +342,7 @@ public class SelectPictureActivity extends BaseActivity {
 
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
-            FolderViewHolder holder = null;
+            FolderViewHolder holder;
             if (convertView == null) {
                 convertView = View.inflate(SelectPictureActivity.this, R.layout.list_dir_item, null);
                 holder = new FolderViewHolder();
@@ -406,7 +406,7 @@ public class SelectPictureActivity extends BaseActivity {
                 if (parentFile == null) {
                     continue;
                 }
-                ImageFolder imageFolder = null;
+                ImageFolder imageFolder;
                 String dirPath = parentFile.getAbsolutePath();
                 //防止同一个文件夹的多次扫描
                 if (!tmpDir.containsKey(dirPath)) {
