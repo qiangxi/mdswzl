@@ -1,138 +1,145 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#47549E"
     android:orientation="vertical">
 
-    <include layout="@layout/tool_bar_layout"/>
+    <include layout="@layout/tool_bar_layout" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp">
+
+        <com.lanma.lostandfound.view.RoundImageView
+            android:id="@+id/studentHeaderImage"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_marginTop="20dp"
+            android:gravity="center"
+            android:src="@drawable/icon_passenger_man"
+            app:border_outside_color="#F0F4F8"
+            app:border_thickness="0.5dp" />
+
+        <EditText
+            android:id="@+id/studentName"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:layout_marginTop="50dp"
+            android:gravity="center_vertical"
+            android:hint="姓名..."
+            android:maxLength="20"
+            android:textColor="@android:color/white"
+            android:textColorHint="#B3C3D9"
+            android:textSize="12sp" />
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:orientation="vertical"
-            android:paddingLeft="15dp"
-            android:paddingRight="15dp">
+            android:layout_height="45dp"
+            android:layout_marginTop="0.5dp"
+            android:orientation="horizontal"
+            android:padding="5dp"
+            android:visibility="gone">
 
-            <com.lanma.lostandfound.view.RoundImageView
-                android:id="@+id/studentHeaderImage"
-                android:layout_width="80dp"
-                android:layout_height="80dp"
-                android:layout_marginTop="20dp"
+            <TextView
+                android:id="@+id/studentSexMan"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:background="@drawable/button_normal_white_background"
                 android:gravity="center"
-                android:src="@drawable/icon_passenger_man"
-                app:border_outside_color="#F0F4F8"
-                app:border_thickness="0.5dp"/>
+                android:text="男"
+                android:textColor="@android:color/black"
+                android:textSize="12sp" />
 
-            <EditText
-                android:id="@+id/studentName"
-                android:layout_width="match_parent"
-                android:layout_height="45dp"
-                android:layout_marginTop="50dp"
-                android:gravity="center_vertical"
-                android:hint="姓名..."
-                android:maxLength="20"
-                android:textColor="@android:color/white"
-                android:textColorHint="#B3C3D9"
-                android:textSize="12sp"/>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="45dp"
-                android:layout_marginTop="0.5dp"
-                android:orientation="horizontal"
-                android:padding="5dp"
-                android:visibility="gone">
-
-                <TextView
-                    android:id="@+id/studentSexMan"
-                    android:layout_width="35dp"
-                    android:layout_height="35dp"
-                    android:background="@drawable/button_normal_white_background"
-                    android:gravity="center"
-                    android:text="男"
-                    android:textColor="@android:color/black"
-                    android:textSize="12sp"/>
-
-                <TextView
-                    android:id="@+id/studentSexWoman"
-                    android:layout_width="35dp"
-                    android:layout_height="35dp"
-                    android:layout_marginLeft="20dp"
-                    android:background="@drawable/button_normal_white_background"
-                    android:gravity="center"
-                    android:text="女"
-                    android:textColor="@android:color/black"
-                    android:textSize="12sp"/>
-            </LinearLayout>
-
-            <EditText
-                android:id="@+id/studentEmailAddress"
-                android:layout_width="match_parent"
-                android:layout_height="45dp"
-                android:layout_marginTop="0.5dp"
-                android:gravity="center_vertical"
-                android:hint="您的邮箱地址..."
-                android:inputType="textEmailAddress"
-                android:textColor="@android:color/white"
-                android:textColorHint="#B3C3D9"
-                android:textSize="12sp"/>
-
-            <EditText
-                android:id="@+id/studentPhoneNumber"
-                android:layout_width="match_parent"
-                android:layout_height="45dp"
-                android:layout_marginTop="0.5dp"
-                android:gravity="center_vertical"
-                android:hint="手机号..."
-                android:inputType="phone"
-                android:maxLength="11"
-                android:textColor="@android:color/white"
-                android:textColorHint="#B3C3D9"
-                android:textSize="12sp"/>
-
-            <EditText
-                android:id="@+id/studentYear"
-                android:layout_width="match_parent"
-                android:layout_height="45dp"
-                android:layout_marginTop="0.5dp"
-                android:gravity="center_vertical"
-                android:hint="入学年份..."
-                android:inputType="number"
-                android:maxLength="4"
-                android:textColor="@android:color/white"
-                android:textColorHint="#B3C3D9"
-                android:textSize="12sp"/>
-
-
-            <EditText
-                android:id="@+id/studentSpecialities"
-                android:layout_width="match_parent"
-                android:layout_height="45dp"
-                android:layout_marginTop="0.5dp"
-                android:gravity="center_vertical"
-                android:hint="所学专业..."
-                android:inputType="text"
-                android:maxLength="20"
-                android:textColor="@android:color/white"
-                android:textColorHint="#B3C3D9"
-                android:textSize="12sp"/>
+            <TextView
+                android:id="@+id/studentSexWoman"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:layout_marginLeft="20dp"
+                android:background="@drawable/button_normal_white_background"
+                android:gravity="center"
+                android:text="女"
+                android:textColor="@android:color/black"
+                android:textSize="12sp" />
         </LinearLayout>
+
+        <EditText
+            android:id="@+id/studentEmailAddress"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:layout_marginTop="0.5dp"
+            android:gravity="center_vertical"
+            android:hint="您的邮箱地址..."
+            android:inputType="textEmailAddress"
+            android:textColor="@android:color/white"
+            android:textColorHint="#B3C3D9"
+            android:textSize="12sp" />
+
+        <EditText
+            android:id="@+id/studentPhoneNumber"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:layout_marginTop="0.5dp"
+            android:gravity="center_vertical"
+            android:hint="手机号..."
+            android:inputType="phone"
+            android:maxLength="11"
+            android:textColor="@android:color/white"
+            android:textColorHint="#B3C3D9"
+            android:textSize="12sp" />
+
+        <EditText
+            android:id="@+id/studentYear"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:layout_marginTop="0.5dp"
+            android:gravity="center_vertical"
+            android:hint="入学年份..."
+            android:inputType="number"
+            android:maxLength="4"
+            android:textColor="@android:color/white"
+            android:textColorHint="#B3C3D9"
+            android:textSize="12sp" />
+
+
+        <EditText
+            android:id="@+id/studentSpecialities"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:layout_marginTop="0.5dp"
+            android:gravity="center_vertical"
+            android:hint="所学专业..."
+            android:inputType="text"
+            android:maxLength="20"
+            android:textColor="@android:color/white"
+            android:textColorHint="#B3C3D9"
+            android:textSize="12sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:layout_marginBottom="30dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="30dp"
+        android:background="@drawable/shape_button_stroke">
 
         <Button
             android:id="@+id/saveUserInfo"
             android:layout_width="match_parent"
             android:layout_height="45dp"
-            android:layout_gravity="bottom"
-            android:layout_marginBottom="30dp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
-            android:layout_marginTop="30dp"
-            android:background="@drawable/shape_button_stroke"
+            android:background="?attr/selectableItemBackground"
             android:text="更新个人信息"
             android:textColor="@android:color/white"
-            android:textSize="12sp"/>
+            android:textSize="12sp" />
+    </LinearLayout>
+
+
 </LinearLayout>
