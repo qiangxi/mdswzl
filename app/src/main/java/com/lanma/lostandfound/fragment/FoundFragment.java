@@ -18,13 +18,12 @@ import com.lanma.lostandfound.R;
 import com.lanma.lostandfound.activities.AddFoundInfoActivity;
 import com.lanma.lostandfound.activities.InfoDetailActivity;
 import com.lanma.lostandfound.activities.LoginActivity;
-import com.lanma.lostandfound.adapter.LostInfoAdapter;
+import com.lanma.lostandfound.adapter.LostFoundInfoAdapter;
 import com.lanma.lostandfound.beans.LostFoundInfo;
 import com.lanma.lostandfound.beans.StudentInfo;
 import com.lanma.lostandfound.constants.AppConstants;
 import com.lanma.lostandfound.net.ServerConnection;
 import com.lanma.lostandfound.presenter.LostInfoListPresenter;
-import com.lanma.lostandfound.utils.AnimationAdapterUtil;
 import com.lanma.lostandfound.utils.EmptyViewUtil;
 import com.lanma.lostandfound.view.DirectionListView;
 import com.umeng.analytics.MobclickAgent;
@@ -54,7 +53,7 @@ public class FoundFragment extends BaseFragment implements SwipeRefreshLayout.On
     private List<LostFoundInfo> mList = new ArrayList<>();
     private boolean isInited = false;//布局是否已经初始化完毕
     private boolean isDataLoaded = false;//如果已加载过数据,再次回到该界面不用再次加载数据
-    private LostInfoAdapter mAdapter;
+    private LostFoundInfoAdapter mAdapter;
     private int mListViewHeight;//listView的高度
 
     public static FoundFragment newInstance(int position) {
@@ -83,7 +82,7 @@ public class FoundFragment extends BaseFragment implements SwipeRefreshLayout.On
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (null == mAdapter) {
-            mAdapter = new LostInfoAdapter(getActivity(), mList);
+            mAdapter = new LostFoundInfoAdapter(mList);
         }
     }
 
@@ -169,8 +168,8 @@ public class FoundFragment extends BaseFragment implements SwipeRefreshLayout.On
         }
         mSwipeRefreshLayout.setRefreshing(false);
         mList = list;
-        mAdapter = new LostInfoAdapter(getActivity(), mList);
-        mFoundListView.setAdapter(AnimationAdapterUtil.getSwingBottomInAnimationAdapter(mAdapter, mFoundListView));
+        mAdapter = new LostFoundInfoAdapter(mList);
+//        mFoundListView.setAdapter(AnimationAdapterUtil.getSwingBottomInAnimationAdapter(mAdapter, mFoundListView));
     }
 
     @Override
@@ -187,7 +186,7 @@ public class FoundFragment extends BaseFragment implements SwipeRefreshLayout.On
             return;
         }
         mList.addAll(list);
-        mAdapter.notifyDataSetChanged();
+       // mAdapter.notifyDataSetChanged();
     }
 
     @Override
@@ -207,7 +206,7 @@ public class FoundFragment extends BaseFragment implements SwipeRefreshLayout.On
             if (view.getLastVisiblePosition() == (mFoundListView.getCount() - 1)) {
                 View childView = mFoundListView.getChildAt(mFoundListView.getChildCount() - 1);
                 if (null != childView && childView.getBottom() == mListViewHeight) {
-                    ServerConnection.getLostFoundInfoList(AppConstants.FoundInfoType, mList.size(), this);
+
                 }
             }
         }

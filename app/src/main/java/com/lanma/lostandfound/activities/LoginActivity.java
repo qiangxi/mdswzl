@@ -40,11 +40,12 @@ public class LoginActivity extends BaseActivity  {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         ButterKnife.bind(this);
-        setStatusBarColor(Color.parseColor("#0076A3"));
+        setStatusBarColor(getResources().getColor(R.color.colorPrimary));
         initViewPagerAndIndicator();
     }
 
     public void initViewPagerAndIndicator() {
+
         mLoginRegisterViewPager.setAdapter(new LoginRegisterPagerAdapter(getSupportFragmentManager()));
         loginRegisterNavigator = new CommonNavigator(this);
         loginRegisterNavigator.setScrollPivotX(0.35f);
@@ -59,7 +60,7 @@ public class LoginActivity extends BaseActivity  {
             public IPagerTitleView getTitleView(Context context, final int index) {
                 SimplePagerTitleView simplePagerTitleView = new SimplePagerTitleView(context);
                 simplePagerTitleView.setText(TITLES[index]);
-                simplePagerTitleView.setNormalColor(Color.BLACK);
+                simplePagerTitleView.setNormalColor(Color.parseColor("#003972"));
                 simplePagerTitleView.setSelectedColor(Color.WHITE);
                 simplePagerTitleView.setOnClickListener(new View.OnClickListener() {
                     @Override

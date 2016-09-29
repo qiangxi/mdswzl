@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.lanma.lostandfound.view.ReboundScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<com.lanma.lostandfound.view.ReboundScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -15,7 +17,10 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
             android:paddingLeft="30dp"
-            android:paddingRight="30dp">
+            android:paddingRight="30dp"
+            android:textColorHint="#B3C3D9"
+            android:hint="用户名(请输入邮箱)"
+            >
 
             <EditText
                 android:id="@+id/loginUserName"
@@ -23,10 +28,12 @@
                 android:layout_height="40dp"
                 android:layout_marginLeft="30dp"
                 android:layout_marginRight="30dp"
-                android:hint="用户名(请输入邮箱)"
+
+                android:inputType="textEmailAddress"
                 android:paddingLeft="10dp"
+                android:textColorHint="#B3C3D9"
                 android:textColor="@android:color/white"
-                android:textSize="14sp" />
+                android:textSize="14sp"/>
         </android.support.design.widget.TextInputLayout>
 
         <android.support.design.widget.TextInputLayout
@@ -34,7 +41,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingLeft="30dp"
-            android:paddingRight="30dp">
+            android:paddingRight="30dp"
+            android:textColorHint="#B3C3D9"
+            android:hint="请输入密码"
+            app:passwordToggleEnabled="true"
+            app:passwordToggleTint="@color/selector_password_checked_color"
+            app:passwordToggleDrawable="@drawable/selector_password_visibility">
 
             <EditText
                 android:id="@+id/loginPassword"
@@ -42,21 +54,34 @@
                 android:layout_height="40dp"
                 android:layout_marginLeft="30dp"
                 android:layout_marginRight="30dp"
-                android:hint="请输入密码"
+                android:inputType="textPassword"
                 android:paddingLeft="10dp"
                 android:textColor="@android:color/white"
-                android:textSize="14sp" />
+                android:textSize="14sp"/>
         </android.support.design.widget.TextInputLayout>
 
         <Button
             android:id="@+id/login"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="40dp"
             android:layout_marginLeft="30dp"
             android:layout_marginRight="30dp"
             android:layout_marginTop="10dp"
             android:background="@drawable/shape_button_stroke"
             android:text="登陆"
-            android:textColor="@android:color/white" />
+            android:textColor="@android:color/white"/>
+
+        <TextView
+            android:id="@+id/forgetPassword"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:layout_marginRight="30dp"
+            android:layout_marginTop="10dp"
+            android:gravity="center"
+            android:padding="3dp"
+            android:text="忘记密码?"
+            android:background="?attr/selectableItemBackground"
+            android:textColor="#B3C3D9"/>
     </LinearLayout>
 </com.lanma.lostandfound.view.ReboundScrollView>

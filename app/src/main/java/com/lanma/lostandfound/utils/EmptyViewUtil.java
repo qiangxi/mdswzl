@@ -39,4 +39,16 @@ public class EmptyViewUtil {
         }
         return null;
     }
+
+    public static View getEmptyView(Context context, @NonNull String emptyText) {
+        View view = LayoutInflater.from(context).inflate(R.layout.empty_view_layout, null);
+        TextView textView = (TextView) view.findViewById(R.id.emptyViewText);
+        textView.setText(emptyText + "");
+        return view;
+    }
+
+    public static View getEmptyView(Context context) {
+        return LayoutInflater.from(context).inflate(R.layout.empty_view_layout, null);
+    }
+
 }

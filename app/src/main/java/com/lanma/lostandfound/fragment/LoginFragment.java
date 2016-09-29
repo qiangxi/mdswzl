@@ -65,7 +65,6 @@ public class LoginFragment extends BaseFragment implements LoginPresenter {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
     }
 
     @Override
@@ -74,25 +73,32 @@ public class LoginFragment extends BaseFragment implements LoginPresenter {
         ButterKnife.unbind(this);
     }
 
-    @OnClick(R.id.login)
-    public void onClick() {
-        String userName = mLoginUserName.getText().toString();
-        String password = mLoginPassword.getText().toString();
-        if (TextUtils.isEmpty(userName)) {
-            showToast("用户名不可为空");
-            return;
+    @OnClick({R.id.login, R.id.forgetPassword})
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.login:
+                String userName = mLoginUserName.getText().toString();
+                String password = mLoginPassword.getText().toString();
+                if (TextUtils.isEmpty(userName)) {
+                    showToast("用户名不可为空");
+                    return;
+                }
+                if (TextUtils.isEmpty(password)) {
+                    showToast("密码不可为空");
+                    return;
+                }
+                if (!StringUtils.isEmail(userName)) {
+                    showToast("邮箱格式不正确");
+                    return;
+                }
+                ServerConnection.LoginAction(userName, password, this);
+                break;
+            //忘记密码
+            case R.id.forgetPassword:
+                // TODO: 2016/9/29 发送邮件,用于修改密码或重置密码
+                break;
         }
-        if (TextUtils.isEmpty(password)) {
-            showToast("密码不可为空");
-            return;
-        }
-        if (!StringUtils.isEmail(userName)) {
-            showToast("邮箱格式不正确");
-            return;
-        }
-        ServerConnection.LoginAction(userName, password, this);
     }
-
 
     @Override
     public void LoginSuccess() {

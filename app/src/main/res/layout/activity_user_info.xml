@@ -4,66 +4,48 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#47549E"
     android:orientation="vertical">
 
     <include layout="@layout/tool_bar_layout"/>
-
-    <com.lanma.lostandfound.view.ReboundScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_above="@+id/saveUserInfo">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:paddingLeft="15dp"
+            android:paddingRight="15dp">
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="150dp"
-                android:gravity="center">
-
-                <com.lanma.lostandfound.view.RoundImageView
-                    android:id="@+id/studentHeaderImage"
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
-                    android:layout_margin="10dp"
-                    android:src="@drawable/icon_passenger_man"
-                    app:border_inside_color="#FF6634"
-                    app:border_outside_color="#FF6634"
-                    app:border_thickness="1dp"/>
-            </LinearLayout>
+            <com.lanma.lostandfound.view.RoundImageView
+                android:id="@+id/studentHeaderImage"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_marginTop="20dp"
+                android:gravity="center"
+                android:src="@drawable/icon_passenger_man"
+                app:border_outside_color="#F0F4F8"
+                app:border_thickness="0.5dp"/>
 
             <EditText
                 android:id="@+id/studentName"
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
-                android:layout_marginTop="0.5dp"
-                android:background="@android:color/white"
-                android:drawableLeft="@drawable/icon_student_info_name"
-                android:drawablePadding="10dp"
+                android:layout_marginTop="50dp"
                 android:gravity="center_vertical"
                 android:hint="姓名..."
                 android:maxLength="20"
-                android:paddingLeft="20dp"
-                android:textColor="@android:color/black"
+                android:textColor="@android:color/white"
+                android:textColorHint="#B3C3D9"
                 android:textSize="12sp"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
                 android:layout_marginTop="0.5dp"
-                android:background="@android:color/white"
                 android:orientation="horizontal"
-                android:padding="5dp">
-
-                <ImageView
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:layout_marginLeft="5dp"
-                    android:padding="10dp"
-                    android:src="@drawable/icon_student_info_sex"/>
+                android:padding="5dp"
+                android:visibility="gone">
 
                 <TextView
                     android:id="@+id/studentSexMan"
@@ -88,35 +70,15 @@
             </LinearLayout>
 
             <EditText
-                android:id="@+id/studentAge"
-                android:layout_width="match_parent"
-                android:layout_height="45dp"
-                android:layout_marginTop="0.5dp"
-                android:background="@android:color/white"
-                android:drawableLeft="@drawable/icon_student_info_age"
-                android:drawablePadding="10dp"
-                android:gravity="center_vertical"
-                android:hint="年龄..."
-                android:inputType="number"
-                android:maxLength="2"
-                android:paddingLeft="20dp"
-                android:textColor="@android:color/black"
-                android:textSize="12sp"
-                />
-
-            <EditText
                 android:id="@+id/studentEmailAddress"
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
                 android:layout_marginTop="0.5dp"
-                android:background="@android:color/white"
-                android:drawableLeft="@drawable/icon_student_info_email"
-                android:drawablePadding="10dp"
                 android:gravity="center_vertical"
                 android:hint="您的邮箱地址..."
                 android:inputType="textEmailAddress"
-                android:paddingLeft="20dp"
-                android:textColor="@android:color/black"
+                android:textColor="@android:color/white"
+                android:textColorHint="#B3C3D9"
                 android:textSize="12sp"/>
 
             <EditText
@@ -124,15 +86,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
                 android:layout_marginTop="0.5dp"
-                android:background="@android:color/white"
-                android:drawableLeft="@drawable/icon_student_info_phone"
-                android:drawablePadding="10dp"
                 android:gravity="center_vertical"
                 android:hint="手机号..."
                 android:inputType="phone"
                 android:maxLength="11"
-                android:paddingLeft="20dp"
-                android:textColor="@android:color/black"
+                android:textColor="@android:color/white"
+                android:textColorHint="#B3C3D9"
                 android:textSize="12sp"/>
 
             <EditText
@@ -140,80 +99,41 @@
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
                 android:layout_marginTop="0.5dp"
-                android:background="@android:color/white"
-                android:drawableLeft="@drawable/icon_student_info_year"
-                android:drawablePadding="10dp"
                 android:gravity="center_vertical"
                 android:hint="入学年份..."
                 android:inputType="number"
                 android:maxLength="4"
-                android:paddingLeft="20dp"
-                android:textColor="@android:color/black"
+                android:textColor="@android:color/white"
+                android:textColorHint="#B3C3D9"
                 android:textSize="12sp"/>
 
-            <EditText
-                android:id="@+id/studentCollege"
-                android:layout_width="match_parent"
-                android:layout_height="45dp"
-                android:layout_marginTop="0.5dp"
-                android:background="@android:color/white"
-                android:drawableLeft="@drawable/icon_student_info_college"
-                android:drawablePadding="8dp"
-                android:gravity="center_vertical"
-                android:hint="所在学院..."
-                android:inputType="text"
-                android:maxLength="20"
-                android:paddingLeft="20dp"
-                android:textColor="@android:color/black"
-                android:textSize="12sp"/>
 
             <EditText
                 android:id="@+id/studentSpecialities"
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
                 android:layout_marginTop="0.5dp"
-                android:background="@android:color/white"
-                android:drawableLeft="@drawable/icon_student_info_specialities"
-                android:drawablePadding="10dp"
                 android:gravity="center_vertical"
                 android:hint="所学专业..."
                 android:inputType="text"
                 android:maxLength="20"
-                android:paddingLeft="20dp"
-                android:textColor="@android:color/black"
-                android:textSize="12sp"/>
-
-            <EditText
-                android:id="@+id/studentApartNumber"
-                android:layout_width="match_parent"
-                android:layout_height="45dp"
-                android:layout_marginTop="0.5dp"
-                android:background="@android:color/white"
-                android:drawableLeft="@drawable/icon_student_info_apartment"
-                android:drawablePadding="10dp"
-                android:gravity="center_vertical"
-                android:hint="所在公寓(x号楼)..."
-                android:inputType="text"
-                android:maxLength="10"
-                android:paddingLeft="20dp"
-                android:textColor="@android:color/black"
+                android:textColor="@android:color/white"
+                android:textColorHint="#B3C3D9"
                 android:textSize="12sp"/>
         </LinearLayout>
-    </com.lanma.lostandfound.view.ReboundScrollView>
 
-    <Button
-        android:id="@+id/saveUserInfo"
-        android:layout_width="match_parent"
-        android:layout_height="45dp"
-        android:layout_alignParentBottom="true"
-        android:layout_gravity="bottom"
-        android:layout_marginBottom="10dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:layout_marginTop="10dp"
-        android:background="@drawable/button_selector_blue_dark_drawable"
-        android:text="更新个人信息"
-        android:textColor="@android:color/white"
-        android:textSize="12sp"/>
-
+        <Button
+            android:id="@+id/saveUserInfo"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:layout_alignParentBottom="true"
+            android:layout_gravity="bottom"
+            android:layout_marginBottom="30dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="30dp"
+            android:background="@drawable/shape_button_stroke"
+            android:text="更新个人信息"
+            android:textColor="@android:color/white"
+            android:textSize="12sp"/>
 </LinearLayout>

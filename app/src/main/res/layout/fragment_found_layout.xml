@@ -28,9 +28,9 @@
             android:layout_marginBottom="20dp"
             android:layout_marginRight="20dp"
             android:src="@drawable/icon_add_info"
-            app:backgroundTint="#FFCA28"
+            app:backgroundTint="@color/actionBarColor"
             app:borderWidth="0dp"
-            app:rippleColor="#CFA420"
+            app:rippleColor="#004993"
             />
     </FrameLayout>
 </android.support.v4.widget.SwipeRefreshLayout>

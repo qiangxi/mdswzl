@@ -47,20 +47,14 @@ public class StudentInfoActivity extends BaseActivity implements GetStudentInfoP
     TextView mStudentSexMan;//学生性别(男) )
     @Bind(R.id.studentSexWoman)
     TextView mStudentSexWoman;//学生性别(女)
-    @Bind(R.id.studentAge)
-    EditText mStudentAge;//学生年龄
     @Bind(R.id.studentEmailAddress)
     EditText mStudentEmailAddress;//邮箱地址
     @Bind(R.id.studentPhoneNumber)
     EditText mStudentPhoneNumber;//手机号
     @Bind(R.id.studentYear)
     EditText mStudentYear;//入学年份
-    @Bind(R.id.studentCollege)
-    EditText mStudentCollege;//所在学院
     @Bind(R.id.studentSpecialities)
     EditText mStudentSpecialities;//所学专业
-    @Bind(R.id.studentApartNumber)
-    EditText mStudentApartmentNumber;//所在公寓
     @Bind(R.id.toolBar)
     Toolbar mToolBar;
 
@@ -78,12 +72,14 @@ public class StudentInfoActivity extends BaseActivity implements GetStudentInfoP
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_info);
         ButterKnife.bind(this);
+        setStatusBarColor(Color.parseColor("#47549E"));
         initToolBar();
         initData();
         initPhotoUri();
     }
 
     private void initToolBar() {
+        mToolBar.setBackgroundColor(Color.parseColor("#47549E"));
         mToolBar.setTitle("个人信息");
         mToolBar.setTitleTextColor(Color.WHITE);
         mToolBar.setNavigationOnClickListener(new View.OnClickListener() {
@@ -148,13 +144,10 @@ public class StudentInfoActivity extends BaseActivity implements GetStudentInfoP
 
     private void updateStudentInfo() {
         String studentName = mStudentName.getText().toString();
-        String studentAge = mStudentAge.getText().toString();
         String studentEmailAddress = mStudentEmailAddress.getText().toString();
         String studentPhoneNumber = mStudentPhoneNumber.getText().toString();
         String studentYear = mStudentYear.getText().toString();
-        String studentCollege = mStudentCollege.getText().toString();
         String studentSpecialities = mStudentSpecialities.getText().toString();
-        String studentApartmentNumber = mStudentApartmentNumber.getText().toString();
         if (!TextUtils.isEmpty(studentEmailAddress) && !StringUtils.isEmail(studentEmailAddress)) {
             showToast("邮箱格式不正确");
             return;
@@ -166,8 +159,8 @@ public class StudentInfoActivity extends BaseActivity implements GetStudentInfoP
             }
         }
         ServerConnection.UpdateStudentInfo(BmobUser.getCurrentUser(StudentInfo.class).getObjectId(), studentName,
-                studentAge, studentSex, studentEmailAddress, studentPhoneNumber + "", studentYear, studentCollege,
-                studentSpecialities, studentApartmentNumber, this);
+                "", studentSex, studentEmailAddress, studentPhoneNumber + "", studentYear, "",
+                studentSpecialities, "", this);
     }
 
     /**
@@ -327,13 +320,6 @@ public class StudentInfoActivity extends BaseActivity implements GetStudentInfoP
             } else {
                 setManSex();
             }
-            //年龄
-            if (TextUtils.isEmpty(studentInfo.getStudentAge())) {
-                mStudentAge.setText("");
-                mStudentAge.setHint("年龄...");
-            } else {
-                mStudentAge.setText(studentInfo.getStudentAge());
-            }
             //邮箱
             if (TextUtils.isEmpty(studentInfo.getEmail())) {
                 mStudentEmailAddress.setText("");
@@ -348,13 +334,6 @@ public class StudentInfoActivity extends BaseActivity implements GetStudentInfoP
             } else {
                 mStudentPhoneNumber.setText(studentInfo.getMobilePhoneNumber());
             }
-            //学院
-            if (TextUtils.isEmpty(studentInfo.getStudentOfCollege())) {
-                mStudentCollege.setText("");
-                mStudentCollege.setHint("学院...");
-            } else {
-                mStudentCollege.setText(studentInfo.getStudentOfCollege());
-            }
             //专业
             if (TextUtils.isEmpty(studentInfo.getStudentSpecialities())) {
                 mStudentSpecialities.setText("");
@@ -368,13 +347,6 @@ public class StudentInfoActivity extends BaseActivity implements GetStudentInfoP
                 mStudentYear.setHint("入学年份...");
             } else {
                 mStudentYear.setText(studentInfo.getStudentYear());
-            }
-            //公寓号
-            if (TextUtils.isEmpty(studentInfo.getStudentApartNumber())) {
-                mStudentApartmentNumber.setText("");
-                mStudentApartmentNumber.setHint("公寓号(x号楼)...");
-            } else {
-                mStudentApartmentNumber.setText(studentInfo.getStudentApartNumber());
             }
         }
     }
