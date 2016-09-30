@@ -39,21 +39,29 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@android:color/white"
+                    android:cursorVisible="true"
                     android:gravity="left"
                     android:hint="对软件的各种不满、不爽都发泄出来吧,别把自己憋坏了\n反正我又不一定会改...ㄟ( ▔, ▔ )ㄏ"
                     android:minHeight="250dp"
                     android:padding="5dp"
                     android:textSize="12sp"/>
 
-                <Button
-                    android:id="@+id/suggestSubmit"
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="40dp"
+                    android:layout_height="wrap_content"
                     android:layout_marginTop="20dp"
-                    android:background="@drawable/button_selector_blue_dark_drawable"
-                    android:text="向我吐槽"
-                    android:textColor="@android:color/white"
-                    />
+                    android:background="@color/actionBarColor"
+                    >
+
+                    <Button
+                        android:id="@+id/suggestSubmit"
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:background="?attr/selectableItemBackground"
+                        android:text="向我吐槽"
+                        android:textColor="@android:color/white"
+                        />
+                </LinearLayout>
             </LinearLayout>
         </com.lanma.lostandfound.view.ReboundScrollView>
     </LinearLayout>

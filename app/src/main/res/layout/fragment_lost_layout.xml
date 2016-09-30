@@ -4,39 +4,33 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@android:color/white">
 
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:padding="10dp">
+        android:paddingTop="10dp">
 
-
-        <com.lanma.lostandfound.view.DirectionListView
+        <ListView
             android:id="@+id/lostListView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:divider="@android:color/transparent"
-            android:dividerHeight="10dp"
+            android:divider="@color/mainBackgroundColor"
+            android:dividerHeight="0.5dp"
             android:scrollbars="none"/>
-
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/lostRecyclerView"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
 
         <android.support.design.widget.FloatingActionButton
             android:id="@+id/addLostInfo"
             android:layout_width="60dp"
             android:layout_height="60dp"
             android:layout_gravity="bottom|right"
-            android:layout_marginBottom="20dp"
-            android:layout_marginRight="20dp"
+            android:layout_marginBottom="30dp"
+            android:layout_marginRight="30dp"
             android:src="@drawable/icon_add_info"
             app:backgroundTint="@color/actionBarColor"
             app:borderWidth="0dp"
-            app:rippleColor="#004993"
-            />
+            app:rippleColor="#004993"/>
     </FrameLayout>
 </android.support.v4.widget.SwipeRefreshLayout>

@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
+import android.widget.ListView;
 
 import com.lanma.lostandfound.R;
 import com.lanma.lostandfound.activities.AddFoundInfoActivity;
@@ -24,8 +25,8 @@ import com.lanma.lostandfound.beans.StudentInfo;
 import com.lanma.lostandfound.constants.AppConstants;
 import com.lanma.lostandfound.net.ServerConnection;
 import com.lanma.lostandfound.presenter.LostInfoListPresenter;
+import com.lanma.lostandfound.utils.AnimationAdapterUtil;
 import com.lanma.lostandfound.utils.EmptyViewUtil;
-import com.lanma.lostandfound.view.DirectionListView;
 import com.umeng.analytics.MobclickAgent;
 
 import java.util.ArrayList;
@@ -40,11 +41,10 @@ import cn.bmob.v3.BmobUser;
 /**
  * 作者 任强强 on 2016/9/1 18:25.
  */
-public class FoundFragment extends BaseFragment implements SwipeRefreshLayout.OnRefreshListener,
-        AbsListView.OnScrollListener, LostInfoListPresenter, DirectionListView.OnScrollDirectionListener {
+public class FoundFragment extends BaseFragment implements SwipeRefreshLayout.OnRefreshListener, AbsListView.OnScrollListener, LostInfoListPresenter {
 
     @Bind(R.id.foundListView)
-    DirectionListView mFoundListView;
+    ListView mFoundListView;
     @Bind(R.id.swipeRefreshLayout)
     SwipeRefreshLayout mSwipeRefreshLayout;
     @Bind(R.id.addfoundInfo)
@@ -82,7 +82,7 @@ public class FoundFragment extends BaseFragment implements SwipeRefreshLayout.On
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (null == mAdapter) {
-            mAdapter = new LostFoundInfoAdapter(mList);
+            mAdapter = new LostFoundInfoAdapter(getActivity(), mList);
         }
     }
 
@@ -108,7 +108,7 @@ public class FoundFragment extends BaseFragment implements SwipeRefreshLayout.On
 
     private void initEvent() {
         mFoundListView.setOnScrollListener(this);
-        mFoundListView.setOnScrollDirectionListener(this);
+//        mFoundListView.setOnScrollDirectionListener(this);
         mFoundListView.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
             @Override
             public void onGlobalLayout() {
@@ -168,8 +168,8 @@ public class FoundFragment extends BaseFragment implements SwipeRefreshLayout.On
         }
         mSwipeRefreshLayout.setRefreshing(false);
         mList = list;
-        mAdapter = new LostFoundInfoAdapter(mList);
-//        mFoundListView.setAdapter(AnimationAdapterUtil.getSwingBottomInAnimationAdapter(mAdapter, mFoundListView));
+        mAdapter = new LostFoundInfoAdapter(getActivity(), mList);
+        mFoundListView.setAdapter(AnimationAdapterUtil.getSwingBottomInAnimationAdapter(mAdapter, mFoundListView));
     }
 
     @Override
@@ -186,7 +186,7 @@ public class FoundFragment extends BaseFragment implements SwipeRefreshLayout.On
             return;
         }
         mList.addAll(list);
-       // mAdapter.notifyDataSetChanged();
+        mAdapter.notifyDataSetChanged();
     }
 
     @Override
@@ -206,7 +206,7 @@ public class FoundFragment extends BaseFragment implements SwipeRefreshLayout.On
             if (view.getLastVisiblePosition() == (mFoundListView.getCount() - 1)) {
                 View childView = mFoundListView.getChildAt(mFoundListView.getChildCount() - 1);
                 if (null != childView && childView.getBottom() == mListViewHeight) {
-
+                    ServerConnection.getLostFoundInfoList(AppConstants.FoundInfoType, mList.size(), this);
                 }
             }
         }
@@ -226,16 +226,16 @@ public class FoundFragment extends BaseFragment implements SwipeRefreshLayout.On
         }
         mSwipeRefreshLayout.setEnabled(enable);
     }
-
-    @Override
-    public void onScrollUp() {
-        mAddfoundInfo.setVisibility(View.GONE);
-    }
-
-    @Override
-    public void onScrollDown() {
-        mAddfoundInfo.setVisibility(View.VISIBLE);
-    }
+//
+//    @Override
+//    public void onScrollUp() {
+//        mAddfoundInfo.setVisibility(View.GONE);
+//    }
+//
+//    @Override
+//    public void onScrollDown() {
+//        mAddfoundInfo.setVisibility(View.VISIBLE);
+//    }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -258,4 +258,5 @@ public class FoundFragment extends BaseFragment implements SwipeRefreshLayout.On
         super.onPause();
         MobclickAgent.onPageEnd(getActivity().getClass().getSimpleName());
     }
+
 }

@@ -16,7 +16,7 @@
         <com.lanma.lostandfound.view.ReboundScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_above="@+id/releaseLostInfo"
+            android:layout_above="@+id/releaseFoundInfoLayout"
             android:layout_marginBottom="5dp">
 
             <LinearLayout
@@ -148,16 +148,25 @@
             </LinearLayout>
         </com.lanma.lostandfound.view.ReboundScrollView>
 
-        <Button
-            android:id="@+id/releaseLostInfo"
+        <LinearLayout
+            android:id="@+id/releaseFoundInfoLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
             android:layout_marginBottom="5dp"
-            android:background="@drawable/button_selector_blue_dark_drawable"
-            android:text="发布"
-            android:textColor="@android:color/white"
-            />
+            android:layout_alignParentBottom="true"
+            android:background="@color/actionBarColor">
+
+            <Button
+                android:id="@+id/releaseLostInfo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:background="?attr/selectableItemBackground"
+                android:text="发布"
+                android:textColor="@android:color/white"
+                />
+        </LinearLayout>
+
     </RelativeLayout>
 
 </LinearLayout>

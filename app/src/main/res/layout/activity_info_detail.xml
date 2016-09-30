@@ -148,26 +148,38 @@
             android:background="@android:color/white"
             android:padding="5dp">
 
-            <Button
-                android:id="@+id/InfoDetailLookUserInfo"
+            <LinearLayout
                 android:layout_width="wrap_content"
-                android:layout_height="40dp"
-                android:background="@drawable/button_selector_blue_dark_drawable"
-                android:padding="5dp"
-                android:text="查看失主信息"
-                android:textColor="@android:color/white"
-                android:textSize="14sp"/>
+                android:layout_height="wrap_content"
+                android:background="@color/actionBarColor">
 
-            <Button
-                android:id="@+id/InfoDetailCallPhone"
+                <Button
+                    android:id="@+id/InfoDetailLookUserInfo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+                    android:background="?attr/selectableItemBackground"
+                    android:padding="5dp"
+                    android:text="查看失主信息"
+                    android:textColor="@android:color/white"
+                    android:textSize="14sp"/>
+            </LinearLayout>
+
+            <LinearLayout
                 android:layout_width="wrap_content"
-                android:layout_height="40dp"
+                android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
-                android:background="@drawable/button_selector_blue_dark_drawable"
-                android:padding="5dp"
-                android:text="联系失主"
-                android:textColor="@android:color/white"
-                android:textSize="14sp"/>
+                android:background="@color/actionBarColor">
+
+                <Button
+                    android:id="@+id/InfoDetailCallPhone"
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+                    android:background="?attr/selectableItemBackground"
+                    android:padding="5dp"
+                    android:text="联系失主"
+                    android:textColor="@android:color/white"
+                    android:textSize="14sp"/>
+            </LinearLayout>
         </RelativeLayout>
 
     </RelativeLayout>
