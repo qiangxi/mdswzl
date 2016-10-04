@@ -3,13 +3,13 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="?attr/selectableItemBackground">
 
     <TextView
         android:id="@+id/itemMyLostAndFoundDesc"
         android:layout_width="match_parent"
         android:layout_height="40dp"
-        android:background="@android:color/white"
         android:gravity="center"
         android:paddingLeft="5dp"
         android:paddingRight="5dp"
@@ -20,14 +20,12 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@android:color/white">
+        android:layout_height="wrap_content">
 
         <TextView
             android:id="@+id/itemMyLostAndFoundType"
             android:layout_width="wrap_content"
             android:layout_height="40dp"
-            android:background="@android:color/white"
             android:drawableLeft="@drawable/icon_thing_type"
             android:drawablePadding="5dp"
             android:gravity="center"
@@ -42,7 +40,6 @@
             android:layout_width="wrap_content"
             android:layout_height="40dp"
             android:layout_alignParentRight="true"
-            android:background="@android:color/white"
             android:gravity="center"
             android:paddingRight="10dp"
             android:text="2016-05-05  21:55:11"
@@ -55,7 +52,6 @@
         android:id="@+id/itemMyLostAndFoundDescDetail"
         android:layout_width="match_parent"
         android:layout_height="40dp"
-        android:background="@android:color/white"
         android:gravity="center_vertical"
         android:paddingLeft="5dp"
         android:text="adsadfasfasdgasdgfdafsdafsdfasd"

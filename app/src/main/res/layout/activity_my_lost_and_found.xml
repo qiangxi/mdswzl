@@ -1,24 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <include layout="@layout/tool_bar_layout"/>
+    <include layout="@layout/tool_bar_layout" />
 
-    <LinearLayout
-        android:id="@+id/myLostAndFoundSwipeRefresh"
+    <com.lanma.lostandfound.view.swipemenulistview.SwipeMenuListView
+        android:id="@+id/myLostAndFoundListView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/mainBackgroundColor"
-        >
-
-        <com.lanma.lostandfound.view.swipemenulistview.SwipeMenuListView
-            android:id="@+id/myLostAndFoundListView"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:dividerHeight="0.5dp"/>
-    </LinearLayout>
+        android:background="@android:color/white"
+        android:divider="@color/mainBackgroundColor"
+        android:dividerHeight="0.5dp" />
 
 </LinearLayout>

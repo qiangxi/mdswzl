@@ -42,7 +42,7 @@ import net.lucode.hackware.magicindicator.buildins.commonnavigator.CommonNavigat
 import net.lucode.hackware.magicindicator.buildins.commonnavigator.abs.CommonNavigatorAdapter;
 import net.lucode.hackware.magicindicator.buildins.commonnavigator.abs.IPagerIndicator;
 import net.lucode.hackware.magicindicator.buildins.commonnavigator.abs.IPagerTitleView;
-import net.lucode.hackware.magicindicator.buildins.commonnavigator.indicators.BezierPagerIndicator;
+import net.lucode.hackware.magicindicator.buildins.commonnavigator.indicators.TriangularPagerIndicator;
 import net.lucode.hackware.magicindicator.buildins.commonnavigator.titles.SimplePagerTitleView;
 
 import java.util.ArrayList;
@@ -234,8 +234,8 @@ public class MainActivity extends BaseActivity {
 
             @Override
             public IPagerIndicator getIndicator(Context context) {
-                BezierPagerIndicator indicator = new BezierPagerIndicator(context);
-                indicator.setColors(Color.WHITE);
+                TriangularPagerIndicator indicator = new TriangularPagerIndicator(context);
+                indicator.setLineColor(Color.WHITE);
                 return indicator;
             }
         });

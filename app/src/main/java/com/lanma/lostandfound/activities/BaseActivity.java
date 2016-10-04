@@ -21,6 +21,7 @@ public class BaseActivity extends SwipeBackActivity implements NetConnectedRecei
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_base);
+        mConnection = this;
         setStatusBarColor(getResources().getColor(R.color.colorPrimary));
         AppManager.newInstance().addActivity(this);
         configSwipeBackLayout();

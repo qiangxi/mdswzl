@@ -102,8 +102,6 @@ public class MyLostAndFoundActivity extends BaseActivity implements ViewTreeObse
     }
 
     private void initData() {
-
-
         if (AppConstants.MyLostInfoAction.equals(getIntent().getAction())) {
             mToolBar.setTitle("我的失物信息");
             InfoType = AppConstants.LostInfoType;
