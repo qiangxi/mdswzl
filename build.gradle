@@ -19,10 +19,6 @@ allprojects {
         maven { url "https://raw.github.com/bmob/bmob-android-sdk/master" }
         //PhotoView仓库地址
         maven { url "https://jitpack.io" }
-        //自己的检查软件更新地址
-        maven {
-            url  "http://dl.bintray.com/qiangxi19931994/checkupdatelibrary"
-        }
     }
 }
 

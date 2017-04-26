@@ -10,7 +10,7 @@ import android.widget.EditText;
 
 import com.lanma.lostandfound.R;
 import com.lanma.lostandfound.dialog.LoadingDialog;
-import com.lanma.lostandfound.net.ServerConnection;
+import com.lanma.lostandfound.net.RESTApi;
 import com.lanma.lostandfound.presenter.LoginPresenter;
 import com.lanma.lostandfound.utils.StringUtils;
 import com.umeng.analytics.MobclickAgent;
@@ -91,7 +91,8 @@ public class LoginFragment extends BaseFragment implements LoginPresenter {
                     showToast("邮箱格式不正确");
                     return;
                 }
-                ServerConnection.LoginAction(userName, password, this);
+//                ServerConnection.LoginAction(userName, password, this);
+                RESTApi.LoginAction(userName, password, this);
                 break;
             //忘记密码
             case R.id.forgetPassword:
